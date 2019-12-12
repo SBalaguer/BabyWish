@@ -12,14 +12,22 @@ const passport = require('passport');
 const serveFavicon = require('serve-favicon');
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
 const passportConfigure = require('./passport-configuration.js');
+
+// DEFINE ROUTERS HERE
 const indexRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
+const userApiRouter = require('./routes/api/userApi');
 
 const app = express();
 
 app.use(serveFavicon(join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+); // ADDED THIS TO SEE IF I GET REQ.BODY
 app.use(cookieParser());
 app.use(
   expressSession({
@@ -36,13 +44,16 @@ app.use(
       mongooseConnection: mongoose.connection,
       ttl: 60 * 60 * 24
     })
-  }));
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bindUserToViewLocals);
 
-app.use('/', indexRouter);
+// DEFINE PATH ROUTES HERE
 app.use('/authentication', authenticationRouter);
+app.use('/api/user', userApiRouter);
+app.use('/', indexRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
