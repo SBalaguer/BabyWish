@@ -25,6 +25,9 @@ const schema = new mongoose.Schema({
   dueDate: {
     type: Date
   },
+  birthdayDate: {
+    type: Date
+  },
   firstBaby: {
     type: Boolean
   },
