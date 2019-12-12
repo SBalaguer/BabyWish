@@ -12,9 +12,9 @@ const schema = new mongoose.Schema({
     enum: ['diapers', 'trolleys', 'essentials', 'clothes', 'uncategorized'],
     default: 'uncategorized'
   },
-  supplierId: {
-    type: mongoose.Types.ObjectId
-  },
+  // supplierId: {
+  //   type: mongoose.Types.ObjectId // ATTENTION - removed while we have no suppliers
+  // },
   price: {
     type: Number
   },

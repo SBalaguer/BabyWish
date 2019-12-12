@@ -1,20 +1,21 @@
-"use strict";
+'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
   products: [
     {
-      productId: mongoose.Types.ObjectId,
-      ref: "Product",
+      productId: String, // doing this for testing
+      // productId: mongoose.Types.ObjectId, //ATTENTION
+      // ref: "Product",
       amountWanted: Number,
       amountBought: Number
     }
   ]
 });
 
-module.exports = mongoose.model("WishList", schema);
+module.exports = mongoose.model('WishList', schema);
