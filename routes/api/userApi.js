@@ -4,6 +4,7 @@ const userApiRouter = new Router();
 const User = require('./../../models/user');
 const bcryptjs = require('bcryptjs');
 
+const passport = require('passport');
 // GET SINGLE USER INFO
 
 userApiRouter.get('/:id', async (req, res, next) => {
@@ -58,22 +59,30 @@ userApiRouter.patch('/edit/:id', async (req, res, next) => {
 
 // CREATE USER - just name and role
 
-userApiRouter.post('/create', async (req, res, next) => {
-  console.log('userApi create was called with this body:' + req.body);
-  //console.dir(req);
-  console.dir(req.body);
-  const { name, role, email } = req.body;
-  console.log(name, role);
-  try {
-    const newUser = await User.create({
-      name,
-      role,
-      email
-    });
-    res.json({ newUser });
-  } catch (error) {
-    throw error;
-  }
-});
+// userApiRouter.post('/create', async (req, res, next) => {
+//   console.log('userApi create was called with this body:' + req.body);
+//   //console.dir(req);
+//   console.dir(req.body);
+//   const { name, role, email } = req.body;
+//   console.log(name, role);
+//   try {
+//     const newUser = await User.create({
+//       name,
+//       role,
+//       email
+//     });
+//     res.json({ newUser });
+//   } catch (error) {
+//     throw error;
+//   }
+// });
+
+userApiRouter.post(
+  '/create',
+  passport.authenticate('local-sign-up', {
+    successRedirect: '/private',
+    failureRedirect: '/sign-up'
+  })
+);
 
 module.exports = userApiRouter;
