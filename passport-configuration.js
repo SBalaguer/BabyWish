@@ -34,7 +34,6 @@ passport.use(
       const firstBaby = req.body.firstBaby;
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
-      const babyGender = req.body.babyGender;
       bcryptjs
         .hash(password, 10)
         .then(hash => {
@@ -46,8 +45,7 @@ passport.use(
             dueDate,
             firstBaby,
             address,
-            phoneNumber,
-            babyGender
+            phoneNumber
           });
         })
         .then(user => {

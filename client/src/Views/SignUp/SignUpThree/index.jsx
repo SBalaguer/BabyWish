@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export class SignUpThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phoneNumber: '',
-      address: '',
-      email: '',
-      password: '',
-      passwordSecond: ''
+      phoneNumber: "",
+      address: "",
+      email: "",
+      password: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,9 +36,12 @@ export class SignUpThree extends Component {
     this.props.history.push(`/`); //ATTENTION: Should redirect to profile
   }
 
-  checkPassword() {
-    if (this.state.password !== this.state.passwordSecond) {
-      console.log('Check passwords'); //ATTENTION: Should make a more visibile flag for consumer
+  checkPassword(event) {
+    const passwordSecond = event.target.value;
+    if (this.state.password !== passwordSecond) {
+      console.log("Check passwords"); //ATTENTION: Should make a more visibile flag for consumer
+    } else {
+      console.log("Same passwords"); //ATTENTION: Should make a more visibile flag for consumer
     }
   }
 
