@@ -16,12 +16,15 @@ export class WishList extends Component {
     const id = this.props.match.params.id;
     console.log('componentDidMount ran before try and the params is:\n' + id);
     try {
-      const addWishListToState = await getWishlistById(id);
+      let addWishListToState = await getWishlistById(id);
       console.log(
         'componendDidMount ran on wishlist view and addWishListToState is: \n' +
           addWishListToState
       );
-      addWishListToState = addWishListToState.products;
+      console.dir(addWishListToState);
+      addWishListToState = addWishListToState.data.wholeWishList.products;
+      console.dir(addWishListToState);
+
       this.setState({
         wishListToRender: addWishListToState
       });
@@ -38,7 +41,7 @@ export class WishList extends Component {
         <div className="wish-list-container">
           {this.state.wishListToRender.map(item => {
             return (
-              <div className="single-item">
+              <div key={item._id} className="single-item">
                 <h3>{item.productId}</h3>
               </div>
             );
