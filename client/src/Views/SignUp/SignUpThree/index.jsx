@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export class SignUpThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phoneNumber: "",
-      address: "",
-      email: "",
-      password: "",
-      passwordSecond: ""
+      phoneNumber: '',
+      address: '',
+      email: '',
+      password: '',
+      passwordSecond: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +39,7 @@ export class SignUpThree extends Component {
 
   checkPassword() {
     if (this.state.password !== this.state.passwordSecond) {
-      console.log("Check passwords"); //ATTENTION: Should make a more visibile flag for consumer
+      console.log('Check passwords'); //ATTENTION: Should make a more visibile flag for consumer
     }
   }
 
@@ -49,30 +49,35 @@ export class SignUpThree extends Component {
         <h1>We are almost Done!</h1>
         <form onSubmit={this.handleSubmit}>
           <input
+            required
             type="text"
             name="address"
             onChange={this.handleInputChange}
             placeholder="Address"
           />
           <input
+            required
             type="text"
             name="phoneNumber"
             onChange={this.handleInputChange}
             placeholder="Phone Number"
           />
           <input
+            required
             type="email"
             name="email"
             onChange={this.handleInputChange}
             placeholder="Email"
           />
           <input
+            required
             type="password"
             name="password"
             onChange={this.handleInputChange}
             placeholder="Password"
           />
           <input
+            required
             type="password"
             name="passwordSecond"
             onChange={this.checkPassword}

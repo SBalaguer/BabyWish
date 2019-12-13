@@ -4,7 +4,7 @@ const wishListApiRouter = new Router();
 const WishList = require('./../../models/wishList');
 const User = require('./../../models/user');
 
-// ( probably USELESS ) - GET WISHLIST BY USER ID - THIS RETURNS ONLY THE ARRAY OF WISHLIST PRODUCTS
+// ( probably USELESS ) - GET WISHLIST BY USER ID - THIS RETURNS ONLY THE ARRAY OF WISHLIST PRODUCTS - NND ONLY FIRST ONE
 
 wishListApiRouter.get('/user/:id', async (req, res, next) => {
   const id = req.params.id;
@@ -51,7 +51,7 @@ wishListApiRouter.get('/:id', async (req, res, next) => {
   }
 });
 
-// ADD PRODUCT WITH WISHLIST ID
+// ADD PRODUCT WITH WISHLIST ID - FROM PARENT SIDE
 
 wishListApiRouter.patch('/:id', async (req, res, next) => {
   const id = req.params.id;

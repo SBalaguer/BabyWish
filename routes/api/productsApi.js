@@ -9,23 +9,16 @@ const User = require('./../../models/user');
 
 productsRouter.post('/create', async (req, res, next) => {
   const { name, category, price, pictureUrl, availableStock } = req.body;
-  //   const newProduct = {
-  //     name,
-  //     category,
-  //     price,
-  //     pictureUrl,
-  //     availableStock
-  //   };
-  //   console.log('this is new product: \n' + newProduct);
-  //   console.dir(newProduct);
+  const newProduct = {
+    // ATTENTION - ADD SUPPLIER LATER
+    name,
+    category,
+    price,
+    pictureUrl,
+    availableStock
+  };
   try {
-    const newProductResult = await Product.create({
-      name,
-      category,
-      price,
-      pictureUrl,
-      availableStock
-    });
+    const newProductResult = await Product.create(newProduct);
     res.json({ newProductResult });
   } catch (error) {
     console.log(error);
