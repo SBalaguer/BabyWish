@@ -5,15 +5,14 @@ const WishList = require('./../../models/wishList');
 const User = require('./../../models/user');
 
 // ( probably USELESS ) - GET WISHLIST BY USER ID - THIS RETURNS ONLY THE ARRAY OF WISHLIST PRODUCTS - NND ONLY FIRST ONE
+// CHANGING THIS TO RETURN ALL WISHLISTS FROM SAME USER
 
 wishListApiRouter.get('/user/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
     const wishListByUser = await WishList.find({ userId: id }).exec();
-    console.log('this is wishlistbyuser: \n' + wishListByUser[0].products);
-    const wishListProds = wishListByUser[0].products;
-    console.log('this is wishlistprods: \n' + wishListProds);
-    res.json({ wishListProds });
+    // wishListByUser = wishListByUser.
+    res.json({ wishListByUser });
   } catch (error) {
     next(error);
   }
@@ -23,11 +22,13 @@ wishListApiRouter.get('/user/:id', async (req, res, next) => {
 
 wishListApiRouter.post('/create/:id', async (req, res, next) => {
   const userId = req.params.id;
+  const name = req.body.name; //name in req body
   try {
     const userIsTrue = await User.findById(userId).exec();
     console.log(userIsTrue);
     if (userIsTrue) {
       const newWishList = await WishList.create({
+        name,
         userId
       });
       res.json({ newWishList });

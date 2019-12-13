@@ -1,65 +1,54 @@
 import React, { Component } from 'react';
-import { getWishlistById } from './../../services/wishlist-functions';
-
-export class WishList extends Component {
+import { getWishlistByUserId } from './../../services/wishlist-functions';
+export class AllWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wishListToRender: [],
-      productsToBuy: [],
-      productsToRemove: []
+      wishLists: []
     };
-    console.log(props);
   }
 
-  async componentDidMount() {
+  // CHANGING WISHLIST API TO RETURN ALL WISHLISTS
+
+  async componentDidMount(props) {
+    // const id = this.props.user._id;
     const id = this.props.match.params.id;
-    console.log('componentDidMount ran before try and the params is:\n' + id);
     try {
-      let addWishListToState = await getWishlistById(id);
-      console.log(
-        'componendDidMount ran on wishlist view and addWishListToState is: \n' +
-          addWishListToState
-      );
-      console.dir(addWishListToState);
-      addWishListToState = addWishListToState.data.wholeWishList.products;
-      console.dir(addWishListToState);
+      let addWishListToState = await getWishlistByUserId(id);
 
       this.setState({
-        wishListToRender: addWishListToState
+        wishLists: addWishListToState
       });
+      //   console.log(
+      //     'this state wishlists: \n' + this.state.wishLists.data.wishListByUser
+      //   );
     } catch (error) {
       throw error;
     }
   }
 
-  // ATTENTION LEO YOU'RE HERE RIGHT NOW
-
   render() {
+    // let allWishListsToMap = null;
+    // if (this.state.wishLists.data.wishListByUser) {
+    //   allWishListsToMap = this.state.wishLists;
+    // }
     return (
       <div>
-        <div className="wish-list-container">
-          {this.state.wishListToRender.map(item => {
-            return (
-              <div key={item._id} className="single-item">
-                <h3>{item.productId}</h3>
-              </div>
-            );
-          })}
+        <div>
+          <div className="wish-list-container">
+            <h1>this is all wishlists view</h1>
+            {this.state.wishLists.map(item => {
+              return (
+                <div key={item._id} className="single-item">
+                  <h3>{item.name}</h3>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default WishList;
-
-// {this.state.wishListToRender.map(item => {
-//   return (
-//     <div className="single-item">
-//     <img src={item.pictureUrl} />
-//     <h3>{item.name}</h3>
-//     </div>
-//   )
-
-// })}
+export default AllWishList;

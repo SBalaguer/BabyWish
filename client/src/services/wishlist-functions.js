@@ -9,3 +9,12 @@ export const getWishlistById = async id => {
     throw error;
   }
 };
+
+export const getWishlistByUserId = async id => {
+  try {
+    const response = await axios.get(`/api/wishlist/user/${id}`);
+    return response.data.wishListByUser;
+  } catch (error) {
+    throw error;
+  }
+};
