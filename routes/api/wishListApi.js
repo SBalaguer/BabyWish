@@ -4,9 +4,6 @@ const wishListApiRouter = new Router();
 const WishList = require('./../../models/wishList');
 const User = require('./../../models/user');
 
-// ( probably USELESS ) - GET WISHLIST BY USER ID - THIS RETURNS ONLY THE ARRAY OF WISHLIST PRODUCTS - NND ONLY FIRST ONE
-// CHANGING THIS TO RETURN ALL WISHLISTS FROM SAME USER
-
 wishListApiRouter.get('/user/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
