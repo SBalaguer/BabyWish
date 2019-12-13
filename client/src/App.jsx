@@ -6,6 +6,7 @@ import SignUpOne from "./Views/SignUp/SignUpOne";
 import SignUpTwoExpecting from "./Views/SignUp/SignUpTwoExpecting";
 import SignUpTwoParent from "./Views/SignUp/SignUpTwoParent";
 import SignUpThree from "./Views/SignUp/SignUpThree";
+import SignIn from "./Views/SignIn";
 
 class App extends Component {
   constructor(props) {
@@ -70,6 +71,16 @@ class App extends Component {
             path="/sign-up"
             render={props => (
               <SignUpOne
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/sign-in"
+            render={props => (
+              <SignIn
                 updateUserState={this.updateUserState}
                 userState={this.state.user}
                 {...props}
