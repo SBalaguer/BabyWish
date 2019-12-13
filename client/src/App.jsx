@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 
-import SignUpOne from './Views/SignUp/SignUpOne';
-import SignUpTwoExpecting from './Views/SignUp/SignUpTwoExpecting';
-import SignUpTwoParent from './Views/SignUp/SignUpTwoParent';
-import SignUpThree from './Views/SignUp/SignUpThree';
-import SignUpThreeGifter from './Views/SignUp/SignUpThreeGifter';
-import SignIn from './Views/SignIn';
-import Navbar from './Components/Navbar';
-import WishList from './Views/WishList';
-import ProfileView from './Views/ProfileView';
-import Products from './Views/Products';
-import SingleProductView from './Views/SingleProductView';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-import { isUserLoggedIn } from './services/user-functions';
+import SignUpOne from "./Views/SignUp/SignUpOne";
+import SignUpTwoExpecting from "./Views/SignUp/SignUpTwoExpecting";
+import SignUpTwoParent from "./Views/SignUp/SignUpTwoParent";
+import SignUpThree from "./Views/SignUp/SignUpThree";
+import SignUpThreeGifter from "./Views/SignUp/SignUpThreeGifter";
+import SignIn from "./Views/SignIn";
+import Navbar from "./Components/Navbar";
+import WishList from "./Views/WishList";
+import ProfileView from "./Views/ProfileView";
+import Products from "./Views/Products";
+import SingleProductView from "./Views/SingleProductView";
+
+import { isUserLoggedIn } from "./services/user-functions";
 
 class App extends Component {
   constructor(props) {
