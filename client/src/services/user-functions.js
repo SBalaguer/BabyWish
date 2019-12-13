@@ -18,9 +18,9 @@ export const signIn = async user => {
   }
 };
 
-export const signOut = async user => {
+export const signOut = async () => {
   try {
-    const response = await axios.post("/authentication/sign-in", user);
+    const response = await axios.post("/authentication/sign-out");
     return response.data.user;
   } catch (error) {
     throw error;
