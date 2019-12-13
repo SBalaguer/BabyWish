@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "./../../services/user-functions";
-import { withRouter } from "react-router-dom";
 
 export class Navbar extends Component {
   constructor(props) {
     super(props);
     this.signOutUser = this.signOutUser.bind(this);
-    console.log(withRouter);
   }
 
   async signOutUser() {
@@ -15,7 +13,7 @@ export class Navbar extends Component {
       const signOutUser = await signOut();
       //console.log(signOutUser);
       this.props.addUsertoUserState(signOutUser);
-      //this.props.history.push(`/`);
+      this.props.history.push(`/`);
     } catch (error) {
       throw error;
     }

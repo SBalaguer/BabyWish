@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import SignUpOne from "./Views/SignUp/SignUpOne";
 import SignUpTwoExpecting from "./Views/SignUp/SignUpTwoExpecting";
@@ -38,10 +39,11 @@ class App extends Component {
   }
 
   render() {
+    const NavbarWithRouter = withRouter(Navbar);
     return (
       <BrowserRouter>
         <h1>App page!</h1>
-        <Navbar
+        <NavbarWithRouter
           user={this.state.user}
           addUsertoUserState={this.addUsertoUserState}
         />
