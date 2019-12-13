@@ -11,6 +11,9 @@ import SignUpThreeGifter from "./Views/SignUp/SignUpThreeGifter";
 import SignIn from "./Views/SignIn";
 import Navbar from "./Components/Navbar";
 import WishList from "./Views/WishList";
+import ProfileView from "./Views/ProfileView";
+import Products from "./Views/Products";
+import SingleProductView from "./Views/SingleProductView";
 
 class App extends Component {
   constructor(props) {
@@ -109,10 +112,44 @@ class App extends Component {
             )}
           />
           <Route
+            path="/user/:id"
+            render={props => (
+              <ProfileView
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/products/:id"
+            render={props => (
+              <SingleProductView
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/products/"
+            render={props => (
+              <Products
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
+          />
+          <Route
             path="/wishlist/:id"
             render={props => (
               <WishList
                 updateUserState={this.updateUserState}
+                userState={this.state.user}
                 addUsertoUserState={this.addUsertoUserState}
                 {...props}
               />
