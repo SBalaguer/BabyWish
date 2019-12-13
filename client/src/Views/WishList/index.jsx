@@ -4,11 +4,11 @@ export class AllWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wishLists: []
+      wishLists: [],
+      newWishListName: '',
+      showInput: false
     };
   }
-
-  // CHANGING WISHLIST API TO RETURN ALL WISHLISTS
 
   async componentDidMount(props) {
     const id = this.props.userState._id;
@@ -44,6 +44,25 @@ export class AllWishList extends Component {
                 </div>
               );
             })}
+            <div>
+              <a className="btn">new Wishlist</a>
+            </div>
+            {showInput && (
+              <div>
+                <input
+                  onChange={this.updateName}
+                  value={this.state.newWishListName}
+                  placeholder="your new wishlist name"
+                />
+                <button
+                  className="btn"
+                  type="submit"
+                  onClick={this.createNewWishList}
+                >
+                  create
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
