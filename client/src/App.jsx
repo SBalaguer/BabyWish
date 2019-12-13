@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
@@ -14,6 +15,8 @@ import WishList from "./Views/WishList";
 import ProfileView from "./Views/ProfileView";
 import Products from "./Views/Products";
 import SingleProductView from "./Views/SingleProductView";
+
+import { isUserLoggedIn } from "./services/user-functions";
 
 class App extends Component {
   constructor(props) {
@@ -33,12 +36,21 @@ class App extends Component {
         ...user
       }
     });
-    //const name = user.name;
-    //return user.name ? this.setState({user:{name: user.name}}) : '';
   }
 
   addUsertoUserState(user) {
     this.setState({ user: user });
+  }
+
+  async componentDidMount() {
+    try {
+      const user = await isUserLoggedIn();
+      if (user) {
+        this.setState({ user: user });
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   render() {
@@ -145,7 +157,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/wishlist/:id"
+            path="/wishlist/"
             render={props => (
               <WishList
                 updateUserState={this.updateUserState}

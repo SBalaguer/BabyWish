@@ -5,13 +5,25 @@ const User = require("./../../models/user");
 const bcryptjs = require("bcryptjs");
 
 const passport = require("passport");
+
+//CHECK IF THERE IS A USER LOGGEDIN
+userApiRouter.get("/check-user-logged", async (req, res, next) => {
+  const userId = req.user;
+  try {
+    const user = await User.findById(userId).exec();
+    res.json({ user });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // GET SINGLE USER INFO
 
 userApiRouter.get("/:id", async (req, res, next) => {
   const userId = req.params.id;
   try {
-    const userInfo = await User.findById(userId).exec();
-    res.json({ userInfo });
+    const user = await User.findById(userId).exec();
+    res.json({ user });
   } catch (error) {
     next(error);
   }
@@ -43,7 +55,7 @@ userApiRouter.patch("/edit/:id", async (req, res, next) => {
       pictureUrl
     } = req.body;
     // const imgUrl = req.file.url; -- not up for now
-    const result = await User.findByIdAndUpdate(userId, {
+    const user = await User.findByIdAndUpdate(userId, {
       ...(name ? { name } : {}),
       ...(dueDate ? { dueDate } : {}),
       ...(firstBaby ? { firstBaby } : {}),
@@ -52,7 +64,7 @@ userApiRouter.patch("/edit/:id", async (req, res, next) => {
       ...(babyGender ? { babyGender } : {}),
       ...(pictureUrl ? { pictureUrl } : {})
     }).exec();
-    res.json({ result });
+    res.json({ user });
   } catch (error) {
     next(error);
   }
