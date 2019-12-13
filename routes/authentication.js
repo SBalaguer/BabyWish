@@ -17,7 +17,7 @@ router.post(
 
 router.post("/sign-out", (req, res, next) => {
   req.logout();
-  res.json({});
+  res.json({ user: {} });
 });
 
 module.exports = router;
