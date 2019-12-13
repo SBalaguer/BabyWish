@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { singleProduct } from "./../../services/product-functions";
+import Navbar from "./../../Components/Navbar";
+import { withRouter } from "react-router-dom";
 
 class SingleProductView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
   async componentDidMount() {
@@ -17,8 +20,14 @@ class SingleProductView extends Component {
     }
   }
 
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
+  }
+
   render() {
     const product = this.state.product;
+    const user = this.props.userState;
+    const NavbarWithRouter = withRouter(Navbar);
     return (
       <div>
         {this.state.product && (
@@ -29,6 +38,10 @@ class SingleProductView extends Component {
             <small>{product.price}</small>
           </React.Fragment>
         )}
+        <NavbarWithRouter
+          user={user}
+          addUsertoUserState={this.addUsertoUserState}
+        />
       </div>
     );
   }

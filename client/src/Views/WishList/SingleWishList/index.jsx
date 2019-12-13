@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { getWishlistById } from '../../../services/wishlist-functions';
+import React, { Component } from "react";
+import { getWishlistById } from "../../../services/wishlist-functions";
+import Navbar from "./../../../Components/Navbar";
+import { withRouter } from "react-router-dom";
 
 // ATTENTION = WILL HAVE TO CHANGE THE WAY THIS GETS A SINGLE WISHLIST
 
@@ -11,16 +13,16 @@ export class SingleWishList extends Component {
       productsToBuy: [],
       productsToRemove: []
     };
-    console.log(props);
+    // console.log(props);
   }
 
   async componentDidMount() {
     const id = this.props.match.params.id;
-    console.log('componentDidMount ran before try and the params is:\n' + id);
+    console.log("componentDidMount ran before try and the params is:\n" + id);
     try {
       let addWishListToState = await getWishlistById(id);
       console.log(
-        'componendDidMount ran on wishlist view and addWishListToState is: \n' +
+        "componendDidMount ran on wishlist view and addWishListToState is: \n" +
           addWishListToState
       );
       console.dir(addWishListToState);
@@ -35,9 +37,15 @@ export class SingleWishList extends Component {
     }
   }
 
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
+  }
+
   // ATTENTION LEO YOU'RE HERE RIGHTNOW
 
   render() {
+    const user = this.props.userState;
+    const NavbarWithRouter = withRouter(Navbar);
     return (
       <div>
         <div className="wish-list-container">
@@ -49,6 +57,10 @@ export class SingleWishList extends Component {
             );
           })}
         </div>
+        <NavbarWithRouter
+          user={user}
+          addUsertoUserState={this.addUsertoUserState}
+        />
       </div>
     );
   }

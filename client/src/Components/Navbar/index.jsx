@@ -21,7 +21,7 @@ export class Navbar extends Component {
   render() {
     const userId = this.props.user._id;
     return (
-      <div>
+      <div className="navbar fixed-bottom bg-light">
         {(!userId && (
           <React.Fragment>
             <Link to="/sign-up">Sign Up</Link>

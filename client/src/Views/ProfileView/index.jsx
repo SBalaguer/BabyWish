@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import Navbar from "./../../Components/Navbar";
+import { withRouter } from "react-router-dom";
+
+import "./index.css";
 
 class ProfileView extends Component {
   constructor(props) {
@@ -6,6 +10,7 @@ class ProfileView extends Component {
     this.state = {
       daysToGo: null
     };
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
   componentDidMount() {}
 
@@ -17,14 +22,40 @@ class ProfileView extends Component {
     }
   }
 
-  render() {
-    // const daysToGo = this.props.userState.dueDate.getTime() - Date.now();
-    // console.log(daysToGo);
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
+  }
 
+  render() {
+    const user = this.props.userState;
+    const NavbarWithRouter = withRouter(Navbar);
     return (
-      <div>
-        <h1>Welcome {this.props.userState.name}!</h1>
-        <small>{this.calcDaysToGo()} Days to go!</small>
+      <div className="profile">
+        <div>Here goes our Logo</div>
+        <div className="profile-name">
+          <div>
+            <h1>
+              Hi <strong>{user.name}</strong>!
+            </h1>
+            <h5>{this.calcDaysToGo()} Days to go!</h5>
+          </div>
+          <img src={user.pictureUrl} alt="" />
+        </div>
+        <div>
+          <p>Wishlist</p>
+          <div>
+            <small>10</small>
+            <small>Gifts</small>
+          </div>
+          <div>
+            <small>82</small>
+            <small>Items</small>
+          </div>
+        </div>
+        <NavbarWithRouter
+          user={user}
+          addUsertoUserState={this.addUsertoUserState}
+        />
       </div>
     );
   }

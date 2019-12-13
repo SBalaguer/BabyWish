@@ -1,0 +1,9 @@
+.sign-in-form {
+  width: 70vw;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.sign-in-form form input {
+  margin: 1em;
+}

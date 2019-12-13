@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { signIn } from "./../../services/user-functions";
 
+import "./style.css";
+
 export class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,7 @@ export class SignIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sign-in-form">
         <h1>Sign In Page</h1>
         <form onSubmit={this.handleSubmit}>
           <input
@@ -44,6 +46,7 @@ export class SignIn extends Component {
             onChange={this.handleInputChange}
             name="email"
             placeholder="Email"
+            className="form-control"
           />
           <input
             type="password"
@@ -51,8 +54,9 @@ export class SignIn extends Component {
             onChange={this.handleInputChange}
             name="password"
             placeholder="Password"
+            className="form-control"
           />
-          <button>Log In</button>
+          <button className="btn btn-start btn-blockn">Log In</button>
         </form>
       </div>
     );

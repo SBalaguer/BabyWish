@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ProductComp from "./../../Components/ProductComp";
 import { listProducts } from "./../../services/product-functions";
+import Navbar from "./../../Components/Navbar";
+import { withRouter } from "react-router-dom";
 
 class Products extends Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class Products extends Component {
     this.state = {
       products: []
     };
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
   async componentDidMount() {
@@ -22,7 +25,13 @@ class Products extends Component {
     }
   }
 
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
+  }
+
   render() {
+    const NavbarWithRouter = withRouter(Navbar);
+    const user = this.props.userState;
     return (
       <div>
         <h1>Products Page</h1>
@@ -32,6 +41,10 @@ class Products extends Component {
         {this.state.products.map(product => (
           <ProductComp key={product._id} {...product} />
         ))}
+        <NavbarWithRouter
+          user={user}
+          addUsertoUserState={this.addUsertoUserState}
+        />
       </div>
     );
   }

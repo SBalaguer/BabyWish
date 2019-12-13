@@ -1,32 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   getWishlistByUserId,
   createWishlist
-} from './../../services/wishlist-functions';
-import { Link } from 'react-router-dom';
+} from "./../../services/wishlist-functions";
+import { Link } from "react-router-dom";
+import Navbar from "./../../Components/Navbar";
+import { withRouter } from "react-router-dom";
 
 export class AllWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       wishLists: [],
-      wishListName: '',
+      wishListName: "",
       showInput: false,
       usedProp: false
     };
-    console.log('this runs first', this.props.userState);
+    // console.log("this runs first", this.props.userState);
     this.toggleInput = this.toggleInput.bind(this);
     this.updateName = this.updateName.bind(this);
     this.createNewWishList = this.createNewWishList.bind(this);
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
   async componentDidUpdate() {
-    console.log('this runs forth', this.props.userState);
+    // console.log("this runs forth", this.props.userState);
     if (this.props.userState !== {} && this.state.usedProp === false) {
       try {
         const id = this.props.userState._id;
         let addWishListToState = await getWishlistByUserId(id);
-        console.log('update state ran and result is: \n' + addWishListToState);
+        // console.log("update state ran and result is: \n" + addWishListToState);
         this.setState({
           wishLists: addWishListToState,
           usedProp: true
@@ -35,6 +38,10 @@ export class AllWishList extends Component {
         throw error;
       }
     }
+  }
+
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
   }
 
   updateName(event) {
@@ -53,7 +60,7 @@ export class AllWishList extends Component {
   async createNewWishList(event) {
     const id = this.props.userState._id;
     const name = this.state.wishListName;
-    console.log('id:\n' + id + '\nname:\n' + name);
+    // console.log("id:\n" + id + "\nname:\n" + name);
     try {
       const response = await createWishlist(id, name);
     } catch (error) {
@@ -62,6 +69,8 @@ export class AllWishList extends Component {
   }
 
   render() {
+    const user = this.props.userState;
+    const NavbarWithRouter = withRouter(Navbar);
     return (
       <div>
         <div>
@@ -97,6 +106,10 @@ export class AllWishList extends Component {
             )}
           </div>
         </div>
+        <NavbarWithRouter
+          user={user}
+          addUsertoUserState={this.addUsertoUserState}
+        />
       </div>
     );
   }
