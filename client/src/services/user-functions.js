@@ -17,3 +17,12 @@ export const signIn = async user => {
     throw error;
   }
 };
+
+export const signOut = async user => {
+  try {
+    const response = await axios.post("/authentication/sign-in", user);
+    return response.data.user;
+  } catch (error) {
+    throw error;
+  }
+};

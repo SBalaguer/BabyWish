@@ -40,7 +40,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <h1>App page!</h1>
-        <Navbar user={this.state.user} />
+        <Navbar
+          user={this.state.user}
+          addUsertoUserState={this.addUsertoUserState}
+        />
         <Switch>
           <Route
             path="/sign-up/expecting/2"

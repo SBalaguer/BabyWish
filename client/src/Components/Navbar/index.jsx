@@ -2,6 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.signOutUser = this.signOutUser.bind(this);
+  }
+
+  signOutUser() {
+    console.log("hola");
+  }
+
   render() {
     return (
       <div>
@@ -9,7 +18,9 @@ export class Navbar extends Component {
         <br />
         <Link to="/sign-in">Sign In</Link>
         <br />
-        <Link to="/sign-out">Sign Out</Link>
+        <Link to="/sign-out" onClick={this.signOutUser}>
+          Sign Out
+        </Link>
         <br />
       </div>
     );
