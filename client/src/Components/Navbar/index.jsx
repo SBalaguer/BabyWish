@@ -11,7 +11,6 @@ export class Navbar extends Component {
   async signOutUser() {
     try {
       const signOutUser = await signOut();
-      //console.log(signOutUser);
       this.props.addUsertoUserState(signOutUser);
       this.props.history.push(`/`);
     } catch (error) {
@@ -20,16 +19,24 @@ export class Navbar extends Component {
   }
 
   render() {
+    const userId = this.props.user._id;
     return (
       <div>
-        <Link to="/sign-up">Sign Up</Link>
-        <br />
-        <Link to="/sign-in">Sign In</Link>
-        <br />
-        <Link to="/sign-out" onClick={this.signOutUser}>
-          Sign Out
-        </Link>
-        <br />
+        {(!userId && (
+          <React.Fragment>
+            <Link to="/sign-up">Sign Up</Link>
+            <br />
+            <Link to="/sign-in">Sign In</Link>
+            <br />
+          </React.Fragment>
+        )) || (
+          <React.Fragment>
+            <Link to="/sign-out" onClick={this.signOutUser}>
+              Sign Out
+            </Link>
+            <br />
+          </React.Fragment>
+        )}
       </div>
     );
   }
