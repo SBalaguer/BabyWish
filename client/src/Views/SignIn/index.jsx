@@ -27,7 +27,7 @@ export class SignIn extends Component {
       const user = await signIn({ email, password });
       //console.log(user);
       this.props.addUsertoUserState(user);
-      this.props.history.push(`/`); //ATTENTION: Should redirect to profile
+      this.props.history.push(`/user/${user._id}`);
     } catch (error) {
       throw error;
     }
