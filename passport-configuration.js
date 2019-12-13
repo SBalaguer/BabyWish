@@ -31,6 +31,7 @@ passport.use(
       const name = req.body.name;
       const role = req.body.role;
       const dueDate = req.body.dueDate;
+      const birthdayDate = req.body.birthdayDate;
       const firstBaby = req.body.firstBaby;
       const address = req.body.address;
       const phoneNumber = req.body.phoneNumber;
@@ -45,13 +46,15 @@ passport.use(
             dueDate,
             firstBaby,
             address,
-            phoneNumber
+            phoneNumber,
+            birthdayDate
           });
         })
         .then(user => {
           callback(null, user);
         })
         .catch(error => {
+          //console.log(error);
           callback(error);
         });
     }

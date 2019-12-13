@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { signUp } from "./../../../services/user-functions";
+import { Link } from "react-router-dom";
 
 export class SignUpThree extends Component {
   constructor(props) {
@@ -26,25 +27,15 @@ export class SignUpThree extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const name = this.props.userState.name;
-    const dueDate = this.props.userState.dueDate;
-    const birthdayDate = this.props.userState.birthdayDate;
-    const firstPregnancy = this.props.userState.firstPregnancy;
     const role = this.props.userState.role;
-    const phoneNumber = this.state.phoneNumber;
-    const address = this.state.address;
     const email = this.state.email;
     const password = this.state.password;
     try {
       const newUser = await signUp({
         name,
-        dueDate,
-        firstPregnancy,
         role,
-        phoneNumber,
-        address,
         email,
-        password,
-        birthdayDate
+        password
       });
       this.props.addUsertoUserState(newUser);
       this.props.history.push(`/`); //ATTENTION: Should redirect to profile
@@ -70,20 +61,6 @@ export class SignUpThree extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             required
-            type="text"
-            name="address"
-            onChange={this.handleInputChange}
-            placeholder="Address"
-          />
-          <input
-            required
-            type="text"
-            name="phoneNumber"
-            onChange={this.handleInputChange}
-            placeholder="Phone Number"
-          />
-          <input
-            required
             type="email"
             name="email"
             onChange={this.handleInputChange}
@@ -105,6 +82,7 @@ export class SignUpThree extends Component {
           />
           <button>Next</button>
         </form>
+        <Link to="">Continue as Guest</Link>
       </div>
     );
   }

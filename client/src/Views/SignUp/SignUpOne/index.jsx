@@ -12,10 +12,8 @@ export class SignUpOne extends Component {
   }
 
   handleInputChange(event) {
-    //console.log(event.target.name);
     const name = event.target.name;
     const value = event.target.value;
-    console.log(name);
     this.setState({
       [name]: value
     });
@@ -23,12 +21,11 @@ export class SignUpOne extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.updateUserState(this.state);
     if (this.state.role !== "gifter") {
       this.props.history.push(`/sign-up/${this.state.role}/2`);
     } else {
-      console.log("She is a gifter");
+      this.props.history.push(`/sign-up/${this.state.role}/3`);
     }
   }
 

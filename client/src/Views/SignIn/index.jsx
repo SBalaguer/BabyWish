@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { signIn } from "./../../services/user-functions";
 
 export class SignIn extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export class SignIn extends Component {
       password: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -18,10 +20,17 @@ export class SignIn extends Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    //CHECK IN HERE IN OUR DB IF THERE IS A USER WITH THAT EMAIL AND PASSWORD
-    //THEN UPDATE THE STATE WITH THE USER OBJECT IN APP USING PROPS
+    const { email, password } = this.state;
+    try {
+      const user = await signIn({ email, password });
+      //console.log(user);
+      this.props.addUsertoUserState(user);
+      this.props.history.push(`/`); //ATTENTION: Should redirect to profile
+    } catch (error) {
+      throw error;
+    }
   }
 
   render() {

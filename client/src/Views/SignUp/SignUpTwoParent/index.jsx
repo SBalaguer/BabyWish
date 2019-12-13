@@ -13,8 +13,6 @@ export class SignUpTwoParent extends Component {
   handleDateInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    console.dir(event.target);
-    console.log(value);
     this.setState({
       [name]: value
     });
@@ -22,7 +20,6 @@ export class SignUpTwoParent extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.updateUserState(this.state);
     this.props.history.push(`/sign-up/3`);
   }

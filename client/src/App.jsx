@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import './App.css';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import "./App.css";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-import SignUpOne from './Views/SignUp/SignUpOne';
-import SignUpTwoExpecting from './Views/SignUp/SignUpTwoExpecting';
-import SignUpTwoParent from './Views/SignUp/SignUpTwoParent';
-import SignUpThree from './Views/SignUp/SignUpThree';
-import SignIn from './Views/SignIn';
+import SignUpOne from "./Views/SignUp/SignUpOne";
+import SignUpTwoExpecting from "./Views/SignUp/SignUpTwoExpecting";
+import SignUpTwoParent from "./Views/SignUp/SignUpTwoParent";
+import SignUpThree from "./Views/SignUp/SignUpThree";
+import SignUpThreeGifter from "./Views/SignUp/SignUpThreeGifter";
+import SignIn from "./Views/SignIn";
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
     };
     console.log(this.state);
     this.updateUserState = this.updateUserState.bind(this);
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
   updateUserState(user) {
@@ -29,13 +31,20 @@ class App extends Component {
     //return user.name ? this.setState({user:{name: user.name}}) : '';
   }
 
+  addUsertoUserState(user) {
+    this.setState(user);
+  }
+
   render() {
     return (
       <BrowserRouter>
         <h1>App page!</h1>
         <Link to="/sign-up">Sign Up</Link>
-        <Link to="/sign-in">Sign Up</Link>
-        <Link to="/sign-out">Sign Up</Link>
+        <br />
+        <Link to="/sign-in">Sign In</Link>
+        <br />
+        <Link to="/sign-out">Sign Out</Link>
+        <br />
         <Switch>
           <Route
             path="/sign-up/expecting/2"
@@ -58,11 +67,21 @@ class App extends Component {
             )}
           />
           <Route
+            path="/sign-up/gifter/3"
+            render={props => (
+              <SignUpThreeGifter
+                {...props}
+                addUsertoUserState={this.addUsertoUserState}
+                userState={this.state.user}
+              />
+            )}
+          />
+          <Route
             path="/sign-up/3"
             render={props => (
               <SignUpThree
                 {...props}
-                updateUserState={this.updateUserState}
+                addUsertoUserState={this.addUsertoUserState}
                 userState={this.state.user}
               />
             )}
@@ -82,7 +101,7 @@ class App extends Component {
             render={props => (
               <SignIn
                 updateUserState={this.updateUserState}
-                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
                 {...props}
               />
             )}

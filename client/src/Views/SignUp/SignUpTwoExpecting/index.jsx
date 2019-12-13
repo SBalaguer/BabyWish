@@ -15,8 +15,6 @@ export class SignUpTwoExpecting extends Component {
   handleDateInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    console.dir(event.target);
-    console.log(value);
     this.setState({
       [name]: value
     });
@@ -24,7 +22,6 @@ export class SignUpTwoExpecting extends Component {
 
   checkboxToggle(event) {
     const firstPregnancy = event.target.checked;
-    console.log(firstPregnancy);
     this.setState({
       firstPregnancy
     });
@@ -32,7 +29,6 @@ export class SignUpTwoExpecting extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     this.props.updateUserState(this.state);
     this.props.history.push(`/sign-up/3`);
   }
