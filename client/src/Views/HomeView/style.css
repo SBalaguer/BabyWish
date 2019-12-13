@@ -1,0 +1,33 @@
+.home-page {
+  background-color: #ffdfe4;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-page_title {
+  size: 2em;
+  margin: 0 auto;
+}
+
+.home-page_wish {
+  color: #ff7f90;
+}
+
+.home-page_baby {
+  color: #ff606c;
+}
+
+.btn-start {
+  background-color: #ff7f90 !important ;
+  color: #ffffff !important ;
+  border-radius: 40px !important ;
+  width: 60vw !important ;
+}
+
+.home-page_buttons {
+  margin-top: 20em;
+}

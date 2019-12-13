@@ -13,7 +13,7 @@ class Products extends Component {
   async componentDidMount() {
     try {
       const products = await listProducts();
-      console.log(products);
+      //console.log(products);
       this.setState({
         products
       });
@@ -30,7 +30,7 @@ class Products extends Component {
           Here we should have a navbar for the products to search and filter
         </h3>
         {this.state.products.map(product => (
-          <ProductComp {...product} />
+          <ProductComp key={product._id} {...product} />
         ))}
       </div>
     );
