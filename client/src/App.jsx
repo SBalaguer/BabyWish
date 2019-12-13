@@ -109,10 +109,22 @@ class App extends Component {
             )}
           />
           <Route
+            path="/user/:id"
+            render={props => (
+              <SignIn
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
+          />
+          <Route
             path="/wishlist/:id"
             render={props => (
               <WishList
                 updateUserState={this.updateUserState}
+                userState={this.state.user}
                 addUsertoUserState={this.addUsertoUserState}
                 {...props}
               />
