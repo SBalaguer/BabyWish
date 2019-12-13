@@ -8,7 +8,7 @@ _Products_
 
 _User_
 
-1. Create User
+1. Create User -- this is sign up
    Method: POST
    Route: /api/user/create
    Information: Name, Role, DueDate / BirthDay, FirstPregnancy, Address, PhoneNumber, Email, Password.
@@ -25,6 +25,13 @@ _User_
    Method: PATCH
    Route: /api/user/edit/id
    Info: It will update only the information that we send. This route does not update password.
+5. Sign in
+   Method: POST
+   Route: /authentication/sign-in
+   required fields: email, password
+6. Sign out
+   Method: POST
+   Route: /authentication/sign-out
 
 _WishList_
 
