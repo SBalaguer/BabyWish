@@ -18,3 +18,12 @@ export const getWishlistByUserId = async id => {
     throw error;
   }
 };
+
+export const createWishlist = async (id, name) => {
+  try {
+    const newWishlist = await axios.post(`api/wishlist/create/${id}`, { name });
+    return newWishlist;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -22,10 +22,12 @@ wishListApiRouter.get('/user/:id', async (req, res, next) => {
 
 wishListApiRouter.post('/create/:id', async (req, res, next) => {
   const userId = req.params.id;
+  console.log('this is the reqbody', req.body);
   const name = req.body.name; //name in req body
+  // console.log(name);
   try {
     const userIsTrue = await User.findById(userId).exec();
-    console.log(userIsTrue);
+    // console.log(userIsTrue);
     if (userIsTrue) {
       const newWishList = await WishList.create({
         name,

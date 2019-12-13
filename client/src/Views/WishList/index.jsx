@@ -1,37 +1,67 @@
 import React, { Component } from 'react';
-import { getWishlistByUserId } from './../../services/wishlist-functions';
+import {
+  getWishlistByUserId,
+  createWishlist
+} from './../../services/wishlist-functions';
+import { Link } from 'react-router-dom';
+
 export class AllWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       wishLists: [],
-      newWishListName: '',
-      showInput: false
+      wishListName: '',
+      showInput: false,
+      usedProp: false
     };
+    console.log('this runs first', this.props.userState);
+    this.toggleInput = this.toggleInput.bind(this);
+    this.updateName = this.updateName.bind(this);
+    this.createNewWishList = this.createNewWishList.bind(this);
   }
 
-  async componentDidMount(props) {
+  async componentDidUpdate() {
+    console.log('this runs forth', this.props.userState);
+    if (this.props.userState !== {} && this.state.usedProp === false) {
+      try {
+        const id = this.props.userState._id;
+        let addWishListToState = await getWishlistByUserId(id);
+        console.log('update state ran and result is: \n' + addWishListToState);
+        this.setState({
+          wishLists: addWishListToState,
+          usedProp: true
+        });
+      } catch (error) {
+        throw error;
+      }
+    }
+  }
+
+  updateName(event) {
+    const value = event.target.value;
+    this.setState({
+      wishListName: value
+    });
+  }
+
+  toggleInput(event) {
+    this.setState({
+      showInput: !this.state.showInput
+    });
+  }
+
+  async createNewWishList(event) {
     const id = this.props.userState._id;
-    // const id = this.props.match.params.id;
+    const name = this.state.wishListName;
+    console.log('id:\n' + id + '\nname:\n' + name);
     try {
-      let addWishListToState = await getWishlistByUserId(id);
-      console.log(addWishListToState);
-      this.setState({
-        wishLists: addWishListToState
-      });
-      //   console.log(
-      //     'this state wishlists: \n' + this.state.wishLists.data.wishListByUser
-      //   );
+      const response = await createWishlist(id, name);
     } catch (error) {
       throw error;
     }
   }
 
   render() {
-    // let allWishListsToMap = null;
-    // if (this.state.wishLists.data.wishListByUser) {
-    //   allWishListsToMap = this.state.wishLists;
-    // }
     return (
       <div>
         <div>
@@ -40,28 +70,30 @@ export class AllWishList extends Component {
             {this.state.wishLists.map(item => {
               return (
                 <div key={item._id} className="single-item">
-                  <h3>{item.name}</h3>
+                  <Link to={`/wishlist/${item._id}`}>
+                    <h3>{item.name}</h3>
+                  </Link>
+                  <p>something</p>
                 </div>
               );
             })}
             <div>
-              <a className="btn">new Wishlist</a>
+              <a className="btn" onClick={this.toggleInput}>
+                new Wishlist
+              </a>
             </div>
-            {showInput && (
-              <div>
+            {this.state.showInput && (
+              <form onSubmit={this.createNewWishList}>
                 <input
                   onChange={this.updateName}
                   value={this.state.newWishListName}
+                  name="name"
                   placeholder="your new wishlist name"
                 />
-                <button
-                  className="btn"
-                  type="submit"
-                  onClick={this.createNewWishList}
-                >
+                <button className="btn" type="submit">
                   create
                 </button>
-              </div>
+              </form>
             )}
           </div>
         </div>
