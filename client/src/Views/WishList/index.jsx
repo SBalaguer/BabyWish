@@ -11,11 +11,11 @@ export class AllWishList extends Component {
   // CHANGING WISHLIST API TO RETURN ALL WISHLISTS
 
   async componentDidMount(props) {
-    // const id = this.props.user._id;
-    const id = this.props.match.params.id;
+    const id = this.props.userState._id;
+    // const id = this.props.match.params.id;
     try {
       let addWishListToState = await getWishlistByUserId(id);
-
+      console.log(addWishListToState);
       this.setState({
         wishLists: addWishListToState
       });

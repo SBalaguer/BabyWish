@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
   name: {
@@ -9,8 +9,8 @@ const schema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['diapers', 'trolleys', 'essentials', 'clothes', 'uncategorized'],
-    default: 'uncategorized'
+    enum: ["diapers", "trolleys", "essentials", "clothes", "uncategorized"],
+    default: "uncategorized"
   },
   // supplierId: {
   //   type: mongoose.Types.ObjectId // ATTENTION - removed while we have no suppliers
@@ -26,4 +26,4 @@ const schema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Product', schema);
+module.exports = mongoose.model("Product", schema);

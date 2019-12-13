@@ -26,3 +26,12 @@ export const signOut = async () => {
     throw error;
   }
 };
+
+export const isUserLoggedIn = async () => {
+  try {
+    const response = await axios.get("/api/user/check-user-logged");
+    return response.data.user;
+  } catch (error) {
+    throw error;
+  }
+};
