@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 
-
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 
+import HomeView from "./Views/HomeView";
 import SignUpOne from "./Views/SignUp/SignUpOne";
 import SignUpTwoExpecting from "./Views/SignUp/SignUpTwoExpecting";
 import SignUpTwoParent from "./Views/SignUp/SignUpTwoParent";
@@ -25,7 +25,7 @@ class App extends Component {
     this.state = {
       user: {}
     };
-    console.log(this.state);
+    //console.log(this.state);
     this.updateUserState = this.updateUserState.bind(this);
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
@@ -58,7 +58,6 @@ class App extends Component {
     const NavbarWithRouter = withRouter(Navbar);
     return (
       <BrowserRouter>
-        <h1>App page!</h1>
         <NavbarWithRouter
           user={this.state.user}
           addUsertoUserState={this.addUsertoUserState}
@@ -168,6 +167,7 @@ class App extends Component {
               />
             )}
           />
+          <Route path="/" component={HomeView} />
         </Switch>
       </BrowserRouter>
     );
