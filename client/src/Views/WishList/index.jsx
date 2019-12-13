@@ -9,12 +9,18 @@ export class WishList extends Component {
       productsToBuy: [],
       productsToRemove: []
     };
+    console.log(props);
   }
 
   async componentDidMount() {
     const id = this.props.match.params.id;
+    console.log('componentDidMount ran before try and the params is:\n' + id);
     try {
       const addWishListToState = await getWishlistById(id);
+      console.log(
+        'componendDidMount ran on wishlist view and addWishListToState is: \n' +
+          addWishListToState
+      );
       addWishListToState = addWishListToState.products;
       this.setState({
         wishListToRender: addWishListToState
