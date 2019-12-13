@@ -47,7 +47,7 @@ export class SignUpThree extends Component {
         birthdayDate
       });
       this.props.addUsertoUserState(newUser);
-      this.props.history.push(`/`); //ATTENTION: Should redirect to profile
+      this.props.history.push(`/user/${newUser._id}`); //ATTENTION: Should redirect to profile
       //console.log(newUser);
     } catch (error) {
       throw error;

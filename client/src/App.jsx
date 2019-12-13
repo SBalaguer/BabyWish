@@ -8,6 +8,7 @@ import SignUpTwoParent from "./Views/SignUp/SignUpTwoParent";
 import SignUpThree from "./Views/SignUp/SignUpThree";
 import SignUpThreeGifter from "./Views/SignUp/SignUpThreeGifter";
 import SignIn from "./Views/SignIn";
+import Navbar from "./Components/Navbar";
 
 class App extends Component {
   constructor(props) {
@@ -39,12 +40,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <h1>App page!</h1>
-        <Link to="/sign-up">Sign Up</Link>
-        <br />
-        <Link to="/sign-in">Sign In</Link>
-        <br />
-        <Link to="/sign-out">Sign Out</Link>
-        <br />
+        <Navbar user={this.state.user} />
         <Switch>
           <Route
             path="/sign-up/expecting/2"
