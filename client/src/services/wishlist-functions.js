@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getWishlistById = async id => {
   try {
     const response = await axios.get(`/api/wishlist/${id}`);
-    return response;
+    return response.data.wholeWishList.products;
   } catch (error) {
     throw error;
   }
