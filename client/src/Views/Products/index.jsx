@@ -39,7 +39,12 @@ class Products extends Component {
           Here we should have a navbar for the products to search and filter
         </h3>
         {this.state.products.map(product => (
-          <ProductComp key={product._id} {...product} />
+          <ProductComp
+            key={product._id}
+            {...product}
+            userId={user._id}
+            userRole={user.role}
+          />
         ))}
         <NavbarWithRouter
           user={user}

@@ -1,0 +1,10 @@
+.single-prod-container {
+  width: 90vw;
+  height: 90vh;
+  margin: 0 auto;
+}
+
+.single-prod-container_product {
+  width: 100%;
+  height: 85%;
+}
