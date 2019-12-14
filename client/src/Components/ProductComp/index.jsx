@@ -23,9 +23,9 @@ export default function ProductComp(props) {
         </div>
       </div>
       <div>
-        {(props.userRole !== "gifter" && <button>Add</button>) || (
-          <button>Buy</button>
-        )}
+        {(props.userRole !== "gifter" && (
+          <button onClick={() => props.addProduct(props._id)}>Add</button>
+        )) || <button>Buy</button>}
       </div>
     </Link>
   );

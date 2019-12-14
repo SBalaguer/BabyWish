@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getWishlistById } from "../../../services/wishlist-functions";
 import Navbar from "./../../../Components/Navbar";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // ATTENTION = WILL HAVE TO CHANGE THE WAY THIS GETS A SINGLE WISHLIST
 
@@ -9,28 +10,18 @@ export class SingleWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wishListToRender: [],
-      productsToBuy: [],
-      productsToRemove: []
+      wishListToRender: []
     };
     // console.log(props);
   }
 
   async componentDidMount() {
     const id = this.props.match.params.id;
-    console.log("componentDidMount ran before try and the params is:\n" + id);
     try {
-      let addWishListToState = await getWishlistById(id);
-      console.log(
-        "componendDidMount ran on wishlist view and addWishListToState is: \n" +
-          addWishListToState
-      );
-      console.dir(addWishListToState);
-      // addWishListToState = addWishListToState.data.wholeWishList.products;
-      console.dir(addWishListToState);
-
+      const wishListToRender = await getWishlistById(id);
+      //console.log(wishListToRender);
       this.setState({
-        wishListToRender: addWishListToState
+        wishListToRender
       });
     } catch (error) {
       throw error;
@@ -41,22 +32,33 @@ export class SingleWishList extends Component {
     this.props.addUsertoUserState(user);
   }
 
-  // ATTENTION LEO YOU'RE HERE RIGHTNOW
-
   render() {
     const user = this.props.userState;
     const NavbarWithRouter = withRouter(Navbar);
+    const wishList = this.state.wishListToRender;
+    const products = wishList.products;
+    //console.log(products);
     return (
       <div>
-        <div className="wish-list-container">
-          {this.state.wishListToRender.map(item => {
-            return (
-              <div key={item._id} className="single-item">
-                <h3>{item.productId}</h3>
-              </div>
-            );
-          })}
-        </div>
+        <h1>Wishlist View </h1>
+        <h3>{wishList.name}</h3>
+        <Link
+          to={{
+            pathname: "/products",
+            state: {
+              wishListId: wishList._id
+            }
+          }}
+        >
+          Add Product!
+        </Link>
+        {products && (
+          <div className="wish-list-container">
+            {products.map(product => {
+              return <p key={product._id}>{product._id}</p>;
+            })}
+          </div>
+        )}
         <NavbarWithRouter
           user={user}
           addUsertoUserState={this.addUsertoUserState}

@@ -4,7 +4,7 @@ import axios from "axios";
 export const getWishlistById = async id => {
   try {
     const response = await axios.get(`/api/wishlist/${id}`);
-    return response.data.wholeWishList.products;
+    return response.data.wishList;
   } catch (error) {
     throw error;
   }
@@ -21,8 +21,8 @@ export const getWishlistByUserId = async id => {
 
 export const createWishlist = async (id, name) => {
   try {
-    const response = await axios.post(`api/wishlist/create/${id}`, { name });
-    return response.data.newWishList;
+    const response = await axios.post(`/api/wishlist/create/${id}`, { name });
+    return response.data.updateWishList;
   } catch (error) {
     throw error;
   }
@@ -30,7 +30,7 @@ export const createWishlist = async (id, name) => {
 
 export const addProductToWishlist = async (id, prodId, amountWanted) => {
   try {
-    const response = await axios.patch(`api/wishlist/${id}`, {
+    const response = await axios.patch(`/api/wishlist/${id}`, {
       prodId,
       amountWanted
     });
