@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import Navbar from "./../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 
+import WishlistComp from "./../../Components/WishlistComp";
+
 export class AllWishList extends Component {
   constructor(props) {
     super(props);
@@ -75,14 +77,7 @@ export class AllWishList extends Component {
           <div className="wish-list-container">
             <h1>this is all wishlists view</h1>
             {this.state.wishLists.map(item => {
-              return (
-                <div key={item._id} className="single-item">
-                  <Link to={`/wishlist/${item._id}`}>
-                    <h3>{item.name}</h3>
-                  </Link>
-                  <p>something</p>
-                </div>
-              );
+              return <WishlistComp key={item._id} {...item} />;
             })}
             <div>
               <button
