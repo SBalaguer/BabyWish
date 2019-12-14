@@ -14,34 +14,24 @@ export class AllWishList extends Component {
       wishLists: [],
       wishListName: "",
       showInput: false,
-      usedProp: false
+      userId: this.props.userState._id
     };
-    // console.log("this runs first", this.props.userState);
     this.toggleInput = this.toggleInput.bind(this);
     this.updateName = this.updateName.bind(this);
     this.createNewWishList = this.createNewWishList.bind(this);
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
-  async componentDidUpdate() {
-    // console.log("this runs forth", this.props.userState);
-    if (this.props.userState !== {} && this.state.usedProp === false) {
-      try {
-        const id = this.props.userState._id;
-        let addWishListToState = await getWishlistByUserId(id);
-        // console.log("update state ran and result is: \n" + addWishListToState);
-        this.setState({
-          wishLists: addWishListToState,
-          usedProp: true
-        });
-      } catch (error) {
-        throw error;
-      }
+  async componentDidMount() {
+    try {
+      const userId = this.state.userId;
+      const addWishListToState = await getWishlistByUserId(userId);
+      this.setState({
+        wishLists: addWishListToState
+      });
+    } catch (error) {
+      throw error;
     }
-  }
-
-  addUsertoUserState(user) {
-    this.props.addUsertoUserState(user);
   }
 
   updateName(event) {
@@ -60,12 +50,15 @@ export class AllWishList extends Component {
   async createNewWishList(event) {
     const id = this.props.userState._id;
     const name = this.state.wishListName;
-    // console.log("id:\n" + id + "\nname:\n" + name);
     try {
       const response = await createWishlist(id, name);
     } catch (error) {
       throw error;
     }
+  }
+
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
   }
 
   render() {
