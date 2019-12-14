@@ -19,20 +19,15 @@ wishListApiRouter.get("/user/:id", async (req, res, next) => {
 
 wishListApiRouter.post("/create/:id", async (req, res, next) => {
   const userId = req.params.id;
-  const name = req.body.name; //name in req body
-  // console.log(name);
+  const name = req.body.name;
   try {
     const userIsTrue = await User.findById(userId).exec();
-    // console.log(userIsTrue);
-    if (userIsTrue) {
-      const newWishList = await WishList.create({
-        name,
-        userId
-      });
-      res.json({ newWishList });
-    } else {
-      res.send("user not found");
-    }
+    if (!userIsTrue) throw new Error("There's no user with that email.");
+    const newWishList = await WishList.create({
+      name,
+      userId
+    });
+    res.json({ newWishList });
   } catch (error) {
     next(error);
   }

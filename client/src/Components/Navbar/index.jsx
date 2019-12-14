@@ -35,8 +35,6 @@ export class Navbar extends Component {
               Sign Out
             </Link>
             <br />
-            <Link to="/products">Products</Link>
-            <br />
             <Link to="/wishlist">Wishlist</Link>
             <br />
             <Link to={`/user/${userId}`}>Profile</Link>

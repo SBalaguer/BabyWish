@@ -41,17 +41,22 @@ export class AllWishList extends Component {
     });
   }
 
-  toggleInput(event) {
+  toggleInput() {
     this.setState({
       showInput: !this.state.showInput
     });
   }
 
   async createNewWishList(event) {
+    event.preventDefault();
     const id = this.props.userState._id;
     const name = this.state.wishListName;
     try {
-      const response = await createWishlist(id, name);
+      const newWishlist = await createWishlist(id, name);
+      const wishLists = [...this.state.wishLists, newWishlist];
+      const wishListName = "";
+      const showInput = false;
+      this.setState({ wishLists, wishListName, showInput });
     } catch (error) {
       throw error;
     }
@@ -80,21 +85,25 @@ export class AllWishList extends Component {
               );
             })}
             <div>
-              <a className="btn" onClick={this.toggleInput}>
+              <button
+                className="btn"
+                onClick={() => {
+                  this.toggleInput();
+                }}
+              >
                 new Wishlist
-              </a>
+              </button>
             </div>
             {this.state.showInput && (
               <form onSubmit={this.createNewWishList}>
                 <input
+                  type="text"
                   onChange={this.updateName}
-                  value={this.state.newWishListName}
+                  value={this.state.wishListName}
                   name="name"
                   placeholder="your new wishlist name"
                 />
-                <button className="btn" type="submit">
-                  create
-                </button>
+                <button className="btn">Create</button>
               </form>
             )}
           </div>
