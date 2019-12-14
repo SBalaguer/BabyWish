@@ -10,19 +10,20 @@ class Products extends Component {
     super(props);
     this.state = {
       products: [],
-      wishListFrom: this.props.location.state.wishListId
+      wishListFrom: ""
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.handdleAddProduct = this.handdleAddProduct.bind(this);
-    //console.log(this.props.location.state);
   }
 
   async componentDidMount() {
+    const wishListFrom = this.props.location.state.wishListId;
     try {
       const products = await listProducts();
       //console.log(products);
       this.setState({
-        products
+        products,
+        wishListFrom
       });
     } catch (error) {
       throw error;
@@ -35,22 +36,17 @@ class Products extends Component {
 
   async handdleAddProduct(productId) {
     const wishlistId = this.state.wishListFrom;
-    //by default will be 1!
     const amountWanted = 1;
-    console.log("WishlistId", wishlistId);
-    console.log("ProductId", productId);
-    console.log("Amout", amountWanted);
     try {
       const updatedWishlist = await addProductToWishlist(
         wishlistId,
         productId,
         amountWanted
       );
-      //console.log(updatedWishlist);
+      this.props.history.push(`/wishlist/${wishlistId}`);
     } catch (error) {
       console.log(error);
     }
-    console.log("User wants to add this", productId);
   }
 
   render() {
@@ -71,7 +67,7 @@ class Products extends Component {
             addProduct={productId => {
               this.handdleAddProduct(productId);
             }}
-            wishListFrom={this.wishListFrom}
+            wishListFrom={this.state.wishListFrom}
           />
         ))}
         <NavbarWithRouter

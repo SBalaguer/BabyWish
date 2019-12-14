@@ -55,7 +55,7 @@ export class SingleWishList extends Component {
         {products && (
           <div className="wish-list-container">
             {products.map(product => {
-              return <p key={product._id}>{product._id}</p>;
+              return <p key={product._id}>{product.productId}</p>;
             })}
           </div>
         )}
@@ -69,13 +69,3 @@ export class SingleWishList extends Component {
 }
 
 export default SingleWishList;
-
-// {this.state.wishListToRender.map(item => {
-//   return (
-//     <div className="single-item">
-//     <img src={item.pictureUrl} />
-//     <h3>{item.name}</h3>
-//     </div>
-//   )
-
-// })}

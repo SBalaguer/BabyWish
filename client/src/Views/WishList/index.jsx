@@ -3,7 +3,7 @@ import {
   getWishlistByUserId,
   createWishlist
 } from "./../../services/wishlist-functions";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Navbar from "./../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 
@@ -71,13 +71,18 @@ export class AllWishList extends Component {
   render() {
     const user = this.props.userState;
     const NavbarWithRouter = withRouter(Navbar);
+    const wishLists = this.state.wishLists;
     return (
       <div>
         <div>
           <div className="wish-list-container">
             <h1>this is all wishlists view</h1>
-            {this.state.wishLists.map(item => {
-              return <WishlistComp key={item._id} {...item} />;
+            {wishLists.map(wishList => {
+              if (wishList) {
+                return (<WishlistComp key={wishList._id} {...wishList} />);
+              } else {
+                return null
+              }
             })}
             <div>
               <button

@@ -22,19 +22,19 @@ export const getWishlistByUserId = async id => {
 export const createWishlist = async (id, name) => {
   try {
     const response = await axios.post(`/api/wishlist/create/${id}`, { name });
-    return response.data.updateWishList;
+    return response.data.newWishList;
   } catch (error) {
     throw error;
   }
 };
 
-export const addProductToWishlist = async (id, prodId, amountWanted) => {
+export const addProductToWishlist = async (id, productId, amountWanted) => {
   try {
     const response = await axios.patch(`/api/wishlist/${id}`, {
-      prodId,
+      productId,
       amountWanted
     });
-    return response.data.newWishlist;
+    return response.data.updateWishList;
   } catch (error) {
     throw error;
   }

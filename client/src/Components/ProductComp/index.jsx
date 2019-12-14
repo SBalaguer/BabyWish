@@ -13,8 +13,17 @@ export default function ProductComp(props) {
     height: "100px",
     margin: "0.3em"
   };
+  const wishListId = props.wishListFrom;
   return (
-    <Link to={`/products/${props._id}`} className="prod-container">
+    <Link
+      to={{
+        pathname: `/products/${props._id}`,
+        state: {
+          wishListId: wishListId
+        }
+      }}
+      className="prod-container"
+    >
       <div className="prod-container_data">
         <div className="prod-container_data-img" style={style}></div>
         <div className="prod-container_data-text">

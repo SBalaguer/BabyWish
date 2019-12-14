@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { singleProduct } from "./../../services/product-functions";
 import Navbar from "./../../Components/Navbar";
 import { withRouter } from "react-router-dom";
-import {
-  getWishlistByUserId,
-  addProductToWishlist
-} from "./../../services/wishlist-functions";
+import { addProductToWishlist } from "./../../services/wishlist-functions";
 import "./style.css";
 
 class SingleProductView extends Component {
@@ -13,9 +10,8 @@ class SingleProductView extends Component {
     super(props);
     this.state = {
       amountWanted: 1,
-      userWishlists: [],
       userId: this.props.userState._id,
-      selectedWishlistId: "",
+      wishListFrom: "",
       renderWishlist: false
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
@@ -24,12 +20,11 @@ class SingleProductView extends Component {
   }
 
   async componentDidMount() {
+    const wishListFrom = this.props.location.state.wishListId;
     try {
       const productId = this.props.match.params.id;
-      const userId = this.state.userId;
       const product = await singleProduct(productId);
-      const userWishlists = await getWishlistByUserId(userId);
-      this.setState({ product, userWishlists });
+      this.setState({ product, wishListFrom });
     } catch (error) {
       throw error;
     }
@@ -42,21 +37,14 @@ class SingleProductView extends Component {
   handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    console.log(name, value);
     this.setState({
       [name]: Number(value)
     });
   }
 
-  selectWishlist(id) {
-    const selectedWishlistId = id;
-    const renderWishlist = false;
-    this.setState({ selectedWishlistId, renderWishlist });
-  }
-
   async handleAddClick(event) {
     event.preventDefault();
-    const wishlistId = this.state.selectedWishlistId;
+    const wishlistId = this.state.wishListFrom;
     const prodId = this.state.product._id;
     const amountWanted = this.state.amountWanted;
     try {
@@ -65,7 +53,7 @@ class SingleProductView extends Component {
         prodId,
         amountWanted
       );
-      console.log(updatedWishlist);
+      this.props.history.push(`/wishlist/${wishlistId}`);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +63,6 @@ class SingleProductView extends Component {
     const product = this.state.product;
     const user = this.props.userState;
     const NavbarWithRouter = withRouter(Navbar);
-    const wishslists = this.state.userWishlists;
     let style = {};
     if (product) {
       style = {
@@ -117,21 +104,6 @@ class SingleProductView extends Component {
                 <button className="btn btn-start btn-block">Add to Cart</button>
               )}
             </form>
-            {wishslists.map(wishlist => {
-              if (this.state.renderWishlist)
-                return (
-                  <div>
-                    <h3>{wishlist.name}</h3>
-                    <button
-                      onClick={() => {
-                        this.selectWishlist(wishlist._id);
-                      }}
-                    >
-                      Select
-                    </button>
-                  </div>
-                );
-            })}
           </div>
         )}
         <NavbarWithRouter

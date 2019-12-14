@@ -50,6 +50,7 @@ wishListApiRouter.get("/:id", async (req, res, next) => {
 wishListApiRouter.patch("/:id", async (req, res, next) => {
   const id = req.params.id;
   const prodId = req.body.productId; //  in the req.body FOR THE moment
+  console.log("this is the product ID: ", prodId);
   const newItem = {
     productId: prodId,
     amountWanted: req.body.amountWanted,
@@ -59,6 +60,7 @@ wishListApiRouter.patch("/:id", async (req, res, next) => {
     const updateWishList = await WishList.findByIdAndUpdate(id, {
       $push: { products: newItem }
     });
+    console.log(updateWishList);
     res.json({ updateWishList });
   } catch (error) {
     next(error);
