@@ -15,6 +15,7 @@ import SingleWishList from "./Views/WishList/SingleWishList";
 import ProfileView from "./Views/ProfileView";
 import Products from "./Views/Products";
 import SingleProductView from "./Views/SingleProductView";
+import CheckOut from "./Views/CheckOut";
 
 import { isUserLoggedIn } from "./services/user-functions";
 
@@ -172,6 +173,7 @@ class App extends Component {
               />
             )}
           />
+          <Route path="/checkout" component={CheckOut} />
           <Route path="/" component={HomeView} />
         </Switch>
       </BrowserRouter>

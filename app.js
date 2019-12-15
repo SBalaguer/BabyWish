@@ -19,6 +19,7 @@ const authenticationRouter = require("./routes/authentication");
 const userApiRouter = require("./routes/api/userApi");
 const wishListApiRouter = require("./routes/api/wishListApi");
 const productApiRouter = require("./routes/api/productsApi");
+const checkoutApiRouter = require("./routes/api/checkoutApi");
 const app = express();
 
 app.use(serveFavicon(join(__dirname, "public/images", "favicon.ico")));
@@ -57,6 +58,7 @@ app.use("/authentication", authenticationRouter);
 app.use("/api/user", userApiRouter);
 app.use("/api/wishlist", wishListApiRouter);
 app.use("/api/products", productApiRouter);
+app.use("/api/checkout", checkoutApiRouter);
 app.use("/", indexRouter);
 
 // Catch missing routes and forward to error handler
