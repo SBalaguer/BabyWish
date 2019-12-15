@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   name: {
@@ -19,8 +19,8 @@ const schema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["admin", "expecting", "parent", "gifter"],
-    default: "gifter"
+    enum: ['admin', 'expecting', 'parent', 'gifter'],
+    default: 'gifter'
   },
   dueDate: {
     type: Date
@@ -40,19 +40,20 @@ const schema = new mongoose.Schema({
   babyGender: {
     type: String,
     enum: [
-      "singleBoy",
-      "singleGirl",
-      "twinBoys",
-      "twinGirls",
-      "twinMix",
-      "neutral"
+      'singleBoy',
+      'singleGirl',
+      'twinBoys',
+      'twinGirls',
+      'twinMix',
+      'neutral'
     ],
-    default: "neutral"
+    default: 'neutral'
   },
   pictureUrl: {
     type: String,
-    default: "https://icon-library.net/images/baby-icon/baby-icon-14.jpg"
-  }
+    default: 'https://icon-library.net/images/baby-icon/baby-icon-14.jpg'
+  },
+  facebookID: String // ADDED THIS FOR FACEBOOK LOGIN
 });
 
-module.exports = mongoose.model("User", schema);
+module.exports = mongoose.model('User', schema);

@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-
-const User = require("./models/user");
-const bcryptjs = require("bcryptjs");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const User = require('./models/user');
+const bcryptjs = require('bcryptjs');
 
 passport.serializeUser((user, callback) => {
   callback(null, user._id);
@@ -21,10 +21,10 @@ passport.deserializeUser((id, callback) => {
 });
 
 passport.use(
-  "local-sign-up",
+  'local-sign-up',
   new LocalStrategy(
     {
-      usernameField: "email",
+      usernameField: 'email',
       passReqToCallback: true
     },
     (req, email, password, callback) => {
@@ -62,8 +62,8 @@ passport.use(
 );
 
 passport.use(
-  "local-sign-in",
-  new LocalStrategy({ usernameField: "email" }, (email, password, callback) => {
+  'local-sign-in',
+  new LocalStrategy({ usernameField: 'email' }, (email, password, callback) => {
     let user;
     User.findOne({
       email
@@ -76,7 +76,7 @@ passport.use(
         if (passwordMatchesHash) {
           callback(null, user);
         } else {
-          callback(new Error("WRONG_PASSWORD"));
+          callback(new Error('WRONG_PASSWORD'));
         }
       })
       .catch(error => {
@@ -84,3 +84,44 @@ passport.use(
       });
   })
 );
+
+// LEOS CHANGES FOR FACEBOOK LOGIN - ATTENTION
+
+// passport.use(
+//   'facebook-strategy',
+//   new FacebookStrategy(
+//     {
+//       clientID: process.env.FACEBOOK_APP_ID,
+//       clientSecret: process.env.FACEBOOK_APP_SECRET,
+//       callbackURL: 'http://localhost:3020/authentication/facebook/callback'
+//     },
+
+//     (accessToken, refreshToken, profile, done) => {
+//       User.findOrCreate({}, (err, user) => {
+//         if (err) {
+//           return done(err);
+//         }
+//         done(null, user);
+//       });
+//     }
+//   )
+// );
+
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: process.env.FACEBOOK_APP_ID,
+//       clientSecret: process.env.FACEBOOK_APP_SECRET,
+//       callbackURL: 'http://localhost:3000/authentication/facebook/callback'
+//     },
+//     function(accessToken, refreshToken, profile, done) {
+//       User.findOrCreate({ facebookID: profile.id }, function(err, user) {
+//         if (err) {
+//           return done(err);
+//         }
+//         done(null, user);
+//       });
+//     }
+//   )
+// );
+// END OF CHANGES
