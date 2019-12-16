@@ -38,7 +38,9 @@ wishListApiRouter.post("/create/:id", async (req, res, next) => {
 wishListApiRouter.get("/:id", async (req, res, next) => {
   const wishListId = req.params.id;
   try {
-    const wishList = await WishList.findById(wishListId).exec();
+    const wishList = await WishList.findById(wishListId)
+      .populate("products.productId")
+      .exec();
     res.json({ wishList });
   } catch (error) {
     next(error);

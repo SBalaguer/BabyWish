@@ -3,6 +3,8 @@ import { getWishlistById } from "../../../services/wishlist-functions";
 import Navbar from "./../../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
+//import ProductComp from "./../../Components/ProductComp";
+import ProductComp from "./../../../Components/ProductComp";
 
 // ATTENTION = WILL HAVE TO CHANGE THE WAY THIS GETS A SINGLE WISHLIST
 
@@ -13,6 +15,7 @@ export class SingleWishList extends Component {
       wishListToRender: []
     };
     // console.log(props);
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
   async componentDidMount() {
@@ -55,7 +58,23 @@ export class SingleWishList extends Component {
         {products && (
           <div className="wish-list-container">
             {products.map(product => {
-              return <p key={product._id}>{product.productId}</p>;
+              {
+                /* return <p key={product._id}>{product.productId}</p>; */
+              }
+              const productData = product.productId;
+              if (productData) {
+                return (
+                  <ProductComp
+                    key={product._id}
+                    {...productData}
+                    userId={user._id}
+                    userRole={user.role}
+                    wanted={product.amountWanted}
+                    bought={user.amountBought}
+                    path="wishlist"
+                  />
+                );
+              }
             })}
           </div>
         )}
