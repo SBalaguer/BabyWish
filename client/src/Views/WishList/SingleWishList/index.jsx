@@ -21,12 +21,9 @@ export class SingleWishList extends Component {
   }
 
   async componentDidMount() {
-    // const id = this.props.match.params.id;
     const id = this.state.wishlistId;
-    console.log("Componen Did Mount running");
     try {
       const wishListToRender = await getWishlistById(id);
-      console.log("original list ", wishListToRender);
       this.setState({
         wishListToRender
       });
@@ -35,18 +32,6 @@ export class SingleWishList extends Component {
       throw error;
     }
   }
-
-  // async componentDidUpdate() {
-  //   const id = this.props.match.params.id;
-  //   try {
-  //     const wishListToRender = await getWishlistById(id);
-  //     this.setState({
-  //       wishListToRender
-  //     });
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
 
   addUsertoUserState(user) {
     this.props.addUsertoUserState(user);
@@ -72,7 +57,6 @@ export class SingleWishList extends Component {
     const NavbarWithRouter = withRouter(Navbar);
     const wishList = this.state.wishListToRender;
     const products = wishList.products;
-    console.log("im rendering");
     return (
       <div>
         <h1>Wishlist View </h1>

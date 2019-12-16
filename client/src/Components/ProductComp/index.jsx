@@ -36,9 +36,11 @@ export default function ProductComp(props) {
             </div>
           </div>
           <div>
-            <button onClick={() => props.removeProduct(props.deleteId)}>
-              Remove Product
-            </button>
+            {(props.userRole !== "gifter" && (
+              <button onClick={() => props.removeProduct(props.deleteId)}>
+                Remove Product
+              </button>
+            )) || <button>Buy Product</button>}
           </div>
         </div>
       )) || (
@@ -59,9 +61,7 @@ export default function ProductComp(props) {
             </div>
           </div>
           <div>
-            {(props.userRole !== "gifter" && (
-              <button onClick={() => props.addProduct(props._id)}>Add</button>
-            )) || <button>Buy</button>}
+            <button onClick={() => props.addProduct(props._id)}>Add</button>
           </div>
         </Link>
       )}
