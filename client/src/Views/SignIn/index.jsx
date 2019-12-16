@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { signIn } from './../../services/user-functions';
+import React, { Component } from "react";
+import { signIn } from "./../../services/user-functions";
+import { Link } from "react-router-dom";
 
-import './style.css';
+import "./style.css";
 
 export class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,30 +38,75 @@ export class SignIn extends Component {
 
   render() {
     return (
-      <div className="sign-in-form">
-        <h1>Sign In Page</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-            name="email"
-            placeholder="Email"
-            className="form-control"
-          />
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={this.handleInputChange}
-            name="password"
-            placeholder="Password"
-            className="form-control"
-          />
-          <button className="btn btn-start btn-blockn">Log In</button>
-        </form>
+      <div className="alingment-center">
+        <div className="row sign-in-title">
+          <img className="home-logo" src="../babywishlogo.png" alt=".." />
+        </div>
+        <div className="row form-holder">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                name="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="form-group" id="passDiv">
+              <input
+                type="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+            <Link to="/">
+              <small className="form-text" id="forg-pass">
+                Forgot your password?
+              </small>
+            </Link>
+            <button type="submit" className="btn btn-start btn-block">
+              Log-in
+            </button>
+          </form>
+          <Link to="/sign-up">
+            <small>Do not have an acount? Sign-up!</small>
+          </Link>
+        </div>
       </div>
     );
   }
 }
 
 export default SignIn;
+
+{
+  /* <form onSubmit={this.handleSubmit}>
+            <div className="form-control">
+              <input
+                type="email"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                name="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="form-control">
+              <input
+                type="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+            <button className="btn btn-primary">Log In</button>
+          </form> */
+}

@@ -1,15 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import './style.css';
+import "./style.css";
 
 export default function HomeView() {
   return (
     <div className="home-page">
-      <h1 className="home-page_title">
-        <span className="home-page_baby">Baby</span>
-        <span className="home-page_wish">Wish</span>
-      </h1>
+      <img className="home-logo" src="../babywishlogo.png" alt=".." />
       <div className="home-page_buttons">
         <Link to="/sign-in" className="btn btn-start btn-block">
           Sign In

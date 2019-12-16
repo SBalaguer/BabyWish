@@ -31,7 +31,8 @@ export class AllWishList extends Component {
       const userId = this.state.userId;
       const addWishListToState = await getWishlistByUserId(userId);
       this.setState({
-        wishLists: addWishListToState
+        wishLists: addWishListToState,
+        userId
       });
     } catch (error) {
       throw error;
