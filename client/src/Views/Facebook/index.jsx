@@ -12,14 +12,12 @@ export default class FBLogin extends Component {
   }
 
   async responseFacebook(response) {
-    console.log('this is response from login' + response);
-    console.dir(response);
     try {
       const user = await facebookLogin(response);
-      console.log('this is the response facebook: \n' + user);
       if (user) {
         this.setState({ faceBookUser: user });
         this.props.updateUserState(user);
+        this.props.history.push('/wishlist');
       }
     } catch (error) {
       console.log(error);
@@ -40,26 +38,3 @@ export default class FBLogin extends Component {
     );
   }
 }
-//   async componentDidMount() {
-//     try {
-//       const user = await facebookLogin();
-//       console.log('this is the component mount result: \n' + user);
-//       if (user) {
-//         this.setState({ user: user });
-//       }
-//     } catch (error) {
-//       console.log(error );
-//       throw error;
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h2>you're now being logged in with facebok</h2>
-//       </div>
-//     );
-//   }
-// }
-
-// export { FBLogin };

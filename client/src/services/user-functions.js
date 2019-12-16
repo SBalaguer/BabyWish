@@ -37,11 +37,8 @@ export const isUserLoggedIn = async () => {
 };
 
 export const facebookLogin = async req => {
-  console.log('facebook service ran');
   try {
     const response = await axios.post('/api/user/facebook', req);
-    console.log('facebook post api run and the response is: \n');
-    console.dir(response.data.response);
     return response.data.response;
   } catch (error) {
     console.log(error);

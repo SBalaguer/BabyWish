@@ -80,18 +80,14 @@ userApiRouter.post(
 );
 
 userApiRouter.post('/facebook', async (req, res, next) => {
-  console.log('this is the req.body from user api service\n');
-  console.dir(req.body);
-  let emailForFacebook = req.body.email;
+  const emailForFacebook = req.body.email;
   const response = await User.findOne({ email: emailForFacebook }).exec();
   if (response._id) {
-    console.log('there was a response: \n' + response);
     req.session.user = response._id;
     res.json({ response });
   } else {
     const newUser = await User.create({ email: req.body.email });
     req.session.user = newUser._id;
-    console.log('heres new user: \n' + newUser);
     res.json({ newUser });
   }
 });
