@@ -98,7 +98,9 @@ wishListApiRouter.patch("/remove/:id", async (req, res, next) => {
   const id = req.params.id;
   const prodId = req.body.productId; //  in the req.body FOR THE moment
   try {
-    const wishListById = await WishList.findById(id).exec();
+    const wishListById = await WishList.findById(id)
+      .populate("products.productId")
+      .exec();
     const prodsArray = wishListById.products; // ?? WHY DIFFERENT THAN LINE 12 ??
     for (let prod of prodsArray) {
       if (prod._id == prodId) {
@@ -112,9 +114,10 @@ wishListApiRouter.patch("/remove/:id", async (req, res, next) => {
     });
 
     //we have to look again the wishlist because mongoose does not return an updated wishlist with find by id and update
-    const updateWishList = await WishList.findById(id).exec();
-
-    res.json({ updateWishList });
+    // const updateWishList = await WishList.findById(id).exec();
+    // console.log("updatedList: ", updateWishList); //This works fine!
+    //we do not need tthis resposne, we will look up again in the front side.
+    res.json({});
   } catch (error) {
     next(error);
   }
