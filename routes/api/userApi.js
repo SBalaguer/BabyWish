@@ -1,13 +1,13 @@
-const { Router } = require("express");
-const routeGuard = require("./../../middleware/route-guard");
+const { Router } = require('express');
+const routeGuard = require('./../../middleware/route-guard');
 const userApiRouter = new Router();
-const User = require("./../../models/user");
-const bcryptjs = require("bcryptjs");
+const User = require('./../../models/user');
+const bcryptjs = require('bcryptjs');
 
-const passport = require("passport");
+const passport = require('passport');
 
 //CHECK IF THERE IS A USER LOGGEDIN
-userApiRouter.get("/check-user-logged", async (req, res, next) => {
+userApiRouter.get('/check-user-logged', async (req, res, next) => {
   const userId = req.user;
   try {
     const user = await User.findById(userId).exec();
@@ -19,7 +19,7 @@ userApiRouter.get("/check-user-logged", async (req, res, next) => {
 
 // GET SINGLE USER INFO
 
-userApiRouter.get("/:id", async (req, res, next) => {
+userApiRouter.get('/:id', async (req, res, next) => {
   const userId = req.params.id;
   try {
     const user = await User.findById(userId).exec();
@@ -31,7 +31,7 @@ userApiRouter.get("/:id", async (req, res, next) => {
 
 // GET ALL USERS
 
-userApiRouter.get("/", async (req, res, next) => {
+userApiRouter.get('/', async (req, res, next) => {
   try {
     const allUsers = await User.find().exec();
     res.json({ allUsers });
@@ -42,7 +42,7 @@ userApiRouter.get("/", async (req, res, next) => {
 
 // UPDATE USER - WITH ROUTEGUARD not now
 
-userApiRouter.patch("/edit/:id", async (req, res, next) => {
+userApiRouter.patch('/edit/:id', async (req, res, next) => {
   const userId = req.params.id;
   try {
     const {
@@ -71,13 +71,30 @@ userApiRouter.patch("/edit/:id", async (req, res, next) => {
 });
 
 userApiRouter.post(
-  "/create",
-  passport.authenticate("local-sign-up"),
+  '/create',
+  passport.authenticate('local-sign-up'),
   (req, res) => {
     const user = req.user;
     res.json({ user });
   }
 );
+
+userApiRouter.post('/facebook', async (req, res, next) => {
+  console.log('this is the req.body from user api service\n');
+  console.dir(req.body);
+  let emailForFacebook = req.body.email;
+  const response = await User.findOne({ email: emailForFacebook }).exec();
+  if (response._id) {
+    console.log('there was a response: \n' + response);
+    req.session.user = response._id;
+    res.json({ response });
+  } else {
+    const newUser = await User.create({ email: req.body.email });
+    req.session.user = newUser._id;
+    console.log('heres new user: \n' + newUser);
+    res.json({ newUser });
+  }
+});
 
 // ATTENTION ADD PASSWORD CHANGE PATCH METHOD HERE
 // AND DELETE

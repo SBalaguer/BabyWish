@@ -88,16 +88,16 @@ passport.use(
 // LEOS CHANGES FOR FACEBOOK LOGIN - ATTENTION
 
 // passport.use(
-//   'facebook-strategy',
+//   'facebook',
 //   new FacebookStrategy(
 //     {
 //       clientID: process.env.FACEBOOK_APP_ID,
 //       clientSecret: process.env.FACEBOOK_APP_SECRET,
-//       callbackURL: 'http://localhost:3020/authentication/facebook/callback'
+//       callbackURL: 'http://localhost:3000/authentication/facebook/callback'
 //     },
 
 //     (accessToken, refreshToken, profile, done) => {
-//       User.findOrCreate({}, (err, user) => {
+//       User.findOrCreate({ facebookID: profile.id }, (err, user) => {
 //         if (err) {
 //           return done(err);
 //         }

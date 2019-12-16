@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { signIn } from "./../../services/user-functions";
+import React, { Component } from 'react';
+import { signIn } from './../../services/user-functions';
 
-import "./style.css";
+import './style.css';
 
 export class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

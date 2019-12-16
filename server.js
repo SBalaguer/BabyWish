@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const PORT = parseInt(process.env.PORT, 10);
 const URI = process.env.MONGODB_URI;
 
+const cors = require('cors'); // ADDED TO TRY AND SOLVE CORS ERROR WITH FACEBOOK LOGIN
+app.use(cors());
 const terminate = error => {
   if (error) debug(error);
   const exitCode = error && error instanceof Error ? 1 : 0;
@@ -44,8 +46,9 @@ const onError = error => {
 
 const onListening = server => {
   const { port } = server.address();
-  debug(`Node server listening on ${ port }`);
-  if (process.env.NODE_ENV === 'development') debug(`Visit http://localhost:3000 while developing`);
+  debug(`Node server listening on ${port}`);
+  if (process.env.NODE_ENV === 'development')
+    debug(`Visit http://localhost:3000 while developing`);
 };
 
 const initiate = () => {
@@ -63,11 +66,11 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    debug(`Database connected to URI "${ URI }"`);
+    debug(`Database connected to URI "${URI}"`);
     initiate();
   })
   .catch(error => {
-    console.error(`There was an error connecting the database to URI "${ URI }"`);
+    console.error(`There was an error connecting the database to URI "${URI}"`);
     debug(error);
     process.exit(1);
   });

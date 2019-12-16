@@ -16,6 +16,7 @@ import ProfileView from './Views/ProfileView';
 import Products from './Views/Products';
 import SingleProductView from './Views/SingleProductView';
 import CheckOut from './Views/CheckOut';
+import FBLogin from './Views/Facebook';
 
 import { isUserLoggedIn } from './services/user-functions';
 
@@ -58,6 +59,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <Route
+            path="/authentication/facebook"
+            render={props => (
+              <FBLogin
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                {...props}
+              />
+            )}
+          />
           <Route
             path="/sign-up/expecting/2"
             render={props => (

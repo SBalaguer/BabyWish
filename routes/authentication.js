@@ -22,18 +22,27 @@ router.post('/sign-out', (req, res, next) => {
 
 // LEOS CHANGES FOR FACEBOOK LOGIN - ATTENTION
 
-router.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/sign-up'
-  })
-);
+// router.get(
+//   '/facebook/callback',
+//   passport.authenticate('facebook', {
+//     successRedirect: '/',
+//     failureRedirect: '/sign-up'
+//   })
+// );
 
-router.get('/facebook', passport.authenticate('facebook'), (req, res, next) => {
-  const user = req.user;
-  res.json({ user });
-});
+// router.get('/facebook', passport.authenticate('facebook'), (req, res, next) => {
+//   console.log('facebook api ran');
+//   const user = req.user;
+//   res.json({ user });
+// });
+
+// router.post('/facebook',  (req, res, next) => {
+//   user.findOrCreate()
+
+//   const user = req.user;
+//   res.json({ user });
+// });
+
 // END OF CHANGES
 
 module.exports = router;
