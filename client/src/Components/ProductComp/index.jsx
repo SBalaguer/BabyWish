@@ -14,9 +14,7 @@ export default function ProductComp(props) {
     margin: "0.3em"
   };
   const wishListId = props.wishListFrom;
-  if (props.path === "wishlist") {
-    const wishlist = true;
-  }
+  //console.log(props._id);
   return (
     <React.Fragment>
       {(props.path === "wishlist" && (
@@ -38,7 +36,9 @@ export default function ProductComp(props) {
             </div>
           </div>
           <div>
-            <button>Remove Product</button>
+            <button onClick={() => props.removeProduct(props.deleteId)}>
+              Remove Product
+            </button>
           </div>
         </div>
       )) || (

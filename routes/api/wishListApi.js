@@ -101,14 +101,19 @@ wishListApiRouter.patch("/remove/:id", async (req, res, next) => {
     const wishListById = await WishList.findById(id).exec();
     const prodsArray = wishListById.products; // ?? WHY DIFFERENT THAN LINE 12 ??
     for (let prod of prodsArray) {
-      if (prod.productId === prodId) {
+      if (prod._id == prodId) {
         const indexToSplice = prodsArray.indexOf(prod);
         prodsArray.splice(indexToSplice, 1);
       }
     }
-    const updateWishList = await WishList.findByIdAndUpdate(id, {
+
+    await WishList.findByIdAndUpdate(id, {
       products: prodsArray
     });
+
+    //we have to look again the wishlist because mongoose does not return an updated wishlist with find by id and update
+    const updateWishList = await WishList.findById(id).exec();
+
     res.json({ updateWishList });
   } catch (error) {
     next(error);
