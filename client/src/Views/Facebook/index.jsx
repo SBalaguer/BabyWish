@@ -12,12 +12,13 @@ export default class FBLogin extends Component {
   }
 
   async responseFacebook(response) {
+    console.log('response facebook got:\n' + response);
     try {
       const user = await facebookLogin(response);
       if (user) {
         this.setState({ faceBookUser: user });
         this.props.updateUserState(user);
-        this.props.history.push('/wishlist');
+        this.props.history.push(`/user/${user._id}`);
       }
     } catch (error) {
       console.log(error);

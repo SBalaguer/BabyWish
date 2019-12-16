@@ -80,13 +80,24 @@ userApiRouter.post(
 );
 
 userApiRouter.post('/facebook', async (req, res, next) => {
-  const emailForFacebook = req.body.email;
-  const response = await User.findOne({ email: emailForFacebook }).exec();
-  if (response._id) {
+  console.log('api facebook was called with: \n' + req);
+  console.dir(req.body);
+  const reqEmail = req.body.email;
+  const reqPic = req.body.picture.data.url;
+  const reqName = req.body.name;
+  const response = await User.findOne({ email: reqEmail }).exec();
+  console.log(response);
+  if (response !== null) {
+    console.log('we found an user');
     req.session.user = response._id;
     res.json({ response });
   } else {
-    const newUser = await User.create({ email: req.body.email });
+    console.log('attempting to create nw user');
+    const newUser = await User.create({
+      email: reqEmail,
+      pictureUrl: reqPic,
+      name: reqName
+    });
     req.session.user = newUser._id;
     res.json({ newUser });
   }
