@@ -13,21 +13,25 @@ export class SingleWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wishListToRender: []
+      wishListToRender: {},
+      wishlistId: this.props.match.params.id
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.removeProductFromWishlist = this.removeProductFromWishlist.bind(this);
   }
 
   async componentDidMount() {
-    const id = this.props.match.params.id;
-    console.log("im running");
+    // const id = this.props.match.params.id;
+    const id = this.state.wishlistId;
+    console.log("Componen Did Mount running");
     try {
       const wishListToRender = await getWishlistById(id);
+      console.log("original list ", wishListToRender);
       this.setState({
         wishListToRender
       });
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }
@@ -49,15 +53,18 @@ export class SingleWishList extends Component {
   }
 
   async removeProductFromWishlist(productId) {
-    const wishlistId = this.props.match.params.id;
-    const wishListToRender = await removeProductInWishlist(
-      wishlistId,
-      productId
-    );
-    console.log(wishListToRender);
-    this.setState({
-      wishListToRender
-    });
+    try {
+      const wishlistId = this.props.match.params.id;
+      //first we update
+      await removeProductInWishlist(wishlistId, productId);
+      //then we get it again
+      const wishListToRender = await getWishlistById(wishlistId);
+      this.setState({
+        wishListToRender
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 
   render() {
@@ -65,6 +72,7 @@ export class SingleWishList extends Component {
     const NavbarWithRouter = withRouter(Navbar);
     const wishList = this.state.wishListToRender;
     const products = wishList.products;
+    console.log("im rendering");
     return (
       <div>
         <h1>Wishlist View </h1>

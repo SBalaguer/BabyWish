@@ -41,11 +41,11 @@ export const addProductToWishlist = async (id, productId, amountWanted) => {
 };
 
 export const removeProductInWishlist = async (wishlistId, productId) => {
-  console.log(wishlistId, productId);
   try {
     const response = await axios.patch(`/api/wishlist/remove/${wishlistId}`, {
       productId
     });
+    console.log("response from be: ", response.data.updateWishList);
     return response.data.updateWishList;
   } catch (error) {
     throw error;
