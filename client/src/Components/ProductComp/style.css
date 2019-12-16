@@ -26,3 +26,23 @@
   height: 100px;
   width: 30%;
 }
+
+.prod-container_amount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.prod-container_amount_single {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.prod-container_amount_single:first-child {
+  margin-right: 0.2em;
+  padding-right: 0.2em;
+  border-right: 1px solid black;
+}

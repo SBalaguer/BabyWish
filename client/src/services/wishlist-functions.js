@@ -39,3 +39,15 @@ export const addProductToWishlist = async (id, productId, amountWanted) => {
     throw error;
   }
 };
+
+export const removeProductInWishlist = async (wishlistId, productId) => {
+  console.log(wishlistId, productId);
+  try {
+    const response = await axios.patch(`/api/wishlist/remove/${wishlistId}`, {
+      productId
+    });
+    return response.data.updateWishList;
+  } catch (error) {
+    throw error;
+  }
+};
