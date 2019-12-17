@@ -1,8 +1,8 @@
 .prod-container {
-  width: 95vw;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 0.3em;
-  border: 1px solid black;
+  border: 1px solid red;
   display: flex;
   flex-direction: row;
   align-items: center;

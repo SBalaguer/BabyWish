@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "./../../services/user-functions";
 
+import "./style.css";
+
 export class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -20,25 +22,24 @@ export class Navbar extends Component {
 
   render() {
     const userId = this.props.user._id;
+    const userRole = this.props.user.role;
     return (
-      <div className="navbar fixed-bottom bg-light">
+      <div className="navbar-bottom fixed-bottom">
         {(!userId && (
           <React.Fragment>
             <Link to="/sign-up">Sign Up</Link>
-            <br />
             <Link to="/sign-in">Sign In</Link>
-            <br />
           </React.Fragment>
         )) || (
           <React.Fragment>
             <Link to="/sign-out" onClick={this.signOutUser}>
               Sign Out
             </Link>
-            <br />
-            <Link to="/wishlist">Wishlist</Link>
-            <br />
+            {userRole === "admin" && <Link to="/admin">Users List</Link>}
+            {userRole === "gifter" && <Link to="">Shopping Cart</Link>}
+            {userRole === "expecting" && <Link to="/wishlist">Wishlist</Link>}
+            {userRole === "parent" && <Link to="/wishlist">Wishlist</Link>}
             <Link to={`/user/${userId}`}>Profile</Link>
-            <br />
           </React.Fragment>
         )}
       </div>

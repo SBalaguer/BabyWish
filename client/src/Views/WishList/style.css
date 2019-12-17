@@ -1,0 +1,17 @@
+.view-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.add-button {
+  width: 5vh;
+  max-width: 100px;
+}
+
+.wish-list-container {
+  width: 90vw;
+  max-width: 600px;
+}

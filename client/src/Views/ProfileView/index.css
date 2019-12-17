@@ -1,0 +1,88 @@
+.app-container {
+  margin-top: 7.5vh;
+  margin-bottom: 7.5vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.profile-name-container {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.profile-name {
+  color: #1f2674;
+  margin-bottom: 0.1em;
+}
+.user-name {
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.hi {
+  font-size: 0.8em;
+  font-weight: 100;
+}
+
+.days {
+  color: #ff606c;
+}
+
+.days-to-go {
+  color: #1f2674;
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-container:nth-of-type(2) {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  width: 40%;
+}
+
+.counter-container:nth-of-type(1) {
+  width: 30%;
+}
+.counter-container:nth-of-type(3) {
+  width: 30%;
+}
+
+.counters-container {
+  margin-top: 2.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1f2674;
+  border-radius: 20px;
+  width: 90vw;
+  padding: 2vw;
+  max-width: 400px;
+  height: 4.5em;
+  box-shadow: 2px 2px 5px 5px rgba(222, 222, 222, 0.5);
+}
+
+.counter-number {
+  color: #1f2674;
+  font-size: 1.6em;
+}
+
+.counter-description {
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 1em;
+}
