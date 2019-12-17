@@ -4,11 +4,14 @@ import {
   createWishlist,
   deleteWishlist
 } from "./../../services/wishlist-functions";
+import TopNavbar from "./../../Components/TopNavbar";
 // import { Link } from "react-router-dom";
 import Navbar from "./../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 
 import WishlistComp from "./../../Components/WishlistComp";
+
+import "./style.css";
 
 export class AllWishList extends Component {
   constructor(props) {
@@ -90,10 +93,23 @@ export class AllWishList extends Component {
     const NavbarWithRouter = withRouter(Navbar);
     const wishLists = this.state.wishLists;
     return (
-      <div>
-        <div>
+      <React.Fragment>
+        <TopNavbar />
+        <div className="app-container">
           <div className="wish-list-container">
-            <h1>this is all wishlists view</h1>
+            <div className="view-title">
+              <h1>
+                <span className="hi"> Wishlists</span>
+              </h1>
+
+              <div
+                onClick={() => {
+                  this.toggleInput();
+                }}
+              >
+                <img className="add-button" src="../../add-blue.png" alt="" />
+              </div>
+            </div>
             {wishLists.map(wishList => {
               if (wishList) {
                 return (
@@ -107,16 +123,6 @@ export class AllWishList extends Component {
                 return null;
               }
             })}
-            <div>
-              <button
-                className="btn"
-                onClick={() => {
-                  this.toggleInput();
-                }}
-              >
-                new Wishlist
-              </button>
-            </div>
             {this.state.showInput && (
               <form onSubmit={this.createNewWishList}>
                 <input
@@ -135,7 +141,7 @@ export class AllWishList extends Component {
           user={user}
           addUsertoUserState={this.addUsertoUserState}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
