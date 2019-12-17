@@ -3,6 +3,7 @@ import { getWishlistById } from "../../../services/wishlist-functions";
 import Navbar from "./../../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
+import TopNavbar from "./../../../Components/TopNavbar";
 
 import ProductComp from "./../../../Components/ProductComp";
 import { removeProductInWishlist } from "./../../../services/wishlist-functions";
@@ -58,51 +59,57 @@ export class SingleWishList extends Component {
     const wishList = this.state.wishListToRender;
     const products = wishList.products;
     return (
-      <div>
-        <h1>Wishlist View </h1>
-        <h3>{wishList.name}</h3>
-        <Link
-          to={{
-            pathname: "/products",
-            state: {
-              wishListId: wishList._id
-            }
-          }}
-        >
-          Add Product!
-        </Link>
-        {products && (
-          <div className="wish-list-container">
-            {products.map(product => {
-              {
-                /* return <p key={product._id}>{product.productId}</p>; */
-              }
-              const productData = product.productId;
-              if (productData) {
-                return (
-                  <ProductComp
-                    key={product._id}
-                    {...productData}
-                    userId={user._id}
-                    deleteId={product._id}
-                    userRole={user.role}
-                    wanted={product.amountWanted}
-                    bought={user.amountBought}
-                    path="wishlist"
-                    removeProduct={productId => {
-                      this.removeProductFromWishlist(productId);
-                    }}
-                  />
-                );
-              }
-            })}
+      <React.Fragment>
+        <TopNavbar />
+        <div className="app-container">
+          <div className="view-title">
+            <h1>
+              <span className="hi"> {wishList.name}</span>
+            </h1>
           </div>
-        )}
-        <NavbarWithRouter
-          user={user}
-          addUsertoUserState={this.addUsertoUserState}
-        />
-      </div>
+          <Link
+            to={{
+              pathname: "/products",
+              state: {
+                wishListId: wishList._id
+              }
+            }}
+          >
+            Add Product!
+          </Link>
+          {products && (
+            <div className="wish-list-container">
+              {products.map(product => {
+                {
+                  /* return <p key={product._id}>{product.productId}</p>; */
+                }
+                const productData = product.productId;
+                if (productData) {
+                  return (
+                    <ProductComp
+                      key={product._id}
+                      {...productData}
+                      userId={user._id}
+                      deleteId={product._id}
+                      userRole={user.role}
+                      wanted={product.amountWanted}
+                      bought={user.amountBought}
+                      path="wishlist"
+                      removeProduct={productId => {
+                        this.removeProductFromWishlist(productId);
+                      }}
+                    />
+                  );
+                }
+              })}
+            </div>
+          )}
+          <NavbarWithRouter
+            user={user}
+            addUsertoUserState={this.addUsertoUserState}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }

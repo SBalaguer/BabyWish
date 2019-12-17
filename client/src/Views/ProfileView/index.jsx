@@ -47,13 +47,16 @@ class ProfileView extends Component {
     });
   }
 
+  componentDidMount() {
+    this.calcUserData();
+  }
+
   addUsertoUserState(user) {
     this.props.addUsertoUserState(user);
   }
   render() {
     const user = this.props.userState;
     const NavbarWithRouter = withRouter(Navbar);
-    this.calcUserData();
     return (
       <React.Fragment>
         <TopNavbar />

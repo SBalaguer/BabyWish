@@ -124,15 +124,29 @@ export class AllWishList extends Component {
               }
             })}
             {this.state.showInput && (
-              <form onSubmit={this.createNewWishList}>
-                <input
-                  type="text"
-                  onChange={this.updateName}
-                  value={this.state.wishListName}
-                  name="name"
-                  placeholder="your new wishlist name"
-                />
-                <button className="btn">Create</button>
+              <form
+                onSubmit={this.createNewWishList}
+                style={{ marginTop: "1em" }}
+              >
+                <div class="form-row">
+                  <div
+                    class="form-group col-md-6"
+                    style={{ marginBottom: "0.3em" }}
+                  >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="wishlistName"
+                      onChange={this.updateName}
+                      value={this.state.wishListName}
+                      name="name"
+                      placeholder="Wishlist Name"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <button class="empty-btn"> Add</button>
+                  </div>
+                </div>
               </form>
             )}
           </div>
@@ -147,3 +161,25 @@ export class AllWishList extends Component {
 }
 
 export default AllWishList;
+
+{
+  /* <form></form>; */
+}
+
+{
+  /* <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <input
+                      className="form-control"
+                      type="text"
+                      onChange={this.updateName}
+                      value={this.state.wishListName}
+                      name="name"
+                      placeholder="Wishlist Name"
+                    />
+                    <div className="form-group col-md-6">
+                      <button></button>
+                    </div>
+                  </div>
+                </div> */
+}
