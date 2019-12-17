@@ -32,6 +32,7 @@ class ProfileView extends Component {
     const user = this.props.userState;
     const NavbarWithRouter = withRouter(Navbar);
     return (
+      <div className='container'>
       <div className="profile">
         <div>Here goes our Logo</div>
         <div className="profile-name">
@@ -58,6 +59,7 @@ class ProfileView extends Component {
           user={user}
           addUsertoUserState={this.addUsertoUserState}
         />
+      </div>
       </div>
     );
   }

@@ -45,8 +45,16 @@ export const removeProductInWishlist = async (wishlistId, productId) => {
     const response = await axios.patch(`/api/wishlist/remove/${wishlistId}`, {
       productId
     });
-    console.log("response from be: ", response.data.updateWishList);
     return response.data.updateWishList;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteWishlist = async wishlistId => {
+  try {
+    const response = await axios.delete(`/api/wishlist/delete/${wishlistId}`);
+    return response.data;
   } catch (error) {
     throw error;
   }

@@ -114,9 +114,19 @@ wishListApiRouter.patch("/remove/:id", async (req, res, next) => {
     });
 
     //we have to look again the wishlist because mongoose does not return an updated wishlist with find by id and update
-    // const updateWishList = await WishList.findById(id).exec();
-    // console.log("updatedList: ", updateWishList); //This works fine!
-    //we do not need tthis resposne, we will look up again in the front side.
+    //Therefore we do not need tthis resposne, we will look up again in the front side.
+    res.json({});
+  } catch (error) {
+    next(error);
+  }
+});
+
+//DELETE AN ENTIRE WISHLIST
+
+wishListApiRouter.delete("/delete/:id", async (req, res, next) => {
+  const wishListId = req.params.id;
+  try {
+    await WishList.findByIdAndRemove(wishListId).exec();
     res.json({});
   } catch (error) {
     next(error);

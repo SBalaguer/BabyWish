@@ -1,9 +1,31 @@
-.sign-in-form {
-  width: 70vw;
-  max-width: 500px;
-  margin: 0 auto;
+.alingment-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
-.sign-in-form form input {
-  margin: 1em;
+.sign-in-title {
+  margin-bottom: 30vh;
 }
+
+.form-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#passDiv {
+  margin-bottom: 0.2em;
+}
+
+#forg-pass {
+  margin-bottom: 3em;
+}
+
+/* input {
+  font-family: "Rubik", sans-serif;
+} */

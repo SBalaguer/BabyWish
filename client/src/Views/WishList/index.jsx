@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import {
   getWishlistByUserId,
-  createWishlist
+  createWishlist,
+  deleteWishlist
 } from "./../../services/wishlist-functions";
 // import { Link } from "react-router-dom";
 import Navbar from "./../../Components/Navbar";
@@ -22,11 +23,27 @@ export class AllWishList extends Component {
     this.updateName = this.updateName.bind(this);
     this.createNewWishList = this.createNewWishList.bind(this);
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
+    this.deleteWishlist = this.deleteWishlist.bind(this);
   }
 
   async componentDidMount() {
     try {
       const userId = this.state.userId;
+      const addWishListToState = await getWishlistByUserId(userId);
+      this.setState({
+        wishLists: addWishListToState,
+        userId
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteWishlist(id) {
+    //console.log("Wishlist to Delete:", id);
+    const userId = this.state.userId;
+    try {
+      await deleteWishlist(id);
       const addWishListToState = await getWishlistByUserId(userId);
       this.setState({
         wishLists: addWishListToState
@@ -79,9 +96,15 @@ export class AllWishList extends Component {
             <h1>this is all wishlists view</h1>
             {wishLists.map(wishList => {
               if (wishList) {
-                return (<WishlistComp key={wishList._id} {...wishList} />);
+                return (
+                  <WishlistComp
+                    key={wishList._id}
+                    {...wishList}
+                    delete={wishListId => this.deleteWishlist(wishListId)}
+                  />
+                );
               } else {
-                return null
+                return null;
               }
             })}
             <div>

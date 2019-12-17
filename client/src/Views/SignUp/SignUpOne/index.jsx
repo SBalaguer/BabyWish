@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./style.css";
+
 export class SignUpOne extends Component {
   constructor(props) {
     super(props);
@@ -31,8 +33,9 @@ export class SignUpOne extends Component {
 
   render() {
     return (
-      <div>
-        <h1>What is your Name</h1>
+      <div className="container">
+        <h1 className="sign-up-title">Tell us about you</h1>
+        <h3 className="sign-up-subtitle">Fill the information below</h3>
         <img
           src="https://icon-library.net/images/baby-icon/baby-icon-14.jpg"
           alt="..."
@@ -78,3 +81,41 @@ export class SignUpOne extends Component {
 }
 
 export default SignUpOne;
+
+{
+  /* <div className='form-check'>
+<input
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleInputChange}
+          />
+</div>
+
+<div className="form-check">
+  <input className="form-check-input" type="radio" id="exampleRadios1" value="expecting"
+            name="role"
+            onChange={this.handleInputChange} />
+  <label className="form-check-label" for="exampleRadios1">
+    Expecting
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" id="exampleRadios2" value="gifter"
+            name="role"
+            onChange={this.handleInputChange} />
+  <label className="form-check-label" for="exampleRadios2">
+    Parent
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" id="exampleRadios3" value="parent"
+            name="role"
+            onChange={this.handleInputChange}
+          />
+  <label className="form-check-label" for="exampleRadios3">
+    Gifter
+  </label>
+</div> */
+}
