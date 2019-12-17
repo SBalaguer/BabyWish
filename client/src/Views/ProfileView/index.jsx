@@ -32,34 +32,34 @@ class ProfileView extends Component {
     const user = this.props.userState;
     const NavbarWithRouter = withRouter(Navbar);
     return (
-      <div className='container'>
-      <div className="profile">
-        <div>Here goes our Logo</div>
-        <div className="profile-name">
-          <div>
-            <h1>
-              Hi <strong>{user.name}</strong>!
-            </h1>
-            <h5>{this.calcDaysToGo()}</h5>
+      <div className="container">
+        <div className="profile">
+          <div>Here goes our Logo</div>
+          <div className="profile-name">
+            <div>
+              <h1>
+                Hi <strong>{user.name}</strong>!
+              </h1>
+              <h5>{this.calcDaysToGo()}</h5>
+            </div>
+            <img src={user.pictureUrl} alt="" />
           </div>
-          <img src={user.pictureUrl} alt="" />
+          <div>
+            <p>Wishlist</p>
+            <div>
+              <small>10</small>
+              <small>Gifts</small>
+            </div>
+            <div>
+              <small>82</small>
+              <small>Items</small>
+            </div>
+          </div>
+          <NavbarWithRouter
+            user={user}
+            addUsertoUserState={this.addUsertoUserState}
+          />
         </div>
-        <div>
-          <p>Wishlist</p>
-          <div>
-            <small>10</small>
-            <small>Gifts</small>
-          </div>
-          <div>
-            <small>82</small>
-            <small>Items</small>
-          </div>
-        </div>
-        <NavbarWithRouter
-          user={user}
-          addUsertoUserState={this.addUsertoUserState}
-        />
-      </div>
       </div>
     );
   }

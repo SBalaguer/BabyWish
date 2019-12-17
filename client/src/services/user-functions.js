@@ -75,13 +75,28 @@ export const deleteUser = async id => {
 };
 
 export const updateProfile = async (id, obj) => {
-  console.log(
-    'trying to update profile with idd: ' + id + ' and obj to update:\n' + obj
-  );
+  const objToUpdate = obj.objToUpdate;
   try {
-    const response = await axios.patch(`/api/user/edit/${id}`);
+    const response = await axios.patch(`/api/user/edit/${id}`, objToUpdate);
+    console.log(response);
     return response;
   } catch (error) {
+    throw error;
+  }
+};
+
+export const createFile = async file => {
+  const data = new FormData();
+
+  data.append('pictureUrl', file);
+  console.log(data);
+  try {
+    const response = await axios.post(`/api/user/upload`, data);
+    console.log('this below is response file');
+    console.dir(response);
+    return response.data.toReturn;
+  } catch (error) {
+    console.log(error);
     throw error;
   }
 };
