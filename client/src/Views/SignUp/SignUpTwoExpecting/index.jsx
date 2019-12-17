@@ -39,21 +39,37 @@ export class SignUpTwoExpecting extends Component {
         <div className="navbar fixed-top top-navbar">
           <img className="top-nav-logo" src="../../babywishlogo.png" alt="" />
         </div>
-        <h1 className="sign-up-title">We are so happy for you!</h1>
-        <h2 className="sign-up-subtitle">When is your due date?</h2>
+        <div>
+          <h1 className="sign-up-title">We are so happy for you!</h1>
+          <h2 className="sign-up-subtitle">When is your due date?</h2>
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="date"
-            name="dueDate"
-            onChange={this.handleDateInputChange}
-          />
-          <input
-            type="checkbox"
-            name="firstPregnancy"
-            vale="true"
-            onChange={this.checkboxToggle}
-          />
-          First Pregnancy <br />
+          <div
+            className="form-check"
+            style={{ paddingLeft: "0px", marginBottom: "1em" }}
+          >
+            <input
+              type="date"
+              name="dueDate"
+              onChange={this.handleDateInputChange}
+              className="form-control"
+            />
+          </div>
+          <div
+            className="form-check"
+            style={{ paddingLeft: "0px", marginBottom: "10em" }}
+          >
+            <label class="form-check-label">
+              <input
+                type="checkbox"
+                name="firstPregnancy"
+                vale="true"
+                onChange={this.checkboxToggle}
+                style={{ marginRight: "1em" }}
+              />
+              First Pregnancy
+            </label>
+          </div>
           <button className="btn btn-start btn-block">Next</button>
         </form>
       </div>

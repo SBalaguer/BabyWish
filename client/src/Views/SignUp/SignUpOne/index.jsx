@@ -37,8 +37,10 @@ export class SignUpOne extends Component {
         <div className="navbar fixed-top top-navbar">
           <img className="top-nav-logo" src="../../babywishlogo.png" alt="" />
         </div>
-        <h1 className="sign-up-title">Welcome!</h1>
-        <h2 className="sign-up-subtitle">Please tell us a bit about you</h2>
+        <div>
+          <h1 className="sign-up-title">Welcome!</h1>
+          <h2 className="sign-up-subtitle">Please tell us a bit about you</h2>
+        </div>
         <div className="profile-pic-container">
           <img
             className="profile-pic"

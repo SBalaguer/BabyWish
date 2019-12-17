@@ -26,7 +26,7 @@
   width: 50vw;
   height: 50vw;
   border: 0.5px solid #1f2674;
-  border-radius: 50vw;
+  border-radius: 60vw;
   max-width: 250px;
   max-height: 250px;
   display: flex;
@@ -36,9 +36,9 @@
 }
 
 .profile-pic {
-  width: 45vw;
+  width: 47vw;
+  max-width: 235px;
   height: auto;
-  max-width: 230px;
 }
 
 .form-check {
@@ -49,8 +49,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   width: 100vw;
-  height: 93.4vh;
-  margin-top: 6.6vh;
+  height: 87vh;
+  margin-top: 10vh;
+  margin-bottom: 3vh;
 }

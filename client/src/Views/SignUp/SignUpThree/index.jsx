@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { signUp } from "./../../../services/user-functions";
 
+import "./style.css";
+
 export class SignUpThree extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +10,8 @@ export class SignUpThree extends Component {
       phoneNumber: "",
       address: "",
       email: "",
-      password: ""
+      password: "",
+      checkPassword: "hidden"
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,8 +50,7 @@ export class SignUpThree extends Component {
         birthdayDate
       });
       this.props.addUsertoUserState(newUser);
-      this.props.history.push(`/user/${newUser._id}`); //ATTENTION: Should redirect to profile
-      //console.log(newUser);
+      this.props.history.push(`/user/${newUser._id}`);
     } catch (error) {
       throw error;
     }
@@ -57,18 +59,107 @@ export class SignUpThree extends Component {
   checkPassword(event) {
     const passwordSecond = event.target.value;
     if (this.state.password !== passwordSecond) {
-      console.log("Check passwords"); //ATTENTION: Should make a more visibile flag for consumer
+      this.setState({
+        checkPassword: ""
+      });
     } else {
-      console.log("Same passwords"); //ATTENTION: Should make a more visibile flag for consumer
+      this.setState({
+        checkPassword: "hidden"
+      });
     }
   }
 
   render() {
     return (
-      <div>
-        <h1>We are almost Done!</h1>
+      <div className="alingment-center-sign-up">
+        <div className="navbar fixed-top top-navbar">
+          <img className="top-nav-logo" src="../../babywishlogo.png" alt="" />
+        </div>
+        <div>
+          <h1 className="sign-up-title">Last step!</h1>
+          <h2 className="sign-up-subtitle">We are almost there.</h2>
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <input
+          <div className="">
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address"
+                  placeholder="Address"
+                  name="address"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="phone-number"
+                  placeholder="Phone Number"
+                  name="phoneNumber"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Email"
+                name="email"
+                onChange={this.handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Password"
+                name="password"
+                onChange={this.handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group" style={{ marginBottom: "2px" }}>
+              <input
+                type="password"
+                className={"form-control "}
+                id="password2"
+                placeholder="Re-enter Password"
+                name="passwordSecond"
+                onChange={this.checkPassword}
+                required
+              />
+            </div>
+            <small
+              className={"form-text " + this.state.checkPassword}
+              id="forg-pass"
+            >
+              Make sure both passwords match!
+            </small>
+            <button className="btn btn-start btn-block">Welcome!</button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SignUpThree;
+
+{
+  /* <form></form>; */
+}
+
+{
+  /* <input
             required
             type="text"
             name="address"
@@ -103,11 +194,5 @@ export class SignUpThree extends Component {
             onChange={this.checkPassword}
             placeholder="Re-Enter Password"
           />
-          <button>Next</button>
-        </form>
-      </div>
-    );
-  }
+          <button>Next</button> */
 }
-
-export default SignUpThree;
