@@ -80,7 +80,7 @@ export class SignUpThree extends Component {
           <h2 className="sign-up-subtitle">We are almost there.</h2>
         </div>
         <form onSubmit={this.handleSubmit}>
-          <div className="">
+          <div className="sign-up-3-form">
             <div className="form-row">
               <div className="form-group col-md-6">
                 <input
