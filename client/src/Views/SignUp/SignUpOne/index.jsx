@@ -33,47 +33,70 @@ export class SignUpOne extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h1 className="sign-up-title">Tell us about you</h1>
-        <h3 className="sign-up-subtitle">Fill the information below</h3>
-        <img
-          src="https://icon-library.net/images/baby-icon/baby-icon-14.jpg"
-          alt="..."
-        />
+      <div className="alingment-center-sign-up">
+        <div className="navbar fixed-top top-navbar">
+          <img className="top-nav-logo" src="../../babywishlogo.png" alt="" />
+        </div>
+        <h1 className="sign-up-title">Welcome!</h1>
+        <h2 className="sign-up-subtitle">Please tell us a bit about you</h2>
+        <div className="profile-pic-container">
+          <img
+            className="profile-pic"
+            src="../../default-profile-pic.png"
+            alt="..."
+          />
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleInputChange}
-          />
-          <br />
-          <input
-            type="radio"
-            value="expecting"
-            name="role"
-            onChange={this.handleInputChange}
-          />
-          Expecting
-          <br />
-          <input
-            type="radio"
-            value="gifter"
-            name="role"
-            onChange={this.handleInputChange}
-          />
-          Gifter
-          <br />
-          <input
-            type="radio"
-            value="parent"
-            name="role"
-            onChange={this.handleInputChange}
-          />
-          Parent
-          <br />
-          <button>Next</button>
+          <div className="form-check" style={{ paddingLeft: "0px" }}>
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Name"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              id="exampleRadios1"
+              value="expecting"
+              name="role"
+              onChange={this.handleInputChange}
+            />
+            <label className="form-check-label" for="exampleRadios1">
+              Expecting
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              id="exampleRadios2"
+              value="parent"
+              name="role"
+              onChange={this.handleInputChange}
+            />
+            <label className="form-check-label" for="exampleRadios2">
+              Parent
+            </label>
+          </div>
+          <div className="form-check" style={{ marginBottom: "3em" }}>
+            <input
+              className="form-check-input"
+              type="radio"
+              id="exampleRadios3"
+              value="gifter"
+              name="role"
+              onChange={this.handleInputChange}
+            />
+            <label className="form-check-label" for="exampleRadios3">
+              Gifter
+            </label>
+          </div>
+          <button className="btn btn-start btn-block">Next</button>
         </form>
       </div>
     );
@@ -81,41 +104,3 @@ export class SignUpOne extends Component {
 }
 
 export default SignUpOne;
-
-{
-  /* <div className='form-check'>
-<input
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleInputChange}
-          />
-</div>
-
-<div className="form-check">
-  <input className="form-check-input" type="radio" id="exampleRadios1" value="expecting"
-            name="role"
-            onChange={this.handleInputChange} />
-  <label className="form-check-label" for="exampleRadios1">
-    Expecting
-  </label>
-</div>
-<div className="form-check">
-  <input className="form-check-input" type="radio" id="exampleRadios2" value="gifter"
-            name="role"
-            onChange={this.handleInputChange} />
-  <label className="form-check-label" for="exampleRadios2">
-    Parent
-  </label>
-</div>
-<div className="form-check">
-  <input className="form-check-input" type="radio" id="exampleRadios3" value="parent"
-            name="role"
-            onChange={this.handleInputChange}
-          />
-  <label className="form-check-label" for="exampleRadios3">
-    Gifter
-  </label>
-</div> */
-}
