@@ -44,6 +44,13 @@ userApiRouter.get('/', async (req, res, next) => {
 
 userApiRouter.patch('/edit/:id', async (req, res, next) => {
   const userId = req.params.id;
+  console.log(
+    'this is the patch id:\n' +
+      userId +
+      '\n and this is the req.body:\n' +
+      req.body
+  );
+  console.dir(req.body);
   try {
     const {
       name,
@@ -111,5 +118,17 @@ userApiRouter.post('/delete/:id', async (req, res, next) => {
   const deletedUser = await User.findByIdAndDelete(idToDelete);
   res.json({ deletedUser });
 });
+
+const multerMiddleware = require('./../../middleware/cloudinary');
+
+userApiRouter.post(
+  '/upload',
+  multerMiddleware.single('pictureUrl'),
+  async (req, res, next) => {
+    console.log(req.file);
+    const toReturn = req.file.url;
+    res.json({ toReturn });
+  }
+);
 
 module.exports = userApiRouter;
