@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import Navbar from "./../../Components/Navbar";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import Navbar from './../../Components/Navbar';
+import { withRouter } from 'react-router-dom';
 
-import "./index.css";
+import './index.css';
 
 class ProfileView extends Component {
   constructor(props) {
@@ -15,10 +15,12 @@ class ProfileView extends Component {
   componentDidMount() {}
 
   calcDaysToGo() {
-    if (this.props.userState) {
+    if (this.props.userState.role === 'expecting') {
       const dueDate = new Date(this.props.userState.dueDate);
       const today = Date.now();
-      return Math.round((dueDate - today) / (1000 * 60 * 60 * 24));
+      return (
+        Math.round((dueDate - today) / (1000 * 60 * 60 * 24)) + ' Days to go!'
+      );
     }
   }
 
@@ -37,7 +39,7 @@ class ProfileView extends Component {
             <h1>
               Hi <strong>{user.name}</strong>!
             </h1>
-            <h5>{this.calcDaysToGo()} Days to go!</h5>
+            <h5>{this.calcDaysToGo()}</h5>
           </div>
           <img src={user.pictureUrl} alt="" />
         </div>

@@ -22,6 +22,9 @@ const productApiRouter = require('./routes/api/productsApi');
 const checkoutApiRouter = require('./routes/api/checkoutApi');
 const app = express();
 
+// ROUTEGUARD
+const routeGuard = require('./middleware/route-guard');
+
 app.use(serveFavicon(join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
