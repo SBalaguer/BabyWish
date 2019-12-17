@@ -35,8 +35,12 @@ export class SignUpTwoExpecting extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Congrats!</h1>
+      <div className="alingment-center-sign-up container">
+        <div className="navbar fixed-top top-navbar">
+          <img className="top-nav-logo" src="../../babywishlogo.png" alt="" />
+        </div>
+        <h1 className="sign-up-title">We are so happy for you!</h1>
+        <h2 className="sign-up-subtitle">When is your due date?</h2>
         <form onSubmit={this.handleSubmit}>
           <input
             type="date"
@@ -50,7 +54,7 @@ export class SignUpTwoExpecting extends Component {
             onChange={this.checkboxToggle}
           />
           First Pregnancy <br />
-          <button>Next</button>
+          <button className="btn btn-start btn-block">Next</button>
         </form>
       </div>
     );

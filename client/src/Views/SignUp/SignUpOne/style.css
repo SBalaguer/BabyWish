@@ -1,6 +1,56 @@
 .sign-up-title {
   color: #1f2674;
+  margin-bottom: 0.5em;
+  font-size: 2.5em;
+  font-weight: 200;
+  text-align: center;
 }
 .sign-up-subtitle {
   color: #1f2674;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+  font-weight: 100;
+  text-align: center;
+}
+
+.top-nav-logo {
+  height: 6vh;
+  margin: 0.3vh auto;
+}
+
+.top-navbar {
+  background-color: #ffdfe4;
+}
+
+.profile-pic-container {
+  width: 50vw;
+  height: 50vw;
+  border: 0.5px solid #1f2674;
+  border-radius: 50vw;
+  max-width: 250px;
+  max-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.6em;
+}
+
+.profile-pic {
+  width: 45vw;
+  height: auto;
+  max-width: 230px;
+}
+
+.form-check {
+  margin-bottom: 0.5em;
+}
+
+.alingment-center-sign-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 93.4vh;
+  margin-top: 6.6vh;
 }
