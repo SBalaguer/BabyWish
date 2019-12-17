@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { updateProfile, createFile } from './../../services/user-functions';
 // import ImageUpload from '../../Components/ImageUpload';
-import ImageUploader from 'react-images-upload';
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -19,12 +18,6 @@ export class EditProfile extends Component {
       user: this.props.userState
     });
   }
-
-  //   componentWillReceiveProps(props) {
-  //     this.setState({
-  //       user: this.props.userState
-  //     });
-  //   }
 
   handleSubmit(event) {
     const objToUpdate = this.state.user;
@@ -44,19 +37,9 @@ export class EditProfile extends Component {
     });
   }
   async handleFileChange(event) {
-    // console.dir(event.target.files);
     event.preventDefault();
-    // console.dir(event.target[0].files[0]);
     const file = event.target[0].files[0];
-    // console.log(file);
-    // this.setState({
-    //   user: {
-    //     ...this.state.user,
-    //     pictureUrl: file
-    //   }
-    // });
     const fileUrlToUpdate = await createFile(file);
-    console.log('this is the fileurltoUpdate:\n' + fileUrlToUpdate);
     this.setState({
       user: {
         ...this.state.user,
