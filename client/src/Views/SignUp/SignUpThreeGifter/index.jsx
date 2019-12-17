@@ -9,7 +9,8 @@ export class SignUpThree extends Component {
       phoneNumber: "",
       address: "",
       email: "",
-      password: ""
+      password: "",
+      checkPassword: "hidden"
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,39 +49,66 @@ export class SignUpThree extends Component {
   checkPassword(event) {
     const passwordSecond = event.target.value;
     if (this.state.password !== passwordSecond) {
-      console.log("Check passwords"); //ATTENTION: Should make a more visibile flag for consumer
+      this.setState({
+        checkPassword: ""
+      });
     } else {
-      console.log("Same passwords"); //ATTENTION: Should make a more visibile flag for consumer
+      this.setState({
+        checkPassword: "hidden"
+      });
     }
   }
 
   render() {
     return (
-      <div>
-        <h1>We are almost Done!</h1>
+      <div className="alingment-center-sign-up">
+        <div className="navbar fixed-top top-navbar">
+          <img className="top-nav-logo" src="../../babywishlogo.png" alt="" />
+        </div>
+        <div>
+          <h1 className="sign-up-title">You are amazing!</h1>
+          <h2 className="sign-up-subtitle">Tell us more about you.</h2>
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            required
-            type="email"
-            name="email"
-            onChange={this.handleInputChange}
-            placeholder="Email"
-          />
-          <input
-            required
-            type="password"
-            name="password"
-            onChange={this.handleInputChange}
-            placeholder="Password"
-          />
-          <input
-            required
-            type="password"
-            name="passwordSecond"
-            onChange={this.checkPassword}
-            placeholder="Re-Enter Password"
-          />
-          <button>Next</button>
+          <div className="sign-up-3-form">
+            <div className="form-group">
+              <input
+                required
+                type="email"
+                name="email"
+                onChange={this.handleInputChange}
+                placeholder="Email"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                required
+                type="password"
+                name="password"
+                onChange={this.handleInputChange}
+                placeholder="Password"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group" style={{ marginBottom: "2px" }}>
+              <input
+                required
+                type="password"
+                name="passwordSecond"
+                onChange={this.checkPassword}
+                placeholder="Re-Enter Password"
+                className="form-control"
+              />
+            </div>
+            <small
+              className={"form-text " + this.state.checkPassword}
+              id="forg-pass"
+            >
+              Make sure both passwords match!
+            </small>
+            <button className="btn btn-start btn-block">Welcome!</button>
+          </div>
         </form>
         <Link to="">Continue as Guest</Link>
       </div>
