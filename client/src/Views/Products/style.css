@@ -1,0 +1,22 @@
+.view-title-products {
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  /* position: fixed;
+  top: 7vh; */
+}
+
+.search-form {
+  width: 85%;
+}
+
+.view-title-products input {
+  height: 4vh;
+  width: 70%;
+  border: 1px solid #1f2674c7;
+  border-radius: 20px;
+  margin-left: 1em;
+}

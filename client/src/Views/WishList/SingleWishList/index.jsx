@@ -7,6 +7,9 @@ import TopNavbar from "./../../../Components/TopNavbar";
 
 import ProductComp from "./../../../Components/ProductComp";
 import { removeProductInWishlist } from "./../../../services/wishlist-functions";
+import { addProductToWishlist } from "./../../../services/wishlist-functions";
+
+import "./style.css";
 
 // ATTENTION = WILL HAVE TO CHANGE THE WAY THIS GETS A SINGLE WISHLIST
 
@@ -38,6 +41,20 @@ export class SingleWishList extends Component {
     this.props.addUsertoUserState(user);
   }
 
+  // async handdleAddProduct(productId) {
+  //   const wishlistId = this.state.wishlistId;
+  //   const amountWanted = 1;
+  //   try {
+  //     await addProductToWishlist(wishlistId, productId, amountWanted);
+  //     const wishListToRender = await getWishlistById(wishlistId);
+  //     this.setState({
+  //       wishListToRender
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
   async removeProductFromWishlist(productId) {
     try {
       const wishlistId = this.props.match.params.id;
@@ -62,21 +79,26 @@ export class SingleWishList extends Component {
       <React.Fragment>
         <TopNavbar />
         <div className="app-container">
-          <div className="view-title">
+          <div className="view-title-wishlist">
             <h1>
               <span className="hi"> {wishList.name}</span>
             </h1>
+            <Link
+              to={{
+                pathname: "/products",
+                state: {
+                  wishListId: wishList._id
+                }
+              }}
+            >
+              <img
+                className="add-prod-button"
+                src="../../diaper-add-product.png"
+                alt=""
+              />
+            </Link>
           </div>
-          <Link
-            to={{
-              pathname: "/products",
-              state: {
-                wishListId: wishList._id
-              }
-            }}
-          >
-            Add Product!
-          </Link>
+
           {products && (
             <div className="wish-list-container">
               {products.map(product => {

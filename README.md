@@ -65,3 +65,6 @@ _WishList_
    Route: /api/wishlist/user/id
    Information: User ID
    Next Step: Make this method bring all the wishlists for that specific user.
+
+SANTI TEST WISHLIST
+http://localhost:3000/wishlist/5df92c900f7b158f8c21e7fb

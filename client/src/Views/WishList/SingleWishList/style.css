@@ -1,0 +1,14 @@
+.add-prod-button {
+  width: 7.5vh;
+  height: auto;
+  margin-left: 1em;
+  margin-top: 0.3em;
+}
+
+.view-title-wishlist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 1em;
+}

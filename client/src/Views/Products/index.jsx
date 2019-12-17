@@ -4,6 +4,9 @@ import { listProducts } from "./../../services/product-functions";
 import Navbar from "./../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 import { addProductToWishlist } from "./../../services/wishlist-functions";
+import TopNavbar from "./../../Components/TopNavbar";
+
+import "./style.css";
 
 class Products extends Component {
   constructor(props) {
@@ -53,28 +56,36 @@ class Products extends Component {
     const NavbarWithRouter = withRouter(Navbar);
     const user = this.props.userState;
     return (
-      <div>
-        <h1>Products Page</h1>
-        <h3>
-          Here we should have a navbar for the products to search and filter
-        </h3>
-        {this.state.products.map(product => (
-          <ProductComp
-            key={product._id}
-            {...product}
-            userId={user._id}
-            userRole={user.role}
-            addProduct={productId => {
-              this.handdleAddProduct(productId);
-            }}
-            wishListFrom={this.state.wishListFrom}
+      <React.Fragment>
+        <TopNavbar />
+        <div className="app-container">
+          <div className="view-title-products">
+            <h1>
+              <span className="hi"> Select Products</span>
+            </h1>
+            <form className="search-form">
+              <input type="search" />
+              <button>Search</button>
+            </form>
+          </div>
+          {this.state.products.map(product => (
+            <ProductComp
+              key={product._id}
+              {...product}
+              userId={user._id}
+              userRole={user.role}
+              addProduct={productId => {
+                this.handdleAddProduct(productId);
+              }}
+              wishListFrom={this.state.wishListFrom}
+            />
+          ))}
+          <NavbarWithRouter
+            user={user}
+            addUsertoUserState={this.addUsertoUserState}
           />
-        ))}
-        <NavbarWithRouter
-          user={user}
-          addUsertoUserState={this.addUsertoUserState}
-        />
-      </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
