@@ -73,3 +73,15 @@ export const deleteUser = async id => {
     throw error;
   }
 };
+
+export const updateProfile = async (id, obj) => {
+  console.log(
+    'trying to update profile with idd: ' + id + ' and obj to update:\n' + obj
+  );
+  try {
+    const response = await axios.patch(`/api/user/edit/${id}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

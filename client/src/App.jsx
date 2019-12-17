@@ -18,6 +18,7 @@ import SingleProductView from './Views/SingleProductView';
 import CheckOut from './Views/CheckOut';
 import FBLogin from './Views/Facebook';
 import AdminDashboard from './Views/Admin';
+import EditProfile from './Views/EditProfile';
 import { isUserLoggedIn } from './services/user-functions';
 
 class App extends Component {
@@ -181,6 +182,17 @@ class App extends Component {
             path="/wishlist/:id"
             render={props => (
               <SingleWishList
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/editprofile"
+            render={props => (
+              <EditProfile
                 updateUserState={this.updateUserState}
                 userState={this.state.user}
                 addUsertoUserState={this.addUsertoUserState}
