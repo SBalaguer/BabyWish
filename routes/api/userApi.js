@@ -106,4 +106,10 @@ userApiRouter.post('/facebook', async (req, res, next) => {
 // ATTENTION ADD PASSWORD CHANGE PATCH METHOD HERE
 // AND DELETE
 
+userApiRouter.post('/delete/:id', async (req, res, next) => {
+  const idToDelete = req.params.id;
+  const deletedUser = await User.findByIdAndDelete(idToDelete);
+  res.json({ deletedUser });
+});
+
 module.exports = userApiRouter;

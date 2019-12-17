@@ -45,3 +45,31 @@ export const facebookLogin = async req => {
     throw error;
   }
 };
+
+export const findWishList = async id => {
+  try {
+    const response = await axios.get(`/api/wishlist/user/${id}`);
+    console.dir(response);
+    return response.data.wishListByUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    const response = await axios.get('/api/user/');
+    return response.data.allUsers;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteUser = async id => {
+  try {
+    const response = await axios.post(`/api/user/delete/${id}`);
+    return {};
+  } catch (error) {
+    throw error;
+  }
+};

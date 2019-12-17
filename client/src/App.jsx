@@ -17,7 +17,7 @@ import Products from './Views/Products';
 import SingleProductView from './Views/SingleProductView';
 import CheckOut from './Views/CheckOut';
 import FBLogin from './Views/Facebook';
-
+import AdminDashboard from './Views/Admin';
 import { isUserLoggedIn } from './services/user-functions';
 
 class App extends Component {
@@ -193,6 +193,19 @@ class App extends Component {
               path="/wishlist/"
               render={props => (
                 <WishList
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
+          {this.routeGuard(['admin']) && (
+            <Route
+              path="/admin/"
+              render={props => (
+                <AdminDashboard
                   updateUserState={this.updateUserState}
                   userState={this.state.user}
                   addUsertoUserState={this.addUsertoUserState}
