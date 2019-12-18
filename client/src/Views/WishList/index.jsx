@@ -128,14 +128,14 @@ export class AllWishList extends Component {
                 onSubmit={this.createNewWishList}
                 style={{ marginTop: "1em" }}
               >
-                <div class="form-row">
+                <div className="form-row">
                   <div
-                    class="form-group col-md-6"
+                    className="form-group col-md-6"
                     style={{ marginBottom: "0.3em" }}
                   >
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="wishlistName"
                       onChange={this.updateName}
                       value={this.state.wishListName}
@@ -143,8 +143,8 @@ export class AllWishList extends Component {
                       placeholder="Wishlist Name"
                     />
                   </div>
-                  <div class="form-group col-md-6">
-                    <button class="empty-btn"> Add</button>
+                  <div className="form-group col-md-6">
+                    <button className="empty-btn"> Add</button>
                   </div>
                 </div>
               </form>
