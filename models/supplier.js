@@ -15,6 +15,17 @@ const schema = new mongoose.Schema({
   },
   deliveryEtaInDays: {
     type: Number
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  passwordHash: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: Number
   }
 });
 

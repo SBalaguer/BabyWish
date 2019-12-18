@@ -1,0 +1,63 @@
+import React, { Component } from 'react';
+
+import { addProduct } from './../../services/product-functions';
+// import NavbarWithRouter from './../../Components/Navbar';
+
+export class SupplierDashboard extends Component {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       userList: null
+  //     };
+  //     this.refreshList = this.refreshList.bind(this);
+  //   }
+
+  //   async componentDidMount() {
+  //     try {
+  //       const users = await getAllUsers();
+  //       this.setState({
+  //         userList: users
+  //       });
+  //     } catch (error) {
+  //       throw error;
+  //     }
+  //   }
+
+  async productMethod(event) {
+    const name = event.target.name.value;
+    const category = event.target.category.value;
+    const availableStock = event.target.availableStock.value;
+    const price = event.target.price.value;
+    const pictureUrl = event.target.pictureUrl.value;
+
+    const obj = { name, category, availableStock, price, pictureUrl };
+    try {
+      addProduct(obj);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.productMethod}>
+          <input type="text" placeholder="name" name="name" />
+          <select type="text" name="category">
+            <option value="diapers">Diapers</option>
+            <option value="trolleys">trolleys</option>
+            <option value="essentials">Essentials</option>
+            <option value="clothes">Clothes</option>
+            <option value="uncategorized">n/a</option>
+          </select>
+          <input type="number" placeholder="price" name="price" />
+          <input type="text" placeholder="picurl" name="pictureUrl" />
+          <input type="number" placeholder="in stock" name="availableStock" />
+          <button>add</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default SupplierDashboard;
