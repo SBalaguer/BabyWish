@@ -102,7 +102,7 @@ export const createFile = async file => {
     const response = await axios.post(`/api/user/upload`, data);
     console.log('this below is response file');
     console.dir(response);
-    return response.data.toReturn;
+    return response.data.link;
   } catch (error) {
     console.log(error);
     throw error;

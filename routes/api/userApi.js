@@ -110,13 +110,24 @@ userApiRouter.post('/delete/:id', async (req, res, next) => {
 
 const multerMiddleware = require('./../../middleware/cloudinary');
 
+// UPLOADS PICTURE AND CROPS IT TO A CIRCLE AND TRANSFORMS IT TO PNG
 userApiRouter.post(
   '/upload',
   multerMiddleware.single('pictureUrl'),
   async (req, res, next) => {
-    console.log(req.file);
     const toReturn = req.file.url;
-    res.json({ toReturn });
+    const toAdd = 'w_200,h_200,c_crop,g_face,r_max/w_200';
+    let link = toReturn.split('/');
+
+    const indexToSplice = link.indexOf('upload') + 1;
+    link.splice(indexToSplice, 0, toAdd);
+    let changeLast = link[link.length - 1].split('.');
+    changeLast.splice(1, 1, 'png');
+    changeLast = changeLast.join('.');
+    link.splice(link.length - 1, 1, changeLast);
+    link = link.join('/');
+
+    res.json({ link });
   }
 );
 

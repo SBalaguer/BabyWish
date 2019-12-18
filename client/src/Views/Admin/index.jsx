@@ -5,6 +5,7 @@ import {
   getAllUsers,
   deleteUser
 } from './../../services/user-functions';
+import { addFromAmazon } from './../../services/product-functions';
 import NavbarWithRouter from './../../Components/Navbar';
 
 export class AdminDashboard extends Component {
@@ -25,6 +26,12 @@ export class AdminDashboard extends Component {
     } catch (error) {
       throw error;
     }
+  }
+
+  productMethod(event) {
+    event.preventDefault();
+    const asin = event.target.asin.value;
+    addFromAmazon(asin);
   }
 
   deleteMethod(id) {
@@ -54,6 +61,14 @@ export class AdminDashboard extends Component {
               {...user}
             />
           ))}
+        <br />
+        <br />
+        <br />
+        <br />
+        <form onSubmit={this.productMethod}>
+          <input type="text" placeholder="asin" name="asin" />
+          <button>add</button>
+        </form>
         <NavbarWithRouter
           user={this.props.userState}
           addUsertoUserState={this.props.addUsertoUserState}
