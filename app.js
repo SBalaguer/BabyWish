@@ -9,7 +9,7 @@ const expressSession = require("express-session");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const serveFavicon = require("serve-favicon");
+// const serveFavicon = require("serve-favicon");
 const bindUserToViewLocals = require("./middleware/bind-user-to-view-locals.js");
 const passportConfigure = require("./passport-configuration.js");
 
