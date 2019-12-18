@@ -68,7 +68,8 @@ app.use("/api/products", productApiRouter);
 app.use("/api/checkout", checkoutApiRouter);
 app.use("/api/shopping-cart", shoppingCartApiRouter);
 app.use("/api/supplier", supplierApiRouter);
-app.use("/api", indexRouter);
+// app.use("/api", indexRouter);
+
 app.get("*", (req, res, next) => {
   res.sendFile(join(__dirname, "client/build/index.html"));
 });
