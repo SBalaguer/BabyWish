@@ -18,7 +18,8 @@ export class ShoppingCart extends Component {
       gifterID: {},
       wishlistID: {},
       products: [],
-      total: 0
+      total: 0,
+      status: false
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.handleToken = this.handleToken.bind(this);
@@ -66,8 +67,14 @@ export class ShoppingCart extends Component {
     const total = this.state.total;
     try {
       const status = await processPayment(token, total);
+      if (status == "success") {
+        //WE NEED TO SHOW A TOAST
+        //WE NEED TO UPDATE THE WISHLIST
+        //WE NEED TO DELETE THE SHOPPINGCART
+        //WE NEED TO REDIRECT THE USER
+        this.setState({ status: true });
+      }
       console.log(status);
-      this.setState({ status: true });
     } catch (error) {
       console.log(error);
     }

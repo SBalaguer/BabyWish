@@ -89,10 +89,22 @@ shoppingCartRouter.patch("/edit/:id/:productID", async (req, res, next) => {
   };
   try {
     const shoppingCart = await ShoppingCart.findByIdAndUpdate(shoppingCartID, {
-      // ...(product ? { product } : {})
       $push: { products: product }
     });
     res.json({ shoppingCart });
+  } catch (error) {
+    //console.log(error);
+    next(error);
+  }
+});
+
+//DELETE A SHOPPING CART
+shoppingCartRouter.delete("/delete/:id/", async (req, res, next) => {
+  //ID here refers to the shoppingCart ID
+  const shoppingCartID = req.params.id;
+  try {
+    await ShoppingCart.findByIdAndRemove(shoppingCartID);
+    res.json({});
   } catch (error) {
     //console.log(error);
     next(error);
