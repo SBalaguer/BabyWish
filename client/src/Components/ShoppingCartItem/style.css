@@ -1,0 +1,12 @@
+.single-product-sc {
+  display: flex;
+  flex-direction: row;
+  width: 95vw;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.single-product-sc_img {
+  width: 5vw;
+  height: auto;
+}

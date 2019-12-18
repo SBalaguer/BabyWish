@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import HomeView from './Views/HomeView';
-import SignUpOne from './Views/SignUp/SignUpOne';
-import SignUpTwoExpecting from './Views/SignUp/SignUpTwoExpecting';
-import SignUpTwoParent from './Views/SignUp/SignUpTwoParent';
-import SignUpThree from './Views/SignUp/SignUpThree';
-import SignUpThreeGifter from './Views/SignUp/SignUpThreeGifter';
-import SignIn from './Views/SignIn';
-import WishList from './Views/WishList';
-import SingleWishList from './Views/WishList/SingleWishList';
-import ProfileView from './Views/ProfileView';
-import Products from './Views/Products';
-import SingleProductView from './Views/SingleProductView';
-import CheckOut from './Views/CheckOut';
-import FBLogin from './Views/Facebook';
-import AdminDashboard from './Views/Admin';
-import EditProfile from './Views/EditProfile';
-import { isUserLoggedIn } from './services/user-functions';
+import HomeView from "./Views/HomeView";
+import SignUpOne from "./Views/SignUp/SignUpOne";
+import SignUpTwoExpecting from "./Views/SignUp/SignUpTwoExpecting";
+import SignUpTwoParent from "./Views/SignUp/SignUpTwoParent";
+import SignUpThree from "./Views/SignUp/SignUpThree";
+import SignUpThreeGifter from "./Views/SignUp/SignUpThreeGifter";
+import SignIn from "./Views/SignIn";
+import WishList from "./Views/WishList";
+import SingleWishList from "./Views/WishList/SingleWishList";
+import ProfileView from "./Views/ProfileView";
+import Products from "./Views/Products";
+import SingleProductView from "./Views/SingleProductView";
+import CheckOut from "./Views/CheckOut";
+import FBLogin from "./Views/Facebook";
+import AdminDashboard from "./Views/Admin";
+import EditProfile from "./Views/EditProfile";
+import ShoppingCart from "./Views/ShoppingCart";
+import { isUserLoggedIn } from "./services/user-functions";
 
 class App extends Component {
   constructor(props) {
@@ -143,7 +144,18 @@ class App extends Component {
               />
             )}
           />
-          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+          <Route
+            path="/shopping-cart/:id"
+            render={props => (
+              <ShoppingCart
+                updateUserState={this.updateUserState}
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
+          />
+          {this.routeGuard(["admin", "gifter", "expecting", "parent"]) && (
             <Route
               path="/user/:id"
               render={props => (
@@ -156,7 +168,7 @@ class App extends Component {
               )}
             />
           )}
-          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+          {this.routeGuard(["admin", "gifter", "expecting", "parent"]) && (
             <Route
               path="/products/:id"
               render={props => (
@@ -169,7 +181,7 @@ class App extends Component {
               )}
             />
           )}
-          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+          {this.routeGuard(["admin", "gifter", "expecting", "parent"]) && (
             <Route
               path="/products/"
               render={props => (
@@ -182,7 +194,7 @@ class App extends Component {
               )}
             />
           )}
-          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+          {this.routeGuard(["admin", "gifter", "expecting", "parent"]) && (
             <Route
               path="/wishlist/:id"
               render={props => (
@@ -195,7 +207,7 @@ class App extends Component {
               )}
             />
           )}
-          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+          {this.routeGuard(["admin", "gifter", "expecting", "parent"]) && (
             <Route
               path="/editprofile"
               render={props => (
@@ -208,7 +220,7 @@ class App extends Component {
               )}
             />
           )}
-          {this.routeGuard(['admin', 'expecting']) && (
+          {this.routeGuard(["admin", "expecting"]) && (
             <Route
               path="/wishlist/"
               render={props => (
@@ -221,7 +233,7 @@ class App extends Component {
               )}
             />
           )}
-          {this.routeGuard(['admin']) && (
+          {this.routeGuard(["admin"]) && (
             <Route
               path="/admin/"
               render={props => (
@@ -235,7 +247,7 @@ class App extends Component {
             />
           )}
           <Route path="/checkout" component={CheckOut} />
-          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+          {this.routeGuard(["admin", "gifter", "expecting", "parent"]) && (
             <Route
               path="/"
               render={props => (
