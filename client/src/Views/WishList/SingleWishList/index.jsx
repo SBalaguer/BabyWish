@@ -172,6 +172,7 @@ export class SingleWishList extends Component {
           <NavbarWithRouter
             user={user}
             addUsertoUserState={this.addUsertoUserState}
+            wishlistId={this.state.wishlistId}
           />
         </div>
       </React.Fragment>

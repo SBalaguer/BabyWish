@@ -7,7 +7,10 @@ const schema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "User"
   },
-  wishlist: { type: mongoose.Types.ObjectId, ref: "Wishlist" },
+  wishlist: {
+    type: mongoose.Types.ObjectId,
+    ref: "Wishlist"
+  },
   products: [
     {
       productId: {
