@@ -4,6 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('./models/user');
+const Supplier = require('./models/supplier');
 const bcryptjs = require('bcryptjs');
 
 passport.serializeUser((user, callback) => {
@@ -66,6 +67,69 @@ passport.use(
   new LocalStrategy({ usernameField: 'email' }, (email, password, callback) => {
     let user;
     User.findOne({
+      email
+    })
+      .then(document => {
+        user = document;
+        return bcryptjs.compare(password, user.passwordHash);
+      })
+      .then(passwordMatchesHash => {
+        if (passwordMatchesHash) {
+          callback(null, user);
+        } else {
+          callback(new Error('WRONG_PASSWORD'));
+        }
+      })
+      .catch(error => {
+        callback(error);
+      });
+  })
+);
+
+// SUPPLIER PASSPORT CONFIG LEO
+
+passport.use(
+  'supplier-sign-up',
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passReqToCallback: true
+    },
+    (req, email, password, callback) => {
+      const name = req.body.name;
+      const iban = req.body.iban;
+      const shipFrom = req.body.shipFrom;
+      const deliveryEtaInDays = req.body.deliveryEtaInDays;
+      const phoneNumber = req.body.phoneNumber;
+      bcryptjs
+        .hash(password, 10)
+        .then(hash => {
+          return Supplier.create({
+            name,
+            email,
+            passwordHash: hash,
+            iban,
+            shipFrom,
+            deliveryEtaInDays,
+            phoneNumber
+          });
+        })
+        .then(user => {
+          callback(null, user);
+        })
+        .catch(error => {
+          //console.log(error);
+          callback(error);
+        });
+    }
+  )
+);
+
+passport.use(
+  'supplier-sign-in',
+  new LocalStrategy({ usernameField: 'email' }, (email, password, callback) => {
+    let user;
+    Supplier.findOne({
       email
     })
       .then(document => {
