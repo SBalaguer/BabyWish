@@ -3,7 +3,10 @@ import Navbar from "./../../Components/Navbar";
 import TopNavbar from "./../../Components/TopNavbar";
 import ShoppingCartItem from "./../../Components/ShoppingCartItem";
 import { withRouter } from "react-router-dom";
-import { checkIfShoppingCart } from "./../../services/shopping-cart";
+import {
+  checkIfShoppingCart,
+  deleteShoppingcCart
+} from "./../../services/shopping-cart";
 import { singleProduct } from "./../../services/product-functions";
 import { processPayment } from "./../../services/checkout";
 import StripeCheckout from "react-stripe-checkout";
@@ -89,16 +92,18 @@ export class ShoppingCart extends Component {
   async handleToken(token) {
     //console.log(token);
     const total = this.state.total;
+    const shoppingCartID = this.state.shoppingCart._id;
+    const gifterID = this.props.userState._id;
     try {
       const status = await processPayment(token, total);
       if (status == "success") {
         toast("Purchase Complete!", { type: "success" });
-
         //WE NEED TO UPDATE THE WISHLIST
         this.updateBoughtAmount();
-
         //WE NEED TO DELETE THE SHOPPINGCART
+        deleteShoppingcCart(shoppingCartID);
         //WE NEED TO REDIRECT THE USER
+        this.props.history.push(`/user/${gifterID}`);
         this.setState({ status: true });
       } else {
         toast("There was an error.", { type: "error" });

@@ -155,7 +155,7 @@ export class SingleWishList extends Component {
                       deleteId={product._id}
                       userRole={user.role}
                       wanted={product.amountWanted}
-                      bought={user.amountBought}
+                      bought={product.amountBought}
                       path="wishlist"
                       removeProduct={productId => {
                         this.removeProductFromWishlist(productId);

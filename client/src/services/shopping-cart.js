@@ -48,3 +48,11 @@ export const checkIfShoppingCart = async (wishlistId, gifterID) => {
     throw error;
   }
 };
+
+export const deleteShoppingcCart = async shoppingCartID => {
+  try {
+    await axios.delete(`/api/shopping-cart/delete/${shoppingCartID}`);
+  } catch (error) {
+    throw error;
+  }
+};
