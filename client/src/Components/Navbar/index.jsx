@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { signOut } from './../../services/user-functions';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { signOut } from "./../../services/user-functions";
 
-import './style.css';
+import "./style.css";
 
 export class Navbar extends Component {
   constructor(props) {
@@ -23,6 +23,7 @@ export class Navbar extends Component {
   render() {
     const userId = this.props.user._id;
     const userRole = this.props.user.role;
+    const wishListID = this.props.wishlistId;
     return (
       <div className="navbar-bottom fixed-bottom">
         {(!userId && (
@@ -36,10 +37,21 @@ export class Navbar extends Component {
               Sign Out
             </Link>
             <Link to="/editprofile">Edit Profile</Link>
-            {userRole === 'admin' && <Link to="/admin">Users List</Link>}
-            {userRole === 'gifter' && <Link to="">Shopping Cart</Link>}
-            {userRole === 'expecting' && <Link to="/wishlist">Wishlist</Link>}
-            {userRole === 'parent' && <Link to="/wishlist">Wishlist</Link>}
+            {userRole === "admin" && <Link to="/admin">Users List</Link>}
+            {userRole === "gifter" && (
+              <Link
+                to={{
+                  pathname: `/shopping-cart/${userId}`,
+                  state: {
+                    wishListId: wishListID
+                  }
+                }}
+              >
+                Shopping Cart
+              </Link>
+            )}
+            {userRole === "expecting" && <Link to="/wishlist">Wishlist</Link>}
+            {userRole === "parent" && <Link to="/wishlist">Wishlist</Link>}
             <Link to={`/user/${userId}`}>Profile</Link>
           </React.Fragment>
         )}
