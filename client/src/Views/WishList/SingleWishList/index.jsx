@@ -8,6 +8,11 @@ import TopNavbar from "./../../../Components/TopNavbar";
 import ProductComp from "./../../../Components/ProductComp";
 import { removeProductInWishlist } from "./../../../services/wishlist-functions";
 import { addProductToWishlist } from "./../../../services/wishlist-functions";
+import {
+  createShoppingCart,
+  checkIfShoppingCart,
+  addToShoppingCart
+} from "./../../../services/shopping-cart";
 
 import "./style.css";
 
@@ -54,6 +59,44 @@ export class SingleWishList extends Component {
   //     console.log(error);
   //   }
   // }
+
+  async addToShoppingCart(productId) {
+    try {
+      const productID = productId;
+      const wishlistID = this.props.match.params.id;
+      const gifterID = this.props.userState._id;
+      const amountBought = 1;
+      // console.log("this is the product to be added", productID);
+      // console.log("this is the gifter", gifterID);
+      // console.log("this is the wishlist", wishlistID);
+      //FIRST I'M GOING TO CHECK IF THERE IS A SHOPPING CART FOR THIS USER AND WISHLIST
+      const existingShoppingCart = await checkIfShoppingCart(
+        wishlistID,
+        gifterID
+      );
+
+      if (existingShoppingCart) {
+        const shoppingCartID = existingShoppingCart._id;
+        const shoppingCartUpdated = await addToShoppingCart(
+          shoppingCartID,
+          productID,
+          amountBought
+        );
+        //here we will be patching the existing shopping cart
+        console.log("this is the updated ShoppingCart!", shoppingCartUpdated);
+      } else {
+        const newShoppingCart = await createShoppingCart(
+          wishlistID,
+          gifterID,
+          productID,
+          amountBought
+        );
+        console.log(newShoppingCart);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async removeProductFromWishlist(productId) {
     try {
@@ -102,9 +145,6 @@ export class SingleWishList extends Component {
           {products && (
             <div className="wish-list-container">
               {products.map(product => {
-                {
-                  /* return <p key={product._id}>{product.productId}</p>; */
-                }
                 const productData = product.productId;
                 if (productData) {
                   return (
@@ -119,6 +159,9 @@ export class SingleWishList extends Component {
                       path="wishlist"
                       removeProduct={productId => {
                         this.removeProductFromWishlist(productId);
+                      }}
+                      addToShoppingCart={productId => {
+                        this.addToShoppingCart(productId);
                       }}
                     />
                   );

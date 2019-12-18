@@ -44,12 +44,6 @@ userApiRouter.get("/", async (req, res, next) => {
 
 userApiRouter.patch("/edit/:id", async (req, res, next) => {
   const userId = req.params.id;
-  console.log(
-    "this is the patch id:\n" +
-      userId +
-      "\n and this is the req.body:\n" +
-      req.body
-  );
   console.dir(req.body);
   try {
     const {
