@@ -49,7 +49,6 @@ export const facebookLogin = async req => {
 export const findWishList = async id => {
   try {
     const response = await axios.get(`/api/wishlist/user/${id}`);
-    console.dir(response);
     return response.data.wishListByUser;
   } catch (error) {
     throw error;
@@ -60,6 +59,16 @@ export const getAllUsers = async () => {
   try {
     const response = await axios.get('/api/user/');
     return response.data.allUsers;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getSingleUser = async id => {
+  try {
+    const response = await axios.get(`/api/user/${id}`);
+
+    return response.data.user;
   } catch (error) {
     throw error;
   }
@@ -78,7 +87,6 @@ export const updateProfile = async (id, obj) => {
   const objToUpdate = obj.objToUpdate;
   try {
     const response = await axios.patch(`/api/user/edit/${id}`, objToUpdate);
-    console.log(response);
     return response;
   } catch (error) {
     throw error;

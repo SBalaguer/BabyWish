@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { updateProfile, createFile } from './../../services/user-functions';
+import {
+  updateProfile,
+  createFile,
+  getSingleUser
+} from './../../services/user-functions';
 // import ImageUpload from '../../Components/ImageUpload';
+import NavbarWithRouter from './../../Components/Navbar';
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -19,15 +24,12 @@ export class EditProfile extends Component {
     });
   }
 
-  //   componentWillReceiveProps(props) {
-  //     this.setState({
-  //       user: this.props.userState
-  //     });
-  //   }
-
-  handleSubmit(event) {
+  async handleSubmit(event) {
+    event.preventDefault();
     const objToUpdate = this.state.user;
-    updateProfile(this.props.userState._id, { objToUpdate });
+    await updateProfile(this.props.userState._id, { objToUpdate });
+    const reloadInfo = await getSingleUser(this.props.userState._id);
+    await this.props.addUsertoUserState(reloadInfo);
     this.props.history.push(`/user/${this.props.userState._id}`);
   }
 
@@ -43,19 +45,9 @@ export class EditProfile extends Component {
     });
   }
   async handleFileChange(event) {
-    // console.dir(event.target.files);
     event.preventDefault();
-    // console.dir(event.target[0].files[0]);
     const file = event.target[0].files[0];
-    // console.log(file);
-    // this.setState({
-    //   user: {
-    //     ...this.state.user,
-    //     pictureUrl: file
-    //   }
-    // });
     const fileUrlToUpdate = await createFile(file);
-    console.log('this is the fileurltoUpdate:\n' + fileUrlToUpdate);
     this.setState({
       user: {
         ...this.state.user,
@@ -67,43 +59,58 @@ export class EditProfile extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            onChange={this.handleChange}
-            placeholder="Name"
-          />
-          <input
-            type="date"
-            name="dueDate"
-            onChange={this.handleChange}
-            placeholder="Due Date"
-          />
-          <input
-            type="text"
-            name="address"
-            onChange={this.handleChange}
-            placeholder="Address"
-          />
-          <input
-            type="text"
-            name="phoneNumber"
-            onChange={this.handleChange}
-            placeholder="Phone Number"
-          />
-          <input
-            type="text"
-            name="babyGender"
-            onChange={this.handleChange}
-            placeholder="Baby Gender"
-          />
-          <button>commit changes</button>
-        </form>
-        <form encType="multipart/form-data" onSubmit={this.handleFileChange}>
-          <input type="file" name="pictureUrl" />
-          <button type="submit">upload picture</button>
-        </form>
+        <div className="edit-form">
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              onChange={this.handleChange}
+              placeholder="Name"
+            />
+            <input
+              type="date"
+              name="dueDate"
+              onChange={this.handleChange}
+              placeholder="Due Date"
+            />
+            <input
+              type="text"
+              name="address"
+              onChange={this.handleChange}
+              placeholder="Address"
+            />
+            <input
+              type="text"
+              name="phoneNumber"
+              onChange={this.handleChange}
+              placeholder="Phone Number"
+            />
+            <select
+              type="text"
+              name="babyGender"
+              onChange={this.handleChange}
+              placeholder="Baby Gender"
+            >
+              <option value="singleBoy">Single Boy</option>
+              <option value="singleGirl">Single Girl</option>
+              <option value="twinBoys">Twin Boys</option>
+              <option value="twinGirls">Twin Girls</option>
+              <option value="twinMix">Mixed Twins</option>
+              <option value="neutral">Don't / won't know</option>
+            </select>
+            <button>commit changes</button>
+          </form>
+        </div>
+        <div className="upload-div">
+          <form encType="multipart/form-data" onSubmit={this.handleFileChange}>
+            <input type="file" name="pictureUrl" />
+            <button type="submit">upload picture</button>
+          </form>
+        </div>
+        <NavbarWithRouter
+          user={this.props.userState}
+          addUsertoUserState={this.addUsertoUserState}
+        />
       </div>
     );
   }

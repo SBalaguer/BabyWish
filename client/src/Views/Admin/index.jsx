@@ -5,6 +5,7 @@ import {
   getAllUsers,
   deleteUser
 } from './../../services/user-functions';
+import NavbarWithRouter from './../../Components/Navbar';
 
 export class AdminDashboard extends Component {
   constructor(props) {
@@ -53,6 +54,10 @@ export class AdminDashboard extends Component {
               {...user}
             />
           ))}
+        <NavbarWithRouter
+          user={this.props.userState}
+          addUsertoUserState={this.props.addUsertoUserState}
+        />
       </div>
     );
   }

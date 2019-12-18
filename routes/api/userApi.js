@@ -1,13 +1,13 @@
-const { Router } = require("express");
-const routeGuard = require("./../../middleware/route-guard");
+const { Router } = require('express');
+const routeGuard = require('./../../middleware/route-guard');
 const userApiRouter = new Router();
-const User = require("./../../models/user");
-const bcryptjs = require("bcryptjs");
+const User = require('./../../models/user');
+const bcryptjs = require('bcryptjs');
 
-const passport = require("passport");
+const passport = require('passport');
 
 //CHECK IF THERE IS A USER LOGGEDIN
-userApiRouter.get("/check-user-logged", async (req, res, next) => {
+userApiRouter.get('/check-user-logged', async (req, res, next) => {
   const userId = req.user;
   try {
     const user = await User.findById(userId).exec();
@@ -19,7 +19,7 @@ userApiRouter.get("/check-user-logged", async (req, res, next) => {
 
 // GET SINGLE USER INFO
 
-userApiRouter.get("/:id", async (req, res, next) => {
+userApiRouter.get('/:id', async (req, res, next) => {
   const userId = req.params.id;
   try {
     const user = await User.findById(userId).exec();
@@ -31,7 +31,7 @@ userApiRouter.get("/:id", async (req, res, next) => {
 
 // GET ALL USERS
 
-userApiRouter.get("/", async (req, res, next) => {
+userApiRouter.get('/', async (req, res, next) => {
   try {
     const allUsers = await User.find().exec();
     res.json({ allUsers });
@@ -42,9 +42,8 @@ userApiRouter.get("/", async (req, res, next) => {
 
 // UPDATE USER - WITH ROUTEGUARD not now
 
-userApiRouter.patch("/edit/:id", async (req, res, next) => {
+userApiRouter.patch('/edit/:id', async (req, res, next) => {
   const userId = req.params.id;
-  console.dir(req.body);
   try {
     const {
       name,
@@ -72,28 +71,24 @@ userApiRouter.patch("/edit/:id", async (req, res, next) => {
 });
 
 userApiRouter.post(
-  "/create",
-  passport.authenticate("local-sign-up"),
+  '/create',
+  passport.authenticate('local-sign-up'),
   (req, res) => {
     const user = req.user;
     res.json({ user });
   }
 );
 
-userApiRouter.post("/facebook", async (req, res, next) => {
-  console.log("api facebook was called with: \n" + req);
-  console.dir(req.body);
+userApiRouter.post('/facebook', async (req, res, next) => {
   const reqEmail = req.body.email;
   const reqPic = req.body.picture.data.url;
   const reqName = req.body.name;
   const response = await User.findOne({ email: reqEmail }).exec();
   console.log(response);
   if (response !== null) {
-    console.log("we found an user");
     req.session.user = response._id;
     res.json({ response });
   } else {
-    console.log("attempting to create nw user");
     const newUser = await User.create({
       email: reqEmail,
       pictureUrl: reqPic,
@@ -107,17 +102,17 @@ userApiRouter.post("/facebook", async (req, res, next) => {
 // ATTENTION ADD PASSWORD CHANGE PATCH METHOD HERE
 // AND DELETE
 
-userApiRouter.post("/delete/:id", async (req, res, next) => {
+userApiRouter.post('/delete/:id', async (req, res, next) => {
   const idToDelete = req.params.id;
   const deletedUser = await User.findByIdAndDelete(idToDelete);
   res.json({ deletedUser });
 });
 
-const multerMiddleware = require("./../../middleware/cloudinary");
+const multerMiddleware = require('./../../middleware/cloudinary');
 
 userApiRouter.post(
-  "/upload",
-  multerMiddleware.single("pictureUrl"),
+  '/upload',
+  multerMiddleware.single('pictureUrl'),
   async (req, res, next) => {
     console.log(req.file);
     const toReturn = req.file.url;

@@ -143,63 +143,71 @@ class App extends Component {
               />
             )}
           />
-          <Route
-            path="/user/:id"
-            render={props => (
-              <ProfileView
-                updateUserState={this.updateUserState}
-                userState={this.state.user}
-                addUsertoUserState={this.addUsertoUserState}
-                {...props}
-              />
-            )}
-          />
-          <Route
-            path="/products/:id"
-            render={props => (
-              <SingleProductView
-                updateUserState={this.updateUserState}
-                userState={this.state.user}
-                addUsertoUserState={this.addUsertoUserState}
-                {...props}
-              />
-            )}
-          />
-
-          <Route
-            path="/products/"
-            render={props => (
-              <Products
-                updateUserState={this.updateUserState}
-                userState={this.state.user}
-                addUsertoUserState={this.addUsertoUserState}
-                {...props}
-              />
-            )}
-          />
-
-          <Route
-            path="/wishlist/:id"
-            render={props => (
-              <SingleWishList
-                updateUserState={this.updateUserState}
-                userState={this.state.user}
-                addUsertoUserState={this.addUsertoUserState}
-                {...props}
-              />
-            )}
-          />
-          <Route
-            path="/editprofile"
-            render={props => (
-              <EditProfile
-                updateUserState={this.updateUserState}
-                userState={this.state.user}
-                addUsertoUserState={this.addUsertoUserState}
-                {...props}
-              />
-            )}
-          />
+          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+            <Route
+              path="/user/:id"
+              render={props => (
+                <ProfileView
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
+          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+            <Route
+              path="/products/:id"
+              render={props => (
+                <SingleProductView
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
+          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+            <Route
+              path="/products/"
+              render={props => (
+                <Products
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
+          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+            <Route
+              path="/wishlist/:id"
+              render={props => (
+                <SingleWishList
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
+          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+            <Route
+              path="/editprofile"
+              render={props => (
+                <EditProfile
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
           {this.routeGuard(['admin', 'expecting']) && (
             <Route
               path="/wishlist/"
@@ -227,6 +235,19 @@ class App extends Component {
             />
           )}
           <Route path="/checkout" component={CheckOut} />
+          {this.routeGuard(['admin', 'gifter', 'expecting', 'parent']) && (
+            <Route
+              path="/"
+              render={props => (
+                <ProfileView
+                  updateUserState={this.updateUserState}
+                  userState={this.state.user}
+                  addUsertoUserState={this.addUsertoUserState}
+                  {...props}
+                />
+              )}
+            />
+          )}
           <Route path="/" component={HomeView} />
         </Switch>
       </BrowserRouter>
