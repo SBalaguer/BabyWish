@@ -3,21 +3,24 @@ const shoppingCartRouter = new Router();
 const ShoppingCart = require("./../../models/shoppingCart");
 
 //CHECK IF THERE IS A SHOPPING CART FOR THAT USER AND THAT WISHLIST
-shoppingCartRouter.get("/carts/:id/:wishlistID", async (req, res, next) => {
-  //ID here refers to the gifter ID
-  //wishlistID refers to the wishlistID
-  try {
-    const gifterID = req.params.id;
-    const wishListID = req.params.wishlistID;
-    const shoppingCart = await ShoppingCart.findOne({
-      wishlist: wishListID,
-      gifterId: gifterID
-    });
-    res.json({ shoppingCart });
-  } catch (error) {
-    next(error);
+shoppingCartRouter.get(
+  "/carts/:gifterID/:wishlistID",
+  async (req, res, next) => {
+    //GifterID here refers to the gifter ID
+    //wishlistID refers to the wishlistID
+    try {
+      const gifterID = req.params.gifterID;
+      const wishListID = req.params.wishlistID;
+      const shoppingCart = await ShoppingCart.findOne({
+        wishlist: wishListID,
+        gifterId: gifterID
+      });
+      res.json({ shoppingCart });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 //CREATE A NEW SHOPPING CART
 shoppingCartRouter.post("/add/:id", async (req, res, next) => {
@@ -71,5 +74,29 @@ shoppingCartRouter.patch("/edit/:id", async (req, res, next) => {
 });
 
 //UPDATE THE AMOUNT BOUGHT
+shoppingCartRouter.patch("/edit/:id/:productID", async (req, res, next) => {
+  //ID here refers to the shoppingCart ID
+  //Gifter ID will come from the req.body
+  //Product ID will come from the req.body
+  //Amount Bought will come from the req.body
+  //I NEED THE SHOPPING CART ID!
+  const shoppingCartID = req.params.id;
+  const productID = req.params.productID;
+  const { amountBought } = req.body;
+  const product = {
+    productId: productID,
+    amountBought: amountBought
+  };
+  try {
+    const shoppingCart = await ShoppingCart.findByIdAndUpdate(shoppingCartID, {
+      // ...(product ? { product } : {})
+      $push: { products: product }
+    });
+    res.json({ shoppingCart });
+  } catch (error) {
+    //console.log(error);
+    next(error);
+  }
+});
 
 module.exports = shoppingCartRouter;
