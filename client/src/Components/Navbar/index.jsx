@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { signOut } from "./../../services/user-functions";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { signOut } from './../../services/user-functions';
 
-import "./style.css";
+import './style.css';
 
 export class Navbar extends Component {
   constructor(props) {
@@ -35,10 +35,11 @@ export class Navbar extends Component {
             <Link to="/sign-out" onClick={this.signOutUser}>
               Sign Out
             </Link>
-            {userRole === "admin" && <Link to="/admin">Users List</Link>}
-            {userRole === "gifter" && <Link to="">Shopping Cart</Link>}
-            {userRole === "expecting" && <Link to="/wishlist">Wishlist</Link>}
-            {userRole === "parent" && <Link to="/wishlist">Wishlist</Link>}
+            <Link to="/editprofile">Edit Profile</Link>
+            {userRole === 'admin' && <Link to="/admin">Users List</Link>}
+            {userRole === 'gifter' && <Link to="">Shopping Cart</Link>}
+            {userRole === 'expecting' && <Link to="/wishlist">Wishlist</Link>}
+            {userRole === 'parent' && <Link to="/wishlist">Wishlist</Link>}
             <Link to={`/user/${userId}`}>Profile</Link>
           </React.Fragment>
         )}
