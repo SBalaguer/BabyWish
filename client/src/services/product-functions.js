@@ -18,12 +18,21 @@ export const singleProduct = async id => {
   }
 };
 
-export const addFromAmazon = async asin => {
+// export const addFromAmazon = async asin => {
+//   try {
+//     const newProduct = await axios.get(
+//       `http://webservices.amazon.com/onca/xml?ItemId=${asin}&AWSAccessKeyId=AKIAEXAMPLEFWR4TJ7ZQ`
+//     );
+//     console.log(newProduct);
+//   } catch (error) {
+//     throw error;
+//   }
+// }; // NOT IN USE
+
+export const addProduct = async obj => {
   try {
-    const newProduct = await axios.get(
-      `http://webservices.amazon.com/onca/xml?ItemId=${asin}&AWSAccessKeyId=AKIAEXAMPLEFWR4TJ7ZQ`
-    );
-    console.log(newProduct);
+    const newProduct = await axios.post('/api/products/create', obj);
+    return newProduct;
   } catch (error) {
     throw error;
   }

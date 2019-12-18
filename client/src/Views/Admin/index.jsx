@@ -5,7 +5,7 @@ import {
   getAllUsers,
   deleteUser
 } from './../../services/user-functions';
-import { addFromAmazon } from './../../services/product-functions';
+import { addProduct } from './../../services/product-functions';
 import NavbarWithRouter from './../../Components/Navbar';
 
 export class AdminDashboard extends Component {
@@ -29,9 +29,14 @@ export class AdminDashboard extends Component {
   }
 
   productMethod(event) {
-    event.preventDefault();
-    const asin = event.target.asin.value;
-    addFromAmazon(asin);
+    const name = event.target.name.value;
+    const category = event.target.category.value;
+    const availableStock = event.target.availableStock.value;
+    const price = event.target.price.value;
+    const pictureUrl = event.target.pictureUrl.value;
+
+    const obj = { name, category, availableStock, price, pictureUrl };
+    addProduct(obj);
   }
 
   deleteMethod(id) {
@@ -66,7 +71,17 @@ export class AdminDashboard extends Component {
         <br />
         <br />
         <form onSubmit={this.productMethod}>
-          <input type="text" placeholder="asin" name="asin" />
+          <input type="text" placeholder="name" name="name" />
+          <select type="text" name="category">
+            <option value="diapers">Diapers</option>
+            <option value="trolleys">trolleys</option>
+            <option value="essentials">Essentials</option>
+            <option value="clothes">Clothes</option>
+            <option value="uncategorized">n/a</option>
+          </select>
+          <input type="number" placeholder="price" name="price" />
+          <input type="text" placeholder="picurl" name="pictureUrl" />
+          <input type="number" placeholder="in stock" name="availableStock" />
           <button>add</button>
         </form>
         <NavbarWithRouter

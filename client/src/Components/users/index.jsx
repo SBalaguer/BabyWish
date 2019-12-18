@@ -12,7 +12,6 @@ export class UserList extends Component {
   }
   async componentDidMount(props) {
     try {
-      console.log(this.props.eachUser);
       const wishList = await findWishList(this.props._id);
       this.setState({
         wishLists: wishList

@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
   },
   deliveryEtaInDays: {
     type: Number
- 
+  }
 });
 
-module.exports = mongoose.model('Product', schema);
+module.exports = mongoose.model('Supplier', schema);
