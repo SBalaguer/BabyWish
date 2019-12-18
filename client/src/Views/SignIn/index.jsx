@@ -23,6 +23,12 @@ export class SignIn extends Component {
     });
   }
 
+  componentDidMount() {
+    if (this.props.userState) {
+      this.props.history.push(`/user/${this.props.userState._id}`);
+    }
+  }
+
   async handleSubmit(event) {
     event.preventDefault();
     const { email, password } = this.state;

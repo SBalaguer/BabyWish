@@ -1,28 +1,5 @@
-.prod-container {
-  width: 100%;
-  margin: 0 auto;
-  margin-bottom: 0.3em;
-  border: 1px solid red;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.prod-container_data {
-  display: flex;
-  flex-direction: row;
-}
-
-.prod-container_data-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-left: 1em;
-}
-
-.prod-container_data-img {
-  height: 100px;
-  width: 30%;
+.list-btn {
+  height: 4vh;
+  max-height: 40px;
+  margin-right: 0.6em;
 }

@@ -15,3 +15,14 @@
   width: 90vw;
   max-width: 600px;
 }
+
+.add-button-sm {
+}
+
+.empty-btn {
+  width: 3vh;
+  max-width: 70px;
+  border: 0px;
+  background-color: #ffffff;
+  backround-image: url("/Users/santiagoebalaguer/ironhack/projects/BabyWish/client/public/add-blue.png");
+}

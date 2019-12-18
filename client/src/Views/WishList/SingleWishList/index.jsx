@@ -3,9 +3,13 @@ import { getWishlistById } from "../../../services/wishlist-functions";
 import Navbar from "./../../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
+import TopNavbar from "./../../../Components/TopNavbar";
 
 import ProductComp from "./../../../Components/ProductComp";
 import { removeProductInWishlist } from "./../../../services/wishlist-functions";
+import { addProductToWishlist } from "./../../../services/wishlist-functions";
+
+import "./style.css";
 
 // ATTENTION = WILL HAVE TO CHANGE THE WAY THIS GETS A SINGLE WISHLIST
 
@@ -37,6 +41,20 @@ export class SingleWishList extends Component {
     this.props.addUsertoUserState(user);
   }
 
+  // async handdleAddProduct(productId) {
+  //   const wishlistId = this.state.wishlistId;
+  //   const amountWanted = 1;
+  //   try {
+  //     await addProductToWishlist(wishlistId, productId, amountWanted);
+  //     const wishListToRender = await getWishlistById(wishlistId);
+  //     this.setState({
+  //       wishListToRender
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
   async removeProductFromWishlist(productId) {
     try {
       const wishlistId = this.props.match.params.id;
@@ -58,51 +76,62 @@ export class SingleWishList extends Component {
     const wishList = this.state.wishListToRender;
     const products = wishList.products;
     return (
-      <div>
-        <h1>Wishlist View </h1>
-        <h3>{wishList.name}</h3>
-        <Link
-          to={{
-            pathname: "/products",
-            state: {
-              wishListId: wishList._id
-            }
-          }}
-        >
-          Add Product!
-        </Link>
-        {products && (
-          <div className="wish-list-container">
-            {products.map(product => {
-              {
-                /* return <p key={product._id}>{product.productId}</p>; */
-              }
-              const productData = product.productId;
-              if (productData) {
-                return (
-                  <ProductComp
-                    key={product._id}
-                    {...productData}
-                    userId={user._id}
-                    deleteId={product._id}
-                    userRole={user.role}
-                    wanted={product.amountWanted}
-                    bought={user.amountBought}
-                    path="wishlist"
-                    removeProduct={productId => {
-                      this.removeProductFromWishlist(productId);
-                    }}
-                  />
-                );
-              }
-            })}
+      <React.Fragment>
+        <TopNavbar />
+        <div className="app-container">
+          <div className="view-title-wishlist">
+            <h1>
+              <span className="hi"> {wishList.name}</span>
+            </h1>
+            <Link
+              to={{
+                pathname: "/products",
+                state: {
+                  wishListId: wishList._id
+                }
+              }}
+            >
+              <img
+                className="add-prod-button"
+                src="../../diaper-add-product.png"
+                alt=""
+              />
+            </Link>
           </div>
-        )}
-        <NavbarWithRouter
-          user={user}
-          addUsertoUserState={this.addUsertoUserState}
-        />
-      </div>
+
+          {products && (
+            <div className="wish-list-container">
+              {products.map(product => {
+                {
+                  /* return <p key={product._id}>{product.productId}</p>; */
+                }
+                const productData = product.productId;
+                if (productData) {
+                  return (
+                    <ProductComp
+                      key={product._id}
+                      {...productData}
+                      userId={user._id}
+                      deleteId={product._id}
+                      userRole={user.role}
+                      wanted={product.amountWanted}
+                      bought={user.amountBought}
+                      path="wishlist"
+                      removeProduct={productId => {
+                        this.removeProductFromWishlist(productId);
+                      }}
+                    />
+                  );
+                }
+              })}
+            </div>
+          )}
+          <NavbarWithRouter
+            user={user}
+            addUsertoUserState={this.addUsertoUserState}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }

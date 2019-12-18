@@ -1,8 +1,9 @@
 .prod-container {
-  width: 95vw;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 0.3em;
-  border: 1px solid black;
+  border: 1px solid #1f2674c7;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,6 +21,10 @@
   align-items: flex-start;
   justify-content: center;
   margin-left: 1em;
+}
+
+.prod-name {
+  color: #1f2674;
 }
 
 .prod-container_data-img {

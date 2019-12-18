@@ -15,16 +15,22 @@ export default function WishlistComp(props) {
   };
   return (
     <div className="prod-container">
-      <Link to={`/wishlist/${props._id}`}>
-        <div className="prod-container_data">
-          <div className="prod-container_data-img" style={style}></div>
-          <div className="prod-container_data-text">
-            <h5>{props.name}</h5>
-          </div>
+      <div className="prod-container_data">
+        <div className="prod-container_data-img" style={style}></div>
+        <div className="prod-container_data-text">
+          <span className="prod-name">{props.name}</span>
         </div>
-      </Link>
+      </div>
       <div>
-        <button onClick={() => props.delete(props._id)}>Delete</button>
+        <Link to={`/wishlist/${props._id}`}>
+          <img className="list-btn" src="../../view-more.png" alt="" />
+        </Link>
+        <img
+          className="list-btn"
+          onClick={() => props.delete(props._id)}
+          src="../../close.png"
+          alt=""
+        />
       </div>
     </div>
   );

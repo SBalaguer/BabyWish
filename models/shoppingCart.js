@@ -7,15 +7,14 @@ const schema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "User"
   },
-  parent: {
-    type: mongoose.Types.ObjectId,
-    ref: "User"
-  },
+  wishlist: { type: mongoose.Types.ObjectId, ref: "Wishlist" },
   products: [
     {
-      productId: mongoose.Types.ObjectId,
-      ref: "Product",
-      amountWanted: Number,
+      productId: {
+        type: mongoose.Types.ObjectId,
+        require: true,
+        ref: "Product"
+      },
       amountBought: Number
     }
   ]
