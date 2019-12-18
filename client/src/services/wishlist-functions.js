@@ -59,3 +59,15 @@ export const deleteWishlist = async wishlistId => {
     throw error;
   }
 };
+
+export const updateBoughtAmountWL = async (wishlistId, productId, amount) => {
+  try {
+    const response = await axios.patch(`/api/wishlist/gifter/${wishlistId}`, {
+      productId,
+      amount
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

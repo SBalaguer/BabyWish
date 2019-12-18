@@ -79,7 +79,7 @@ wishListApiRouter.patch("/gifter/:id", async (req, res, next) => {
     const wishListById = await WishList.findById(id).exec();
     const prodsArray = wishListById.products; // ?? WHY DIFFERENT THAN LINE 12 ??
     for (let prod of prodsArray) {
-      if (prod.productId === prodId) {
+      if (prod.productId == prodId) {
         prod.amountBought = parseInt(prod.amountBought) + parseInt(amount);
       }
     }
