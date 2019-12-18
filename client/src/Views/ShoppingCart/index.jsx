@@ -7,8 +7,13 @@ import { checkIfShoppingCart } from "./../../services/shopping-cart";
 import { singleProduct } from "./../../services/product-functions";
 import { processPayment } from "./../../services/checkout";
 import StripeCheckout from "react-stripe-checkout";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./styles.css";
+import { updateBoughtAmountWL } from "../../services/wishlist-functions";
+
+toast.configure();
 
 export class ShoppingCart extends Component {
   constructor(props) {
@@ -23,56 +28,80 @@ export class ShoppingCart extends Component {
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.handleToken = this.handleToken.bind(this);
+    this.updateBoughtAmount = this.updateBoughtAmount.bind(this);
   }
   async componentDidMount() {
-    const gifterID = this.props.userState._id;
-    const wishlistID = this.props.location.state.wishListId;
-    const shoppingCart = await checkIfShoppingCart(wishlistID, gifterID);
+    try {
+      const gifterID = this.props.userState._id;
+      const wishlistID = this.props.location.state.wishListId;
+      const shoppingCart = await checkIfShoppingCart(wishlistID, gifterID);
 
-    //NOW WE ARE GOING TO CALCULATE THE PRODUCTS AND THE AMOUNT OF EACH OF THEM
-    const products = shoppingCart.products;
-    for (let i = 0; i < products.length; i++) {
-      for (let j = i + 1; j < products.length; j++) {
-        if (products[i].productId === products[j].productId) {
-          products[i].amountBought =
-            products[i].amountBought + products[j].amountBought;
-          products.splice(j, 1);
-          i = 0;
+      //NOW WE ARE GOING TO CALCULATE THE PRODUCTS AND THE AMOUNT OF EACH OF THEM
+      const products = shoppingCart.products;
+      for (let i = 0; i < products.length; i++) {
+        for (let j = i + 1; j < products.length; j++) {
+          if (products[i].productId === products[j].productId) {
+            products[i].amountBought =
+              products[i].amountBought + products[j].amountBought;
+            products.splice(j, 1);
+            i = 0;
+          }
         }
       }
+      //console.log(products);
+      //NOW WE ARE GOING TO GET THE PICTURE, DESCRIPTION AND PRICE OF EACH PRODUCT.
+      let total = 0;
+      for (let i = 0; i < products.length; i++) {
+        const id = products[i].productId;
+        const productData = await singleProduct(id);
+        products[i].productData = productData;
+        const productPriceAmount =
+          products[i].productData.price * products[i].amountBought;
+        total += productPriceAmount;
+      }
+      //console.log(products);
+      this.setState({
+        gifterID,
+        wishlistID,
+        shoppingCart,
+        products,
+        total
+      });
+    } catch (error) {
+      console.log(error);
     }
-    //console.log(products);
-    //NOW WE ARE GOING TO GET THE PICTURE, DESCRIPTION AND PRICE OF EACH PRODUCT.
-    let total = 0;
-    for (let i = 0; i < products.length; i++) {
-      const id = products[i].productId;
-      const productData = await singleProduct(id);
-      products[i].productData = productData;
-      const productPriceAmount =
-        products[i].productData.price * products[i].amountBought;
-      total += productPriceAmount;
+  }
+
+  async updateBoughtAmount() {
+    try {
+      const wishlistID = this.props.location.state.wishListId;
+      const products = this.state.products;
+      for (let i = 0; i < products.length; i++) {
+        const productId = products[i].productId;
+        const amount = products[i].amountBought;
+        await updateBoughtAmountWL(wishlistID, productId, amount);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    //console.log(products);
-    this.setState({
-      gifterID,
-      wishlistID,
-      shoppingCart,
-      products,
-      total
-    });
   }
 
   async handleToken(token) {
-    console.log(token);
+    //console.log(token);
     const total = this.state.total;
     try {
       const status = await processPayment(token, total);
       if (status == "success") {
-        //WE NEED TO SHOW A TOAST
+        toast("Purchase Complete!", { type: "success" });
+
         //WE NEED TO UPDATE THE WISHLIST
+        this.updateBoughtAmount();
+
         //WE NEED TO DELETE THE SHOPPINGCART
         //WE NEED TO REDIRECT THE USER
         this.setState({ status: true });
+      } else {
+        toast("There was an error.", { type: "error" });
       }
       console.log(status);
     } catch (error) {
