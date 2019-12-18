@@ -27,8 +27,9 @@ const app = express();
 // ROUTEGUARD
 const routeGuard = require("./middleware/route-guard");
 
-app.use(serveFavicon(join(__dirname, "client/build/favicon.ico")));
 app.use(express.static(join(__dirname, "client/build")));
+app.use(serveFavicon(join(__dirname, "client/build/favicon.ico")));
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(
