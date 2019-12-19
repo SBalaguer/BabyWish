@@ -21,6 +21,11 @@
   align-items: flex-start;
   justify-content: center;
   margin-left: 1em;
+  color: #1f2674;
+}
+
+.prod-container a {
+  color: #1f2674;
 }
 
 .prod-name {
@@ -50,4 +55,10 @@
   margin-right: 0.2em;
   padding-right: 0.2em;
   border-right: 1px solid black;
+}
+
+.prod-container_add-product {
+  margin-right: 1em;
+  width: 4vh;
+  height: auto;
 }

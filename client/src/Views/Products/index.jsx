@@ -59,27 +59,35 @@ class Products extends Component {
       <React.Fragment>
         <TopNavbar />
         <div className="app-container">
-          <div className="view-title-products">
-            <h1>
-              <span className="hi"> Select Products</span>
-            </h1>
-            <form className="search-form">
-              <input type="search" />
-              <button>Search</button>
-            </form>
+          <div className="wish-list-container">
+            <div className="view-title-products">
+              <h1>
+                <span className="hi"> Select Products</span>
+              </h1>
+              <form className="search-form">
+                <input type="search" />
+                <button className="btn-white">
+                  <img
+                    className="search-img"
+                    src="../../search-icon.png"
+                    alt=""
+                  />
+                </button>
+              </form>
+            </div>
+            {this.state.products.map(product => (
+              <ProductComp
+                key={product._id}
+                {...product}
+                userId={user._id}
+                userRole={user.role}
+                addProduct={productId => {
+                  this.handdleAddProduct(productId);
+                }}
+                wishListFrom={this.state.wishListFrom}
+              />
+            ))}
           </div>
-          {this.state.products.map(product => (
-            <ProductComp
-              key={product._id}
-              {...product}
-              userId={user._id}
-              userRole={user.role}
-              addProduct={productId => {
-                this.handdleAddProduct(productId);
-              }}
-              wishListFrom={this.state.wishListFrom}
-            />
-          ))}
           <NavbarWithRouter
             user={user}
             addUsertoUserState={this.addUsertoUserState}

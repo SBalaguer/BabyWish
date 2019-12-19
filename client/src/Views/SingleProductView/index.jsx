@@ -3,6 +3,7 @@ import { singleProduct } from "./../../services/product-functions";
 import Navbar from "./../../Components/Navbar";
 import { withRouter } from "react-router-dom";
 import { addProductToWishlist } from "./../../services/wishlist-functions";
+import TopNavbar from "./../../Components/TopNavbar";
 import "./style.css";
 
 class SingleProductView extends Component {
@@ -71,39 +72,46 @@ class SingleProductView extends Component {
         backgroundSize: "contain",
         backgroundPosition: "center",
         width: "100%",
-        height: "70%",
-        margin: "0.3em",
-        marginTop: "3em"
+        height: "60%",
+        margin: "0.3em"
       };
     }
 
     return (
       <React.Fragment>
+        <TopNavbar />
         {this.state.product && (
-          <div className="single-prod-container">
-            <div className="single-prod-container_product">
-              <div style={style}></div>
-              <small>{product.category}</small>
-              <h3>{product.name}</h3>
-              <h5>${product.price}</h5>
-              <div>Here goes the Specs</div>
+          <div className="app-container">
+            <div className="single-prod-container">
+              <div className="single-prod-container_product">
+                <div style={style}></div>
+                <small>{product.category}</small>
+                <h3>{product.name}</h3>
+                <h5>
+                  ${product.price}
+                  {product.category === "diapers" && "/week"}
+                </h5>
+                <div>Here goes the Specs</div>
+              </div>
+              <form onSubmit={this.handleAddClick}>
+                <input
+                  type="number"
+                  name="amountWanted"
+                  value={this.state.amountWanted}
+                  onChange={this.handleInputChange}
+                  min="1"
+                />
+                {(user.role !== "gifter" && (
+                  <button className="btn btn-start btn-block">
+                    Add to Wishlist
+                  </button>
+                )) || (
+                  <button className="btn btn-start btn-block">
+                    Add to Cart
+                  </button>
+                )}
+              </form>
             </div>
-            <form onSubmit={this.handleAddClick}>
-              <input
-                type="number"
-                name="amountWanted"
-                value={this.state.amountWanted}
-                onChange={this.handleInputChange}
-                min="1"
-              />
-              {(user.role !== "gifter" && (
-                <button className="btn btn-start btn-block">
-                  Add to Wishlist
-                </button>
-              )) || (
-                <button className="btn btn-start btn-block">Add to Cart</button>
-              )}
-            </form>
           </div>
         )}
         <NavbarWithRouter

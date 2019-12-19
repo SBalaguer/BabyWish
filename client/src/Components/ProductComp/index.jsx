@@ -61,11 +61,20 @@ export default function ProductComp(props) {
             <div className="prod-container_data-img" style={style}></div>
             <div className="prod-container_data-text">
               <h5>{props.name}</h5>
-              <small>${props.price}</small>
+
+              <small>
+                ${props.price}
+                {props.category === "diapers" && "/week"}
+              </small>
             </div>
           </div>
           <div>
-            <button onClick={() => props.addProduct(props._id)}>Add</button>
+            <img
+              onClick={() => props.addProduct(props._id)}
+              src="../../add-blue.png"
+              className="prod-container_add-product"
+              alt="..."
+            />
           </div>
         </Link>
       )}
