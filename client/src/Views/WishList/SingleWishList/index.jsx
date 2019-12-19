@@ -192,7 +192,11 @@ export class SingleWishList extends Component {
           {products && (
             <div className="wish-list-container">
               {products.map(product => {
+                let done = false;
                 const productData = product.productId;
+                if (product.amountWanted === product.amountBought) {
+                  done = true;
+                }
                 if (productData) {
                   return (
                     <ProductComp
@@ -207,6 +211,7 @@ export class SingleWishList extends Component {
                       removeProduct={productId => {
                         this.removeProductFromWishlist(productId);
                       }}
+                      done={done}
                       addToShoppingCart={productId => {
                         this.addToShoppingCart(productId);
                       }}

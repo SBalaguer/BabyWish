@@ -9,16 +9,59 @@ export default function ProductComp(props) {
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
     backgroundPosition: "center",
-    width: "100px",
-    height: "100px",
+    width: "80px",
+    height: "80px",
     margin: "0.3em"
   };
   const wishListId = props.wishListFrom;
-  // console.log(props);
+  console.log(props);
+
+  const buttonRenderFalse = `{(props.userRole !== "gifter" && (
+    <img
+      className="list-btn"
+      onClick={() => props.removeProduct(props.deleteId)}
+      src="../../close.png"
+      alt=""
+    />
+  )) || (
+    <button onClick={() => props.addToShoppingCart(props._id)}>
+      Buy Product
+    </button>
+  )}`;
+
+  const checkIfDone = function(check) {
+    if (check) {
+      return "prod-container-done";
+    } else {
+      return "prod-container";
+    }
+  };
+
+  const checkIfDone2 = function(check) {
+    if (check) {
+      return <p>Done!</p>;
+    } else if (props.userRole !== "gifter") {
+      return (
+        <img
+          className="list-btn"
+          onClick={() => props.removeProduct(props.deleteId)}
+          src="../../close.png"
+          alt=""
+        />
+      );
+    } else {
+      return (
+        <button onClick={() => props.addToShoppingCart(props._id)}>
+          Buy Product
+        </button>
+      );
+    }
+  };
+
   return (
     <React.Fragment>
       {(props.path === "wishlist" && (
-        <div className="prod-container">
+        <div className={checkIfDone(props.done)}>
           <div className="prod-container_data">
             <div className="prod-container_data-img" style={style}></div>
             <div className="prod-container_data-text">
@@ -35,17 +78,7 @@ export default function ProductComp(props) {
               </div>
             </div>
           </div>
-          <div>
-            {(props.userRole !== "gifter" && (
-              <button onClick={() => props.removeProduct(props.deleteId)}>
-                Remove
-              </button>
-            )) || (
-              <button onClick={() => props.addToShoppingCart(props._id)}>
-                Buy Product
-              </button>
-            )}
-          </div>
+          <div>{checkIfDone2(props.done)}</div>
         </div>
       )) || (
         <Link
