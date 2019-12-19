@@ -72,3 +72,12 @@ export const updateBoughtAmountWL = async (wishlistId, productId, amount) => {
     throw error;
   }
 };
+
+export const findByLocator = async locator => {
+  try {
+    const idToReturn = await axios.get(`/api/wishlist/locate/${locator}`);
+    return idToReturn.data.wishList[0]._id;
+  } catch (error) {
+    throw error;
+  }
+};
