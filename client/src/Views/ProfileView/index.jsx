@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
-import Navbar from './../../Components/Navbar';
-import TopNavbar from './../../Components/TopNavbar';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import Navbar from "./../../Components/Navbar";
+import TopNavbar from "./../../Components/TopNavbar";
+import { withRouter } from "react-router-dom";
 import {
   getWishlistByUserId,
   findByLocator
-} from './../../services/wishlist-functions';
+} from "./../../services/wishlist-functions";
 
-import './index.css';
+import "./index.css";
 
 class ProfileView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       daysToGo: null,
-      numberOfWishlists: '',
-      numberOfGifts: '',
-      numberOfAdded: '',
-      wishListLocator: ''
+      numberOfWishlists: "",
+      numberOfGifts: "",
+      numberOfAdded: "",
+      wishListLocator: "",
+      amountToBuy: 0
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.calcUserData = this.calcUserData.bind(this);
@@ -26,7 +27,7 @@ class ProfileView extends Component {
   }
 
   calcDaysToGo() {
-    if (this.props.userState.role === 'expecting') {
+    if (this.props.userState.role === "expecting") {
       const dueDate = new Date(this.props.userState.dueDate);
       const today = Date.now();
       return Math.round((dueDate - today) / (1000 * 60 * 60 * 24));
@@ -52,6 +53,8 @@ class ProfileView extends Component {
       numberOfGifts
     });
   }
+
+
 
   componentDidMount() {
     this.calcUserData();
@@ -86,10 +89,10 @@ class ProfileView extends Component {
           <div className="profile-container">
             <div className="profile-name-container">
               <h1 className="profile-name">
-                <span className="hi">Hi,</span>{' '}
+                <span className="hi">Hi,</span>{" "}
                 <span className="user-name">{user.name}!</span>
               </h1>
-              {user.role !== 'gifter' && (
+              {user.role !== "gifter" && (
                 <div>
                   <span className="days">{this.calcDaysToGo()}</span>
                   <span className="days-to-go"> days to go!</span>
@@ -100,7 +103,7 @@ class ProfileView extends Component {
               <img className="profile-pic" src={user.pictureUrl} alt="..." />
             </div>
           </div>
-          {user.role !== 'gifter' && (
+          {user.role !== "gifter" && (
             <div>
               <div className="counters-container">
                 <div className="counter-container">
@@ -124,7 +127,7 @@ class ProfileView extends Component {
               </div>
             </div>
           )}
-          {user.role === 'gifter' && (
+          {user.role === "gifter" && (
             <div className="wishlist-locator">
               <div className="gifter-text">
                 <span className="normal-text">Enter the </span>

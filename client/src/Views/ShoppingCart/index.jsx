@@ -108,7 +108,7 @@ export class ShoppingCart extends Component {
       } else {
         toast("There was an error.", { type: "error" });
       }
-      console.log(status);
+      //console.log(status);
     } catch (error) {
       console.log(error);
     }
@@ -145,7 +145,7 @@ export class ShoppingCart extends Component {
             <tbody>
               {products &&
                 products.map(product => {
-                  return <ShoppingCartItem {...product} />;
+                  return <ShoppingCartItem key={product._id} {...product} />;
                 })}
               <tr style={{ borderTop: "1px solid black" }}>
                 <th scope="row"></th>

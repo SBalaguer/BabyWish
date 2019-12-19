@@ -7,6 +7,7 @@ import "./style.css";
 export class Navbar extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.signOutUser = this.signOutUser.bind(this);
   }
 
@@ -24,6 +25,7 @@ export class Navbar extends Component {
     const userId = this.props.user._id;
     const userRole = this.props.user.role;
     const wishListID = this.props.wishlistId;
+
     return (
       <div className="navbar-bottom fixed-bottom">
         {(!userId && (
@@ -39,16 +41,19 @@ export class Navbar extends Component {
             <Link to="/editprofile">Edit Profile</Link>
             {userRole === "admin" && <Link to="/admin">Users List</Link>}
             {userRole === "gifter" && (
-              <Link
-                to={{
-                  pathname: `/shopping-cart/${userId}`,
-                  state: {
-                    wishListId: wishListID
-                  }
-                }}
-              >
-                Shopping Cart
-              </Link>
+              <React.Fragment>
+                <Link
+                  to={{
+                    pathname: `/shopping-cart/${userId}`,
+                    state: {
+                      wishListId: wishListID
+                    }
+                  }}
+                >
+                  Shopping Cart
+                </Link>
+                <p>{this.props.amountInShoppingCart}</p>
+              </React.Fragment>
             )}
             {userRole === "expecting" && <Link to="/wishlist">Wishlist</Link>}
             {userRole === "parent" && <Link to="/wishlist">Wishlist</Link>}

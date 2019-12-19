@@ -96,5 +96,18 @@
 .shopping-cart-info_others {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
   width: 100%;
+}
+.shopping-cart-info_others img {
+  margin-left: 0.6em;
+}
+
+.shopping-cart-info_price {
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 0.8em;
 }
