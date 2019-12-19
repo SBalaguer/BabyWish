@@ -48,4 +48,15 @@ productsRouter.get('/:id', async (req, res, next) => {
   }
 });
 
+const multerMiddleware = require('./../../middleware/cloudinary');
+productsRouter.post(
+  '/upload',
+  multerMiddleware.single('pictureUrl'),
+  async (req, res, next) => {
+    const toReturn = req.file.url;
+
+    res.json({ toReturn });
+  }
+);
+
 module.exports = productsRouter;

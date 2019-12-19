@@ -102,6 +102,7 @@ class Products extends Component {
                     />
                   </button>
                   <select
+                    multiple={true}
                     type="text"
                     name="category"
                     onChange={this.handleSelectChange}
@@ -120,12 +121,12 @@ class Products extends Component {
                     >
                       All
                     </option>
-                    <option value="essentials">Essentials</option>
-                    <option value="diapers">Diapers</option>
-                    <option value="trolleys">Trolleys</option>
-                    <option value="clothes">Clothes</option>
-                    <option value="toys">Toys</option>
-                    <option value="uncategorized">Misc</option>
+                    <option value="['essentials']">Essentials</option>
+                    <option value="['diapers']">Diapers</option>
+                    <option value="['trolleys']">Trolleys</option>
+                    <option value="['clothes']">Clothes</option>
+                    <option value="['toys']">Toys</option>
+                    <option value="['uncategorized']">Misc</option>
                   </select>
                 </form>
               </div>

@@ -38,6 +38,21 @@ export const addProduct = async obj => {
   }
 };
 
+export const createFile = async file => {
+  const data = new FormData();
+
+  data.append('pictureUrl', file);
+  try {
+    const response = await axios.post(`/api/products/upload`, data);
+    console.log('this below is response file');
+    console.dir(response);
+    return response.data.toReturn;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 // // GET PRODUCTS FROM AMAZON
 // productsRouter.get('/new-from-amazon/:asin', async (req,res,next) => {
 //   const asin = req.params.asin
