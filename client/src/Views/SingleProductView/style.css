@@ -3,12 +3,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 90vw;
-  height: 90vh;
   margin: 0 auto;
+  margin-top: 1em;
+  width: 95%;
 }
 
 .single-prod-container_product {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.single-prod-container_product_image-container {
+  width: 80%;
   height: 70%;
+}
+
+.single-prod-container_product_image {
+  width: 100%;
+  /* max-width: 400px; */
+  height: auto;
+  margin: 0 auto;
 }

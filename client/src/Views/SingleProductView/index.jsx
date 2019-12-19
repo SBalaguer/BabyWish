@@ -71,9 +71,8 @@ class SingleProductView extends Component {
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         backgroundPosition: "center",
-        width: "100%",
-        height: "60%",
-        margin: "0.3em"
+        width: "auto",
+        height: "30vh"
       };
     }
 
@@ -84,7 +83,14 @@ class SingleProductView extends Component {
           <div className="app-container">
             <div className="single-prod-container">
               <div className="single-prod-container_product">
-                <div style={style}></div>
+                {/* <div style={style}></div> */}
+                <div className="single-prod-container_product_image-container">
+                  <img
+                    className="single-prod-container_product_image"
+                    src={product.pictureUrl}
+                    alt="..."
+                  />
+                </div>
                 <small>{product.category}</small>
                 <h3>{product.name}</h3>
                 <h5>
