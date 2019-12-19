@@ -153,14 +153,14 @@ export class SingleWishList extends Component {
                 </Link>
                 <FacebookShareButton
                   url={`http://babywish.herokuapp.com/wishlist/${wishList._id}`}
-                  children={"Hey check out the wishlist I've made for my baby!"}
+                  children="Hey check out the wishlist I've made for my baby!"
                 >
                   {' '}
                   <FacebookIcon size={32} round={true} />{' '}
                 </FacebookShareButton>
                 <WhatsappShareButton
                   url={`http://babywish.herokuapp.com/wishlist/${wishList._id}`}
-                  children={"Hey check out the wishlist I've made for my baby!"}
+                  children="Hey check out the wishlist I've made for my baby!"
                 >
                   {' '}
                   <WhatsappIcon size={32} round={true} />{' '}
