@@ -10,7 +10,7 @@ class SingleProductView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amountWanted: 1,
+      amountWanted: "",
       userId: this.props.userState._id,
       wishListFrom: "",
       renderWishlist: false
@@ -83,7 +83,6 @@ class SingleProductView extends Component {
           <div className="app-container">
             <div className="single-prod-container">
               <div className="single-prod-container_product">
-                {/* <div style={style}></div> */}
                 <div className="single-prod-container_product_image-container">
                   <img
                     className="single-prod-container_product_image"
@@ -91,32 +90,38 @@ class SingleProductView extends Component {
                     alt="..."
                   />
                 </div>
-                <small>{product.category}</small>
-                <h3>{product.name}</h3>
-                <h5>
-                  ${product.price}
-                  {product.category === "diapers" && "/week"}
-                </h5>
-                <div>Here goes the Specs</div>
+                <div className="single-prod-container_product_tex-container">
+                  <small>{product.category}</small>
+                  <h3>{product.name}</h3>
+                  <h5>
+                    ${product.price}
+                    {product.category === "diapers" && "/week"}
+                  </h5>
+                </div>
               </div>
-              <form onSubmit={this.handleAddClick}>
-                <input
-                  type="number"
-                  name="amountWanted"
-                  value={this.state.amountWanted}
-                  onChange={this.handleInputChange}
-                  min="1"
-                />
-                {(user.role !== "gifter" && (
-                  <button className="btn btn-start btn-block">
-                    Add to Wishlist
-                  </button>
-                )) || (
-                  <button className="btn btn-start btn-block">
-                    Add to Cart
-                  </button>
-                )}
-              </form>
+              <div className="single-prod-form-container">
+                <form onSubmit={this.handleAddClick}>
+                  <div className="form-check" style={{ paddingLeft: "0px" }}>
+                    <input
+                      className="form-control"
+                      type="number"
+                      name="amountWanted"
+                      value={this.state.amountWanted}
+                      onChange={this.handleInputChange}
+                      min="1"
+                    />
+                  </div>
+                  {(user.role !== "gifter" && (
+                    <button className="btn btn-product-view btn-block">
+                      Add to Wishlist
+                    </button>
+                  )) || (
+                    <button className="btn btn-product-view btn-block">
+                      Add to Cart
+                    </button>
+                  )}
+                </form>
+              </div>
             </div>
           </div>
         )}

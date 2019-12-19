@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './style.css';
+import "./style.css";
 
 export class SignUpOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      role: ''
+      name: "",
+      role: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +24,7 @@ export class SignUpOne extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.updateUserState(this.state);
-    if (this.state.role !== 'gifter') {
+    if (this.state.role !== "gifter") {
       this.props.history.push(`/sign-up/${this.state.role}/2`);
     } else {
       this.props.history.push(`/sign-up/${this.state.role}/3`);
@@ -49,7 +49,7 @@ export class SignUpOne extends Component {
           />
         </div>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-check" style={{ paddingLeft: '0px' }}>
+          <div className="form-check" style={{ paddingLeft: "0px" }}>
             <input
               className="form-control"
               type="text"
@@ -85,7 +85,7 @@ export class SignUpOne extends Component {
               Parent
             </label>
           </div>
-          <div className="form-check" style={{ marginBottom: '3em' }}>
+          <div className="form-check" style={{ marginBottom: "3em" }}>
             <input
               className="form-check-input"
               type="radio"

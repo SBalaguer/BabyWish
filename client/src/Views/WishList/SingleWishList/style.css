@@ -4,15 +4,76 @@
   position: relative;
   left: 0px;
   top: 0px;
+  border-radius: 200px;
+  box-shadow: 2px 2px 5px 0px rgba(222, 222, 222, 0.8);
 }
 
-.view-title-wishlist {
+.view-wl-heading {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1em;
+}
+
+.view-wl-title {
   display: flex;
   width: 100%;
   max-width: 600px;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 1em;
   height: 9vh;
+}
+
+.share-wl {
+  display: flex;
+  width: 70%;
+  max-width: 600px;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-around;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  /* border: 1px solid #1f2674; */
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px 5px rgba(222, 222, 222, 0.5);
+  padding: 0.6em;
+}
+
+.share-methods {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.share-text {
+  color: #1f2674;
+  font-size: 0.65em;
+  font-weight: 100;
+}
+
+.baby-text-wl {
+  font-size: 0.8em;
+  color: #ff606c;
+}
+
+.wish-text-wl {
+  font-size: 0.8em;
+  color: #ffb5c1;
+}
+
+.simple-text-wl {
+  font-size: 0.8em;
+  color: #1f2674;
+}
+
+.share-methods-social {
+  display: flex;
+  flex-direction: row;
 }
