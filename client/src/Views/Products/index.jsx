@@ -1,22 +1,33 @@
-import React, { Component } from "react";
-import ProductComp from "./../../Components/ProductComp";
-import { listProducts } from "./../../services/product-functions";
-import Navbar from "./../../Components/Navbar";
-import { withRouter } from "react-router-dom";
-import { addProductToWishlist } from "./../../services/wishlist-functions";
-import TopNavbar from "./../../Components/TopNavbar";
+import React, { Component } from 'react';
+import ProductComp from './../../Components/ProductComp';
+import { listProducts } from './../../services/product-functions';
+import Navbar from './../../Components/Navbar';
+import { withRouter } from 'react-router-dom';
+import { addProductToWishlist } from './../../services/wishlist-functions';
+import TopNavbar from './../../Components/TopNavbar';
 
-import "./style.css";
+import './style.css';
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [],
-      wishListFrom: ""
+      wishListFrom: '',
+      searchQuery: '',
+      category: [
+        'diapers',
+        'trolleys',
+        'essentials',
+        'clothes',
+        'toys',
+        'uncategorized'
+      ]
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.handdleAddProduct = this.handdleAddProduct.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   async componentDidMount() {
@@ -35,6 +46,18 @@ class Products extends Component {
 
   addUsertoUserState(user) {
     this.props.addUsertoUserState(user);
+  }
+
+  handleInputChange(event) {
+    this.setState({
+      searchQuery: event.target.value
+    });
+  }
+
+  handleSelectChange(event) {
+    this.setState({
+      category: event.target.value
+    });
   }
 
   async handdleAddProduct(productId) {
@@ -64,29 +87,70 @@ class Products extends Component {
               <h1>
                 <span className="hi"> Select Products</span>
               </h1>
-              <form className="search-form">
-                <input type="search" />
-                <button className="btn-white">
-                  <img
-                    className="search-img"
-                    src="../../search-icon.png"
-                    alt=""
+              <div className="search-div">
+                <form className="search-form">
+                  <input
+                    onChange={this.handleInputChange}
+                    value={this.state.searchQuery}
+                    type="search"
                   />
-                </button>
-              </form>
+                  <button className="btn-white">
+                    <img
+                      className="search-img"
+                      src="../../search-icon.png"
+                      alt=""
+                    />
+                  </button>
+                  <select
+                    type="text"
+                    name="category"
+                    onChange={this.handleSelectChange}
+                    placeholder="Category"
+                    value={this.state.category}
+                  >
+                    <option
+                      value="[
+      'diapers',
+      'trolleys',
+      'essentials',
+      'clothes',
+      'toys',
+      'uncategorized'
+    ]"
+                    >
+                      All
+                    </option>
+                    <option value="essentials">Essentials</option>
+                    <option value="diapers">Diapers</option>
+                    <option value="trolleys">Trolleys</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="toys">Toys</option>
+                    <option value="uncategorized">Misc</option>
+                  </select>
+                </form>
+              </div>
             </div>
-            {this.state.products.map(product => (
-              <ProductComp
-                key={product._id}
-                {...product}
-                userId={user._id}
-                userRole={user.role}
-                addProduct={productId => {
-                  this.handdleAddProduct(productId);
-                }}
-                wishListFrom={this.state.wishListFrom}
-              />
-            ))}
+            {this.state.products.map(product => {
+              if (
+                product.name
+                  .toLowerCase()
+                  .includes(this.state.searchQuery.toLowerCase()) &&
+                this.state.category.includes(product.category)
+              ) {
+                return (
+                  <ProductComp
+                    key={product._id}
+                    {...product}
+                    userId={user._id}
+                    userRole={user.role}
+                    addProduct={productId => {
+                      this.handdleAddProduct(productId);
+                    }}
+                    wishListFrom={this.state.wishListFrom}
+                  />
+                );
+              }
+            })}
           </div>
           <NavbarWithRouter
             user={user}
