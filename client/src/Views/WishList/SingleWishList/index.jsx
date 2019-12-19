@@ -32,7 +32,8 @@ export class SingleWishList extends Component {
     super(props);
     this.state = {
       wishListToRender: {},
-      wishlistId: this.props.match.params.id
+      wishlistId: this.props.match.params.id,
+      amountInShoppingCart: 0
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
     this.removeProductFromWishlist = this.removeProductFromWishlist.bind(this);
@@ -69,13 +70,20 @@ export class SingleWishList extends Component {
   //   }
   // }
 
-  async addToShoppingCart(productId, amountBought) {
+  async addToShoppingCart(productId, amountToBuy) {
     try {
       const productID = productId;
       const wishlistID = this.props.match.params.id;
       const gifterID = this.props.userState._id;
-      // const amountBought = amountBought;
-      const amountBought = 1;
+      const amountBought = amountToBuy;
+      const amountInShoppingCart =
+        this.state.amountInShoppingCart + amountBought;
+
+      this.setState({ amountInShoppingCart });
+      if (amountBought === 0) {
+        throw new Error("Cant add 0 to the shopping cart");
+      }
+      //const amountBought = 1;
       // console.log("this is the product to be added", productID);
       // console.log("this is the gifter", gifterID);
       // console.log("this is the wishlist", wishlistID);
@@ -84,6 +92,7 @@ export class SingleWishList extends Component {
         wishlistID,
         gifterID
       );
+      //console.log("want to buy: ", amountBought);
 
       if (existingShoppingCart) {
         const shoppingCartID = existingShoppingCart._id;
@@ -93,7 +102,7 @@ export class SingleWishList extends Component {
           amountBought
         );
         //here we will be patching the existing shopping cart
-        console.log("this is the updated ShoppingCart!", shoppingCartUpdated);
+        //console.log("this is the updated ShoppingCart!", shoppingCartUpdated);
       } else {
         const newShoppingCart = await createShoppingCart(
           wishlistID,
@@ -101,7 +110,7 @@ export class SingleWishList extends Component {
           productID,
           amountBought
         );
-        console.log(newShoppingCart);
+        //console.log(newShoppingCart);
       }
     } catch (error) {
       console.log(error);
@@ -213,8 +222,8 @@ export class SingleWishList extends Component {
                         this.removeProductFromWishlist(productId);
                       }}
                       done={done}
-                      addToShoppingCart={(productId, amountBought) => {
-                        this.addToShoppingCart(productId, amountBought);
+                      addToShoppingCart={(productId, amountToBuy) => {
+                        this.addToShoppingCart(productId, amountToBuy);
                       }}
                     />
                   );
@@ -226,6 +235,7 @@ export class SingleWishList extends Component {
             user={user}
             addUsertoUserState={this.addUsertoUserState}
             wishlistId={this.state.wishlistId}
+            amountInShoppingCart={this.state.amountInShoppingCart}
           />
         </div>
       </React.Fragment>
