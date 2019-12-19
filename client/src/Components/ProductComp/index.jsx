@@ -40,18 +40,30 @@ export default function ProductComp(props) {
       );
     } else {
       const max = props.wanted - props.bought;
+      let price = "";
+      if (props.category === "diapers") {
+        price = props.price + "/week";
+      } else {
+        price = props.price;
+      }
+
       return (
-        <React.Fragment>
-          <form>
-            <input type="number" max={`${max}`} min="1" />
-          </form>
-          <img
-            className="list-btn"
-            onClick={() => props.addToShoppingCart(props._id)}
-            src="../../shopping-cart.png"
-            alt=""
-          />
-        </React.Fragment>
+        <div className="shopping-cart-info">
+          <div className="shopping-cart-info_price">
+            <small>{`$ ${price}`}</small>
+          </div>
+          <div className="shopping-cart-info_others">
+            <form>
+              <input type="number" value="1" max={`${max}`} min="1" />
+            </form>
+            <img
+              className="list-btn"
+              onClick={() => props.addToShoppingCart(props._id)}
+              src="../../shopping-cart.png"
+              alt=""
+            />
+          </div>
+        </div>
       );
     }
   };

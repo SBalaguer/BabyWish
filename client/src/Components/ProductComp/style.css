@@ -84,3 +84,17 @@
   max-height: 60px;
   margin-right: 0.3em;
 }
+
+.shopping-cart-info {
+  display: flex;
+  flex-direction: column;
+  width: 18vw;
+  max-width: 150px;
+  align-items: center;
+}
+
+.shopping-cart-info_others {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
