@@ -117,3 +117,81 @@ export class EditProfile extends Component {
 }
 
 export default EditProfile;
+
+/* this is me trying to style this shit
+
+      <div className="alignment-center">
+        <div className="row sign-in-title">
+          <div className="row form-holder">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  onChange={this.handleChange}
+                  placeholder="Name"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="date"
+                  name="dueDate"
+                  onChange={this.handleChange}
+                  placeholder="Due Date"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="address"
+                  onChange={this.handleChange}
+                  placeholder="Address"
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  onChange={this.handleChange}
+                  placeholder="Phone Number"
+                />
+              </div>
+              <div className="form-group">
+                <select
+                  type="text"
+                  name="babyGender"
+                  onChange={this.handleChange}
+                  placeholder="Baby Gender"
+                >
+                  <option value="singleBoy">Single Boy</option>
+                  <option value="singleGirl">Single Girl</option>
+                  <option value="twinBoys">Twin Boys</option>
+                  <option value="twinGirls">Twin Girls</option>
+                  <option value="twinMix">Mixed Twins</option>
+                  <option value="neutral">Don't / won't know</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <button className="btn btn-start btn-block">
+                  commit changes
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="upload-div">
+            <form
+              encType="multipart/form-data"
+              onSubmit={this.handleFileChange}
+            >
+              <input type="file" name="pictureUrl" />
+              <button type="submit">upload picture</button>
+            </form>
+          </div>
+        </div>
+        <NavbarWithRouter
+          user={this.props.userState}
+          addUsertoUserState={this.addUsertoUserState}
+        />
+      </div>
+
+*/

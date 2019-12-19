@@ -33,8 +33,8 @@ export class SupplierSignIn extends Component {
     try {
       const user = await signIn({ email, password });
       //console.log(user);
-      //   this.props.addUsertoUserState(user);
-      this.props.history.push(`/user/${user._id}`);
+      this.props.addUsertoUserState(user);
+      this.props.history.push(`/supplier`);
     } catch (error) {
       throw error;
     }
@@ -80,8 +80,8 @@ export class SupplierSignIn extends Component {
               Log-in
             </button>
           </form>
-          <Link to="/sign-up">
-            <small>Do not have an acount? Sign-up!</small>
+          <Link to="/supplier/sign-up">
+            <small>Do not have a supplier account? Sign-up!</small>
           </Link>
         </div>
       </div>

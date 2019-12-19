@@ -52,26 +52,42 @@ export class SupplierDashboard extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.productMethod}>
-          <input type="text" placeholder="name" name="name" />
-          <select type="text" name="category">
-            <option value="diapers">Diapers</option>
-            <option value="trolleys">trolleys</option>
-            <option value="essentials">Essentials</option>
-            <option value="clothes">Clothes</option>
-            <option value="toys">Toys</option>
-            <option value="uncategorized">n/a</option>
-          </select>
-          <input type="number" placeholder="price" name="price" />
-          <input type="number" placeholder="in stock" name="availableStock" />
-          <button>add</button>
-        </form>
-        <div className="upload-div">
-          <form encType="multipart/form-data" onSubmit={this.handleFileChange}>
-            <input type="file" name="pictureUrl" />
-            <button type="submit">upload picture</button>
-          </form>
-        </div>
+        {this.props.userState.shipFrom && (
+          <div>
+            <form onSubmit={this.productMethod}>
+              <input type="text" placeholder="name" name="name" />
+              <select type="text" name="category">
+                <option value="diapers">Diapers</option>
+                <option value="trolleys">trolleys</option>
+                <option value="essentials">Essentials</option>
+                <option value="clothes">Clothes</option>
+                <option value="toys">Toys</option>
+                <option value="uncategorized">n/a</option>
+              </select>
+              <input type="number" placeholder="price" name="price" />
+              <input
+                type="number"
+                placeholder="in stock"
+                name="availableStock"
+              />
+              <button>add</button>
+            </form>
+            <div className="upload-div">
+              <form
+                encType="multipart/form-data"
+                onSubmit={this.handleFileChange}
+              >
+                <input type="file" name="pictureUrl" />
+                <button type="submit">upload picture</button>
+              </form>
+            </div>
+          </div>
+        )}
+        {!this.props.userState.shipFrom && (
+          <div>
+            <h3>you need a supplier account to access this page</h3>
+          </div>
+        )}
       </div>
     );
   }

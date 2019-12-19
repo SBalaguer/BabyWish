@@ -265,15 +265,33 @@ class App extends Component {
           )}
           <Route
             path="/supplier/sign-in"
-            render={props => <SupplierSignIn {...props} />}
+            render={props => (
+              <SupplierSignIn
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
           />
           <Route
             path="/supplier/sign-up"
-            render={props => <SupplierSignUp {...props} />}
+            render={props => (
+              <SupplierSignUp
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
           />
           <Route
             path="/supplier/"
-            render={props => <SupplierDashboard {...props} />}
+            render={props => (
+              <SupplierDashboard
+                userState={this.state.user}
+                addUsertoUserState={this.addUsertoUserState}
+                {...props}
+              />
+            )}
           />
           <Route path="/" component={HomeView} />
         </Switch>

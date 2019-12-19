@@ -47,7 +47,8 @@ export class SupplierSignUp extends Component {
         deliveryEtaInDays
       });
       console.log(newUser);
-      //   this.props.history.push(`/user/${newUser._id}`);
+      this.props.addUsertoUserState(newUser);
+      this.props.history.push(`/supplier`);
     } catch (error) {
       throw error;
     }
