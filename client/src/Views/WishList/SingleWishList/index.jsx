@@ -126,20 +126,22 @@ export class SingleWishList extends Component {
             <h1>
               <span className="hi"> {wishList.name}</span>
             </h1>
-            <Link
-              to={{
-                pathname: "/products",
-                state: {
-                  wishListId: wishList._id
-                }
-              }}
-            >
-              <img
-                className="add-prod-button"
-                src="../../diaper-add-product.png"
-                alt=""
-              />
-            </Link>
+            {user.role !== "gifter" && (
+              <Link
+                to={{
+                  pathname: "/products",
+                  state: {
+                    wishListId: wishList._id
+                  }
+                }}
+              >
+                <img
+                  className="add-prod-button"
+                  src="../../diaper-add-product.png"
+                  alt=""
+                />
+              </Link>
+            )}
           </div>
 
           {products && (
