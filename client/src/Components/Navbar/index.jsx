@@ -9,6 +9,7 @@ export class Navbar extends Component {
     super(props);
     this.state = {};
     this.signOutUser = this.signOutUser.bind(this);
+    this.checkAmountInShoppingCart = this.checkAmountInShoppingCart.bind(this);
   }
 
   async signOutUser() {
@@ -21,10 +22,26 @@ export class Navbar extends Component {
     }
   }
 
+  checkAmountInShoppingCart() {
+    if (
+      this.props.amountInShoppingCart !== 0 &&
+      this.props.amountInShoppingCart
+    ) {
+      return (
+        <div className="shop-cart-counter">
+          {this.props.amountInShoppingCart}
+        </div>
+      );
+    } else {
+      return;
+    }
+  }
+
   render() {
     const userId = this.props.user._id;
     const userRole = this.props.user.role;
     const wishListID = this.props.wishlistId;
+    console.log(this.props.amountInShoppingCart);
 
     return (
       <div className="navbar-bottom fixed-bottom">
@@ -41,7 +58,7 @@ export class Navbar extends Component {
             <Link to="/editprofile">Edit Profile</Link>
             {userRole === "admin" && <Link to="/admin">Users List</Link>}
             {userRole === "gifter" && (
-              <div className='shopping-cart-navbar'>
+              <div className="shopping-cart-navbar">
                 <Link
                   to={{
                     pathname: `/shopping-cart/${userId}`,
@@ -52,11 +69,7 @@ export class Navbar extends Component {
                 >
                   Shopping Cart
                 </Link>
-                {this.props.amountInShoppingCart !== 0 && (
-                  <div className="shop-cart-counter">
-                    {this.props.amountInShoppingCart}
-                  </div>
-                )}
+                {this.checkAmountInShoppingCart()}
               </div>
             )}
             {userRole === "expecting" && <Link to="/wishlist">Wishlist</Link>}

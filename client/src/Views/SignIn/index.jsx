@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { signIn } from './../../services/user-functions';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { signIn } from "./../../services/user-functions";
+import { Link } from "react-router-dom";
 
-import './style.css';
+import "./style.css";
 
 export class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -84,37 +84,14 @@ export class SignIn extends Component {
               </button>
             </form>
           </div>
+
+          <Link to="/sign-up">
+            <small>Do not have an acount? Sign-up!</small>
+          </Link>
         </div>
-        <Link to="/sign-up">
-          <small>Do not have an acount? Sign-up!</small>
-        </Link>
       </div>
     );
   }
 }
 
 export default SignIn;
-
-{
-  /* <form onSubmit={this.handleSubmit}>
-            <div className="form-control">
-              <input
-                type="email"
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                name="email"
-                placeholder="Email"
-              />
-            </div>
-            <div className="form-control">
-              <input
-                type="password"
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                name="password"
-                placeholder="Password"
-              />
-            </div>
-            <button className="btn btn-primary">Log In</button>
-          </form> */
-}
