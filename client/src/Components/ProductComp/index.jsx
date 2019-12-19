@@ -26,7 +26,9 @@ export default function ProductComp(props) {
 
   const checkIfDone2 = function(check) {
     if (check) {
-      return <img className="list-btn-baby" src="../../happy-baby.png" alt="" />;
+      return (
+        <img className="list-btn-baby" src="../../happy-baby.png" alt="" />
+      );
     } else if (props.userRole !== "gifter") {
       return (
         <img
@@ -37,10 +39,19 @@ export default function ProductComp(props) {
         />
       );
     } else {
+      const max = props.wanted - props.bought;
       return (
-        <button onClick={() => props.addToShoppingCart(props._id)}>
-          Buy Product
-        </button>
+        <React.Fragment>
+          <form>
+            <input type="number" max={`${max}`} min="1" />
+          </form>
+          <img
+            className="list-btn"
+            onClick={() => props.addToShoppingCart(props._id)}
+            src="../../shopping-cart.png"
+            alt=""
+          />
+        </React.Fragment>
       );
     }
   };
@@ -81,7 +92,6 @@ export default function ProductComp(props) {
             <div className="prod-container_data-img" style={style}></div>
             <div className="prod-container_data-text">
               <h5>{props.name}</h5>
-
               <small>
                 ${props.price}
                 {props.category === "diapers" && "/week"}

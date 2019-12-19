@@ -70,15 +70,10 @@ class ProfileView extends Component {
     //redo this part!
     event.preventDefault();
     const { wishListLocator } = this.state;
+    //find wishlist by BW Locator
+    //ATTENTIONLEO
+    //re-direct to /:wishlistID
     console.log(wishListLocator);
-    // try {
-    //   const user = await signIn({ email, password });
-    //   //console.log(user);
-    //   this.props.addUsertoUserState(user);
-    //   this.props.history.push(`/user/${user._id}`);
-    // } catch (error) {
-    //   throw error;
-    // }
   }
 
   render() {

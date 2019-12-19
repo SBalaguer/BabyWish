@@ -69,11 +69,12 @@ export class SingleWishList extends Component {
   //   }
   // }
 
-  async addToShoppingCart(productId) {
+  async addToShoppingCart(productId, amountBought) {
     try {
       const productID = productId;
       const wishlistID = this.props.match.params.id;
       const gifterID = this.props.userState._id;
+      // const amountBought = amountBought;
       const amountBought = 1;
       // console.log("this is the product to be added", productID);
       // console.log("this is the gifter", gifterID);
@@ -212,8 +213,8 @@ export class SingleWishList extends Component {
                         this.removeProductFromWishlist(productId);
                       }}
                       done={done}
-                      addToShoppingCart={productId => {
-                        this.addToShoppingCart(productId);
+                      addToShoppingCart={(productId, amountBought) => {
+                        this.addToShoppingCart(productId, amountBought);
                       }}
                     />
                   );
