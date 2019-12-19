@@ -1,16 +1,18 @@
 .add-prod-button {
-  width: 5vh;
+  width: 7vh;
   height: auto;
-  margin-left: 1em;
-  border: 1px solid black;
-  border-radius: 8vh;
-  padding: 0.3vh;
+  position: relative;
+  left: 0px;
+  top: 0px;
 }
 
 .view-title-wishlist {
   display: flex;
+  width: 100%;
+  max-width: 600px;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-bottom: 1em;
+  height: 9vh;
 }
