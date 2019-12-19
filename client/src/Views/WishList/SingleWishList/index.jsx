@@ -1,20 +1,29 @@
-import React, { Component } from "react";
-import { getWishlistById } from "../../../services/wishlist-functions";
-import Navbar from "./../../../Components/Navbar";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import TopNavbar from "./../../../Components/TopNavbar";
+import React, { Component } from 'react';
+import { getWishlistById } from '../../../services/wishlist-functions';
+import Navbar from './../../../Components/Navbar';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import TopNavbar from './../../../Components/TopNavbar';
 
-import ProductComp from "./../../../Components/ProductComp";
-import { removeProductInWishlist } from "./../../../services/wishlist-functions";
-import { addProductToWishlist } from "./../../../services/wishlist-functions";
+import ProductComp from './../../../Components/ProductComp';
+import { removeProductInWishlist } from './../../../services/wishlist-functions';
+import { addProductToWishlist } from './../../../services/wishlist-functions';
 import {
   createShoppingCart,
   checkIfShoppingCart,
   addToShoppingCart
-} from "./../../../services/shopping-cart";
+} from './../../../services/shopping-cart';
 
-import "./style.css";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  EmailShareButton,
+  FacebookIcon,
+  WhatsappIcon,
+  EmailIcon
+} from 'react-share';
+
+import './style.css';
 
 // ATTENTION = WILL HAVE TO CHANGE THE WAY THIS GETS A SINGLE WISHLIST
 
@@ -83,7 +92,7 @@ export class SingleWishList extends Component {
           amountBought
         );
         //here we will be patching the existing shopping cart
-        console.log("this is the updated ShoppingCart!", shoppingCartUpdated);
+        console.log('this is the updated ShoppingCart!', shoppingCartUpdated);
       } else {
         const newShoppingCart = await createShoppingCart(
           wishlistID,
@@ -126,21 +135,37 @@ export class SingleWishList extends Component {
             <h1>
               <span className="hi"> {wishList.name}</span>
             </h1>
-            {user.role !== "gifter" && (
-              <Link
-                to={{
-                  pathname: "/products",
-                  state: {
-                    wishListId: wishList._id
-                  }
-                }}
-              >
-                <img
-                  className="add-prod-button"
-                  src="../../diaper-add-product.png"
-                  alt=""
-                />
-              </Link>
+            {user.role !== 'gifter' && (
+              <div>
+                <Link
+                  to={{
+                    pathname: '/products',
+                    state: {
+                      wishListId: wishList._id
+                    }
+                  }}
+                >
+                  <img
+                    className="add-prod-button"
+                    src="../../diaper-add-product.png"
+                    alt=""
+                  />
+                </Link>
+                <FacebookShareButton
+                  url={`http://babywish.herokuapp.com/wishlist/${wishList._id}`}
+                  children={"Hey check out the wishlist I've made for my baby!"}
+                >
+                  {' '}
+                  <FacebookIcon size={32} round={true} />{' '}
+                </FacebookShareButton>
+                <WhatsappShareButton
+                  url={`http://babywish.herokuapp.com/wishlist/${wishList._id}`}
+                  children={"Hey check out the wishlist I've made for my baby!"}
+                >
+                  {' '}
+                  <WhatsappIcon size={32} round={true} />{' '}
+                </WhatsappShareButton>
+              </div>
             )}
           </div>
 
