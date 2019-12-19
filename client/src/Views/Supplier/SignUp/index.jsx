@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { signUp } from '../../../services/supplier-functions';
+import React, { Component } from "react";
+import { signUp } from "../../../services/supplier-functions";
 
 export class SupplierSignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      iban: '',
-      shipFrom: '',
-      deliveryEtaInDays: '',
-      phoneNumber: '',
-      password: ''
+      name: "",
+      iban: "",
+      shipFrom: "",
+      deliveryEtaInDays: "",
+      phoneNumber: "",
+      password: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +46,7 @@ export class SupplierSignUp extends Component {
         shipFrom,
         deliveryEtaInDays
       });
-      console.log(newUser);
+      //console.log(newUser);
       this.props.addUsertoUserState(newUser);
       this.props.history.push(`/supplier`);
     } catch (error) {
@@ -58,11 +58,11 @@ export class SupplierSignUp extends Component {
     const passwordSecond = event.target.value;
     if (this.state.password !== passwordSecond) {
       this.setState({
-        checkPassword: ''
+        checkPassword: ""
       });
     } else {
       this.setState({
-        checkPassword: 'hidden'
+        checkPassword: "hidden"
       });
     }
   }
@@ -79,46 +79,46 @@ export class SupplierSignUp extends Component {
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="sign-up-3-form">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Name"
+                name="name"
+                onChange={this.handleInputChange}
+                required
+              />
+            </div>
             <div className="form-row">
-              <div className="form-group col-md-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  placeholder="name"
-                  name="name"
-                  onChange={this.handleInputChange}
-                  required
-                />
-              </div>
-              <div className="form-group col-md-6">
+              <div className="form-group col-md-4">
                 <input
                   type="text"
                   className="form-control"
                   id="iban"
-                  placeholder="iban"
+                  placeholder="IBAN"
                   name="iban"
                   onChange={this.handleInputChange}
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group col-md-4">
                 <input
                   type="text"
                   className="form-control"
                   id="shipFrom"
-                  placeholder="shipFrom"
+                  placeholder="Shipping From"
                   name="shipFrom"
                   onChange={this.handleInputChange}
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group col-md-4">
                 <input
                   type="number"
                   className="form-control"
                   id="deliveryEtaInDays"
-                  placeholder="deliveryEtaInDays"
+                  placeholder="Delivery ETA in Days"
                   name="deliveryEtaInDays"
                   onChange={this.handleInputChange}
                   required
@@ -141,7 +141,7 @@ export class SupplierSignUp extends Component {
                 type="number"
                 className="form-control"
                 id="phoneNumber"
-                placeholder="phoneNumber"
+                placeholder="Phone Number"
                 name="phoneNumber"
                 onChange={this.handleInputChange}
                 required
@@ -158,10 +158,10 @@ export class SupplierSignUp extends Component {
                 required
               />
             </div>
-            <div className="form-group" style={{ marginBottom: '2px' }}>
+            <div className="form-group" style={{ marginBottom: "2px" }}>
               <input
                 type="password"
-                className={'form-control '}
+                className={"form-control "}
                 id="password2"
                 placeholder="Re-enter Password"
                 name="passwordSecond"
@@ -170,7 +170,7 @@ export class SupplierSignUp extends Component {
               />
             </div>
             <small
-              className={'form-text ' + this.state.checkPassword}
+              className={"form-text " + this.state.checkPassword}
               id="forg-pass"
             >
               Make sure both passwords match!

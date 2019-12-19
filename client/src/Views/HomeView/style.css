@@ -38,3 +38,9 @@
   width: 70vw;
   max-width: 400px;
 }
+
+.social-login {
+  display: flex;
+  width: 60vw;
+  justify-content: space-around;
+}

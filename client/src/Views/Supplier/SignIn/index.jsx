@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { signIn } from './../../../services/supplier-functions';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { signIn } from "./../../../services/supplier-functions";
+import { Link } from "react-router-dom";
 
 export class SupplierSignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +44,11 @@ export class SupplierSignIn extends Component {
     return (
       <div className="alingment-center">
         <div className="row sign-in-title">
-          <img className="home-logo" src="../babywishlogo.png" alt=".." />
+          <img
+            className="home-logo"
+            src="../babywishlogo-suppliers.png"
+            alt=".."
+          />
         </div>
         <div className="row form-holder">
           <form onSubmit={this.handleSubmit}>
@@ -77,7 +81,7 @@ export class SupplierSignIn extends Component {
               </small>
             </Link>
             <button type="submit" className="btn btn-start btn-block">
-              Log-in
+              Supplier Log-in
             </button>
           </form>
           <Link to="/supplier/sign-up">

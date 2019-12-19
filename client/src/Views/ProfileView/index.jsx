@@ -54,8 +54,6 @@ class ProfileView extends Component {
     });
   }
 
-
-
   componentDidMount() {
     this.calcUserData();
   }

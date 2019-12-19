@@ -41,7 +41,7 @@ export class Navbar extends Component {
             <Link to="/editprofile">Edit Profile</Link>
             {userRole === "admin" && <Link to="/admin">Users List</Link>}
             {userRole === "gifter" && (
-              <React.Fragment>
+              <div className='shopping-cart-navbar'>
                 <Link
                   to={{
                     pathname: `/shopping-cart/${userId}`,
@@ -52,8 +52,12 @@ export class Navbar extends Component {
                 >
                   Shopping Cart
                 </Link>
-                <p>{this.props.amountInShoppingCart}</p>
-              </React.Fragment>
+                {this.props.amountInShoppingCart !== 0 && (
+                  <div className="shop-cart-counter">
+                    {this.props.amountInShoppingCart}
+                  </div>
+                )}
+              </div>
             )}
             {userRole === "expecting" && <Link to="/wishlist">Wishlist</Link>}
             {userRole === "parent" && <Link to="/wishlist">Wishlist</Link>}

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./style.css";
+import { FacebookIcon, TwitterIcon } from "react-share";
 
 export default function HomeView() {
   return (
@@ -14,10 +15,8 @@ export default function HomeView() {
         <Link to="/sign-up" className="btn btn-start btn-block">
           Sign Up
         </Link>
-        <Link to="/authentication/facebook" className="btn btn-start btn-block">
-          Sign in with Facebook
-        </Link>
       </div>
+      <Link to="/supplier/sign-in">Are you a Supplier?</Link>
     </div>
   );
 }
