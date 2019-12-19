@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // this will likely return the whole object
 export const getWishlistById = async id => {
@@ -22,7 +22,8 @@ export const getWishlistByUserId = async id => {
 export const createWishlist = async (id, name) => {
   try {
     const response = await axios.post(`/api/wishlist/create/${id}`, { name });
-    return response.data.newWishList;
+    return response.data.wishListWithId;
+    //return response.data.newWishList; leo you changed this
   } catch (error) {
     throw error;
   }
