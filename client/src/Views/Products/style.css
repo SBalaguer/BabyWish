@@ -10,16 +10,10 @@
 
 .search-form {
   width: 100%;
-}
-
-.view-title-products input {
-  height: 5vh;
-  width: 81%;
-  border: 1px solid #1f2674c7;
-  border-radius: 15px;
-  margin-left: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .btn-white {
@@ -29,4 +23,15 @@
 }
 .search-img {
   width: 3.2vh;
+}
+
+.select-category {
+  height: 5vh;
+  width: 81%;
+  border: 1px solid #1f2674c7;
+  background-color: #fff;
+  border-radius: 15px;
+  margin-left: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
 }

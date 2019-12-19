@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import ProductComp from './../../Components/ProductComp';
-import { listProducts } from './../../services/product-functions';
-import Navbar from './../../Components/Navbar';
-import { withRouter } from 'react-router-dom';
-import { addProductToWishlist } from './../../services/wishlist-functions';
-import TopNavbar from './../../Components/TopNavbar';
+import React, { Component } from "react";
+import ProductComp from "./../../Components/ProductComp";
+import { listProducts } from "./../../services/product-functions";
+import Navbar from "./../../Components/Navbar";
+import { withRouter } from "react-router-dom";
+import { addProductToWishlist } from "./../../services/wishlist-functions";
+import TopNavbar from "./../../Components/TopNavbar";
 
-import './style.css';
+import "./style.css";
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [],
-      wishListFrom: '',
-      searchQuery: '',
+      wishListFrom: "",
+      searchQuery: "",
       category: [
-        'diapers',
-        'trolleys',
-        'essentials',
-        'clothes',
-        'toys',
-        'uncategorized'
+        "diapers",
+        "trolleys",
+        "essentials",
+        "clothes",
+        "toys",
+        "uncategorized"
       ]
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
@@ -55,8 +55,21 @@ class Products extends Component {
   }
 
   handleSelectChange(event) {
+    let cat = event.target.value;
+    if (cat === "all") {
+      cat = [
+        "diapers",
+        "trolleys",
+        "essentials",
+        "clothes",
+        "toys",
+        "uncategorized"
+      ];
+    } else {
+      cat = [cat];
+    }
     this.setState({
-      category: event.target.value
+      category: cat
     });
   }
 
@@ -87,48 +100,36 @@ class Products extends Component {
               <h1>
                 <span className="hi"> Select Products</span>
               </h1>
-              <div className="search-div">
-                <form className="search-form">
+              <div className="search-form">
+                <form>
                   <input
                     onChange={this.handleInputChange}
                     value={this.state.searchQuery}
                     type="search"
+                    className="form-check select-category"
                   />
-                  <button className="btn-white">
-                    <img
-                      className="search-img"
-                      src="../../search-icon.png"
-                      alt=""
-                    />
-                  </button>
+                </form>
+                <form>
                   <select
-                    multiple={true}
-                    type="text"
+                    className="form-check select-category"
                     name="category"
                     onChange={this.handleSelectChange}
-                    placeholder="Category"
-                    value={this.state.category}
+                    id=""
                   >
-                    <option
-                      value="[
-      'diapers',
-      'trolleys',
-      'essentials',
-      'clothes',
-      'toys',
-      'uncategorized'
-    ]"
-                    >
-                      All
-                    </option>
-                    <option value="['essentials']">Essentials</option>
-                    <option value="['diapers']">Diapers</option>
-                    <option value="['trolleys']">Trolleys</option>
-                    <option value="['clothes']">Clothes</option>
-                    <option value="['toys']">Toys</option>
-                    <option value="['uncategorized']">Misc</option>
+                    <option value="all">All</option>
+                    <option value="diapers">Diapers</option>
+                    <option value="trolleys">Trolleys</option>
+                    <option value="essentials">Essentials</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="toys">Toys</option>
+                    <option value="uncategorized">Others</option>
                   </select>
                 </form>
+                <img
+                  className="search-img"
+                  src="../../search-icon.png"
+                  alt=""
+                />
               </div>
             </div>
             {this.state.products.map(product => {

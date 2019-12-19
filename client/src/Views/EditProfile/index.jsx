@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import TopNavbar from "./../../Components/TopNavbar";
 import {
   updateProfile,
   createFile,
   getSingleUser
-} from './../../services/user-functions';
+} from "./../../services/user-functions";
 // import ImageUpload from '../../Components/ImageUpload';
-import NavbarWithRouter from './../../Components/Navbar';
+import NavbarWithRouter from "./../../Components/Navbar";
+
+import "./style.css";
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -58,74 +61,17 @@ export class EditProfile extends Component {
 
   render() {
     return (
-      <div>
-        <div className="edit-form">
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              onChange={this.handleChange}
-              placeholder="Name"
-            />
-            <input
-              type="date"
-              name="dueDate"
-              onChange={this.handleChange}
-              placeholder="Due Date"
-            />
-            <input
-              type="text"
-              name="address"
-              onChange={this.handleChange}
-              placeholder="Address"
-            />
-            <input
-              type="text"
-              name="phoneNumber"
-              onChange={this.handleChange}
-              placeholder="Phone Number"
-            />
-            <select
-              type="text"
-              name="babyGender"
-              onChange={this.handleChange}
-              placeholder="Baby Gender"
-            >
-              <option value="singleBoy">Single Boy</option>
-              <option value="singleGirl">Single Girl</option>
-              <option value="twinBoys">Twin Boys</option>
-              <option value="twinGirls">Twin Girls</option>
-              <option value="twinMix">Mixed Twins</option>
-              <option value="neutral">Don't / won't know</option>
-            </select>
-            <button>commit changes</button>
-          </form>
-        </div>
-        <div className="upload-div">
-          <form encType="multipart/form-data" onSubmit={this.handleFileChange}>
-            <input type="file" name="pictureUrl" />
-            <button type="submit">upload picture</button>
-          </form>
-        </div>
-        <NavbarWithRouter
-          user={this.props.userState}
-          addUsertoUserState={this.addUsertoUserState}
-        />
-      </div>
-    );
-  }
-}
-
-export default EditProfile;
-
-/* this is me trying to style this shit
-
-      <div className="alignment-center">
-        <div className="row sign-in-title">
-          <div className="row form-holder">
+      <React.Fragment>
+        <TopNavbar />
+        <div className="app-container">
+          <div className="edit-form">
+            <h1 className="profile-name">
+              <span className="hi">Edit Profile</span>
+            </h1>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <input
+                  className="form-control"
                   type="text"
                   name="name"
                   onChange={this.handleChange}
@@ -134,6 +80,7 @@ export default EditProfile;
               </div>
               <div className="form-group">
                 <input
+                  className="form-control"
                   type="date"
                   name="dueDate"
                   onChange={this.handleChange}
@@ -142,6 +89,7 @@ export default EditProfile;
               </div>
               <div className="form-group">
                 <input
+                  className="form-control"
                   type="text"
                   name="address"
                   onChange={this.handleChange}
@@ -150,6 +98,7 @@ export default EditProfile;
               </div>
               <div className="form-group">
                 <input
+                  className="form-control"
                   type="text"
                   name="phoneNumber"
                   onChange={this.handleChange}
@@ -158,6 +107,7 @@ export default EditProfile;
               </div>
               <div className="form-group">
                 <select
+                  className="form-control"
                   type="text"
                   name="babyGender"
                   onChange={this.handleChange}
@@ -171,27 +121,34 @@ export default EditProfile;
                   <option value="neutral">Don't / won't know</option>
                 </select>
               </div>
-              <div className="form-group">
-                <button className="btn btn-start btn-block">
-                  commit changes
-                </button>
-              </div>
+              <button
+                className="btn btn-wl btn-block"
+                style={{ marginBottom: "1.5em" }}
+              >
+                Udpate Profile
+              </button>
             </form>
-          </div>
-          <div className="upload-div">
+
             <form
               encType="multipart/form-data"
               onSubmit={this.handleFileChange}
             >
-              <input type="file" name="pictureUrl" />
-              <button type="submit">upload picture</button>
+              <div className="form-group">
+                <input type="file" className="form-control" name="pictureUrl" />
+              </div>
+              <button type="submit" className="btn btn-wl btn-block">
+                Change Profile Picture
+              </button>
             </form>
           </div>
+          <NavbarWithRouter
+            user={this.props.userState}
+            addUsertoUserState={this.addUsertoUserState}
+          />
         </div>
-        <NavbarWithRouter
-          user={this.props.userState}
-          addUsertoUserState={this.addUsertoUserState}
-        />
-      </div>
+      </React.Fragment>
+    );
+  }
+}
 
-*/
+export default EditProfile;
