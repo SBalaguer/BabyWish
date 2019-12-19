@@ -16,19 +16,6 @@ export default function ProductComp(props) {
   const wishListId = props.wishListFrom;
   console.log(props);
 
-  const buttonRenderFalse = `{(props.userRole !== "gifter" && (
-    <img
-      className="list-btn"
-      onClick={() => props.removeProduct(props.deleteId)}
-      src="../../close.png"
-      alt=""
-    />
-  )) || (
-    <button onClick={() => props.addToShoppingCart(props._id)}>
-      Buy Product
-    </button>
-  )}`;
-
   const checkIfDone = function(check) {
     if (check) {
       return "prod-container-done";
@@ -39,7 +26,7 @@ export default function ProductComp(props) {
 
   const checkIfDone2 = function(check) {
     if (check) {
-      return <p>Done!</p>;
+      return <img className="list-btn-baby" src="../../happy-baby.png" alt="" />;
     } else if (props.userRole !== "gifter") {
       return (
         <img
