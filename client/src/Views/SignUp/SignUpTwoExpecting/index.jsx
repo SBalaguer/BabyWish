@@ -34,6 +34,13 @@ export class SignUpTwoExpecting extends Component {
   }
 
   render() {
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
     return (
       <div className="alingment-center-sign-up container">
         <div className="navbar fixed-top top-navbar">
@@ -53,6 +60,7 @@ export class SignUpTwoExpecting extends Component {
               name="dueDate"
               onChange={this.handleDateInputChange}
               className="form-control"
+              min={date}
             />
           </div>
           <div

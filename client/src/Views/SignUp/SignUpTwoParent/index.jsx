@@ -25,6 +25,13 @@ export class SignUpTwoParent extends Component {
   }
 
   render() {
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
     return (
       <div className="alingment-center-sign-up">
         <div className="navbar fixed-top top-navbar">
@@ -41,6 +48,7 @@ export class SignUpTwoParent extends Component {
               name="birthdayDate"
               onChange={this.handleDateInputChange}
               className="form-control"
+              max={date}
             />
           </div>
           <button className="btn btn-start btn-block">Next</button>
