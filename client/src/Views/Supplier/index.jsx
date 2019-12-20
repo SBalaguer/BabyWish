@@ -10,7 +10,8 @@ export class SupplierDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pictureUrl: null,
+      pictureUrl:
+        "https://res.cloudinary.com/dcnzfzgxm/image/upload/v1576834016/BabyWish/logo-pres_cwpufg.png",
       name: "",
       category: "uncategorized",
       availableStock: "",
@@ -55,7 +56,8 @@ export class SupplierDashboard extends Component {
       category = "";
       availableStock = "";
       price = "";
-      pictureUrl = null;
+      pictureUrl =
+        "https://res.cloudinary.com/dcnzfzgxm/image/upload/v1576834016/BabyWish/logo-pres_cwpufg.png";
       this.setState({
         name,
         category,
