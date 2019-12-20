@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import TopNavbar from "./../../Components/TopNavbar";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import TopNavbar from './../../Components/TopNavbar';
+import { withRouter } from 'react-router-dom';
 
-import Navbar from "./../../Components/Navbar";
+import Navbar from './../../Components/Navbar';
 import {
   updateProfile,
   createFile,
   getSingleUser
-} from "./../../services/user-functions";
+} from './../../services/user-functions';
 // import ImageUpload from '../../Components/ImageUpload';
 
-import "./style.css";
+import './style.css';
 
 export class EditProfile extends Component {
   constructor(props) {
@@ -132,7 +132,7 @@ export class EditProfile extends Component {
               </div>
               <button
                 className="btn btn-wl btn-block"
-                style={{ marginBottom: "1.5em" }}
+                style={{ marginBottom: '1.5em' }}
               >
                 Udpate Profile
               </button>
@@ -142,8 +142,8 @@ export class EditProfile extends Component {
               encType="multipart/form-data"
               onSubmit={this.handleFileChange}
             >
-              <div className="form-group">
-                <input type="file" className="form-control" name="pictureUrl" />
+              <div id="file-div" className="form-group">
+                <input type="file" className="file-input" name="pictureUrl" />
               </div>
               <button type="submit" className="btn btn-wl btn-block">
                 Change Profile Picture
@@ -161,3 +161,5 @@ export class EditProfile extends Component {
 }
 
 export default EditProfile;
+
+// style for file input  form-control

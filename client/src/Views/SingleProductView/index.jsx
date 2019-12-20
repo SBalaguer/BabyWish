@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import { singleProduct } from "./../../services/product-functions";
-import Navbar from "./../../Components/Navbar";
-import { withRouter } from "react-router-dom";
-import { addProductToWishlist } from "./../../services/wishlist-functions";
-import TopNavbar from "./../../Components/TopNavbar";
-import "./style.css";
+import React, { Component } from 'react';
+import { singleProduct } from './../../services/product-functions';
+import Navbar from './../../Components/Navbar';
+import { withRouter } from 'react-router-dom';
+import { addProductToWishlist } from './../../services/wishlist-functions';
+import TopNavbar from './../../Components/TopNavbar';
+import './style.css';
 
 class SingleProductView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amountWanted: "",
+      amountWanted: '',
       userId: this.props.userState._id,
-      wishListFrom: "",
+      wishListFrom: '',
       renderWishlist: false
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
@@ -68,11 +68,11 @@ class SingleProductView extends Component {
     if (product) {
       style = {
         backgroundImage: `url(${product.pictureUrl})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain",
-        backgroundPosition: "center",
-        width: "auto",
-        height: "30vh"
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        width: 'auto',
+        height: '30vh'
       };
     }
 
@@ -95,23 +95,24 @@ class SingleProductView extends Component {
                   <h3>{product.name}</h3>
                   <h5>
                     ${product.price}
-                    {product.category === "diapers" && "/week"}
+                    {product.category === 'diapers' && '/week'}
                   </h5>
                 </div>
               </div>
               <div className="single-prod-form-container">
                 <form onSubmit={this.handleAddClick}>
-                  <div className="form-check" style={{ paddingLeft: "0px" }}>
+                  <div className="form-check" style={{ paddingLeft: '0px' }}>
                     <input
                       className="form-control"
                       type="number"
                       name="amountWanted"
                       value={this.state.amountWanted}
                       onChange={this.handleInputChange}
+                      placeholder="How many?"
                       min="1"
                     />
                   </div>
-                  {(user.role !== "gifter" && (
+                  {(user.role !== 'gifter' && (
                     <button className="btn btn-product-view btn-block">
                       Add to Wishlist
                     </button>

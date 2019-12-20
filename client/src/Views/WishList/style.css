@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 .add-button {
@@ -16,8 +17,7 @@
   max-width: 600px;
 }
 
-.add-button-sm {
-}
+.add-button-sm {}
 
 .empty-btn {
   width: 3vh;
@@ -25,4 +25,19 @@
   border: 0px;
   background-color: #ffffff;
   background-image: url("/Users/santiagoebalaguer/ironhack/projects/BabyWish/client/public/add-blue.png");
+}
+
+.no-wishlist-div {
+  padding-top: 30vh;
+  padding-bottom: 30vh;
+  text-align: center;
+  font-weight: 100;
+  color: gray;
+  background-image: url('/clouds.png');
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: contain;
+  /* Resize the background image to cover the entire container */
 }
