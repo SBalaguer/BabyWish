@@ -31,7 +31,7 @@ export const addToShoppingCart = async (
         amountBought
       }
     );
-    console.log(response.data);
+    // console.log(response.data);
     return response.data.shoppingCart;
   } catch (error) {
     throw error;

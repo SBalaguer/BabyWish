@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import TopNavbar from "./../../Components/TopNavbar";
+import { withRouter } from "react-router-dom";
+
+import Navbar from "./../../Components/Navbar";
 import {
   updateProfile,
   createFile,
   getSingleUser
 } from "./../../services/user-functions";
 // import ImageUpload from '../../Components/ImageUpload';
-import NavbarWithRouter from "./../../Components/Navbar";
 
 import "./style.css";
 
@@ -19,12 +21,17 @@ export class EditProfile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
+    this.addUsertoUserState = this.addUsertoUserState.bind(this);
   }
 
   componentDidMount(props) {
     this.setState({
       user: this.props.userState
     });
+  }
+
+  addUsertoUserState(user) {
+    this.props.addUsertoUserState(user);
   }
 
   async handleSubmit(event) {
@@ -60,6 +67,8 @@ export class EditProfile extends Component {
   }
 
   render() {
+    const user = this.props.userState;
+    const NavbarWithRouter = withRouter(Navbar);
     return (
       <React.Fragment>
         <TopNavbar />
@@ -142,7 +151,7 @@ export class EditProfile extends Component {
             </form>
           </div>
           <NavbarWithRouter
-            user={this.props.userState}
+            user={user}
             addUsertoUserState={this.addUsertoUserState}
           />
         </div>

@@ -41,7 +41,7 @@ export class Navbar extends Component {
     const userId = this.props.user._id;
     const userRole = this.props.user.role;
     const wishListID = this.props.wishlistId;
-    console.log(this.props.amountInShoppingCart);
+    // console.log(this.props.amountInShoppingCart);
 
     return (
       <div className="navbar-bottom fixed-bottom">

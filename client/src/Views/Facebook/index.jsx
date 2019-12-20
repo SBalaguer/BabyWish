@@ -12,7 +12,7 @@ export default class FBLogin extends Component {
   }
 
   async responseFacebook(response) {
-    console.log('response facebook got:\n' + response);
+    // console.log('response facebook got:\n' + response);
     try {
       const user = await facebookLogin(response);
       if (user) {

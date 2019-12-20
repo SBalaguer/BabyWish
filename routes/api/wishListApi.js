@@ -36,7 +36,7 @@ wishListApiRouter.post('/create/:id', async (req, res, next) => {
     });
     res.json({ wishListWithId });
   } catch (error) {
-    console.log('error in wishlist api: ' + error);
+    // console.log('error in wishlist api: ' + error);
     next(error);
   }
 });

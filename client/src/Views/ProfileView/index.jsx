@@ -64,7 +64,7 @@ class ProfileView extends Component {
 
   handleInputChange(event) {
     const value = event.target.value;
-    console.log(value);
+    // console.log(value);
     this.setState({
       wishListLocator: value
     });

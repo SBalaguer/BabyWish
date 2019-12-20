@@ -10,7 +10,7 @@ export const signIn = async user => {
 };
 
 export const signUp = async newUser => {
-  console.log(newUser);
+  // console.log(newUser);
   try {
     const response = await axios.post('/api/supplier/create', newUser);
     return response.data.user;

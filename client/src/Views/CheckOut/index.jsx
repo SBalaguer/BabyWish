@@ -20,7 +20,7 @@ export class CheckOut extends Component {
 
   handleInputChange(event){
     const value = event.target.value
-    console.log(value)
+    // console.log(value)
     this.setState({
       product:{
         name: 'Test',
@@ -30,11 +30,11 @@ export class CheckOut extends Component {
   }
 
   async handleToken(token){
-    console.log(token)
+    // console.log(token)
     const product = this.state.product
     try{
       const status = await processPayment(token, product)
-      console.log(status)
+      // console.log(status)
       this.setState({status:true})
     } catch (error) {
       console.log(error)

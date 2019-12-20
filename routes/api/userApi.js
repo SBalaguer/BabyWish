@@ -9,16 +9,16 @@ const passport = require('passport');
 
 //CHECK IF THERE IS A USER LOGGEDIN
 userApiRouter.get('/check-user-logged', async (req, res, next) => {
-  console.log('this is req.user:\n' + req.user);
+  // console.log('this is req.user:\n' + req.user);
   const userId = req.user;
   try {
     let user = await User.findById(userId).exec();
-    console.log(user);
+    // console.log(user);
     if (user) {
       res.json({ user });
     } else {
       user = await Supplier.findById(userId).exec();
-      console.log('else run and user is:\n' + user);
+      // console.log('else run and user is:\n' + user);
       res.json({ user });
     }
   } catch (error) {

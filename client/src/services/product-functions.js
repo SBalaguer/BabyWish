@@ -44,7 +44,7 @@ export const createFile = async file => {
   data.append('pictureUrl', file);
   try {
     const response = await axios.post(`/api/products/upload`, data);
-    console.log('this below is response file');
+    // console.log('this below is response file');
     console.dir(response);
     return response.data.toReturn;
   } catch (error) {

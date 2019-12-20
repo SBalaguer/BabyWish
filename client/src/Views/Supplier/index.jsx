@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TopNavbar from "./../../Components/TopNavbar";
 import { Link } from "react-router-dom";
+import NavbarSupplier from "./../../Components/NavbarSupplier";
 
 import { addProduct, createFile } from "./../../services/product-functions";
 // import NavbarWithRouter from './../../Components/Navbar';
@@ -9,10 +10,23 @@ export class SupplierDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pictureUrl: null
+      pictureUrl: null,
+      name: "",
+      category: "uncategorized",
+      availableStock: "",
+      price: ""
     };
     this.handleFileChange = this.handleFileChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.productMethod = this.productMethod.bind(this);
+  }
+
+  handleInputChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
   }
 
   //   async componentDidMount() {
@@ -28,15 +42,27 @@ export class SupplierDashboard extends Component {
 
   async productMethod(event) {
     event.preventDefault();
-    const name = event.target.name.value;
-    const category = event.target.category.value;
-    const availableStock = event.target.availableStock.value;
-    const price = event.target.price.value;
-    const pictureUrl = this.state.pictureUrl;
+    let name = this.state.name;
+    let category = this.state.category;
+    let availableStock = this.state.availableStock;
+    let price = this.state.price;
+    let pictureUrl = this.state.pictureUrl;
 
     const obj = { name, category, availableStock, price, pictureUrl };
     try {
       addProduct(obj);
+      name = "";
+      category = "";
+      availableStock = "";
+      price = "";
+      pictureUrl = null;
+      this.setState({
+        name,
+        category,
+        availableStock,
+        price,
+        pictureUrl
+      });
     } catch (error) {
       throw error;
     }
@@ -65,10 +91,21 @@ export class SupplierDashboard extends Component {
                     type="text"
                     placeholder="Name"
                     name="name"
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
-                  <select className="form-control" type="text" name="category">
+                  <select
+                    className="form-control"
+                    type="text"
+                    name="category"
+                    value={this.state.category}
+                    onChange={this.handleInputChange}
+                    required
+                  >
+                    <option value="uncategorized">Select Category</option>
                     <option value="diapers">Diapers</option>
                     <option value="trolleys">Trolleys</option>
                     <option value="essentials">Essentials</option>
@@ -83,6 +120,9 @@ export class SupplierDashboard extends Component {
                     type="number"
                     placeholder="Price (in EUR)"
                     name="price"
+                    value={this.state.price}
+                    onChange={this.handleInputChange}
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -91,6 +131,9 @@ export class SupplierDashboard extends Component {
                     type="number"
                     placeholder="Stock Availability"
                     name="availableStock"
+                    value={this.state.availableStock}
+                    onChange={this.handleInputChange}
+                    required
                   />
                 </div>
                 <button
@@ -109,13 +152,10 @@ export class SupplierDashboard extends Component {
                     className="form-control"
                     type="file"
                     name="pictureUrl"
+                    style={{ marginBottom: "1.5em" }}
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-start btn-block"
-                  style={{ marginBottom: "1.5em" }}
-                >
+                <button type="submit" className="btn btn-start btn-block">
                   Upload Product Image
                 </button>
               </form>
@@ -123,11 +163,14 @@ export class SupplierDashboard extends Component {
           )}
           {!this.props.userState.shipFrom && (
             <div className="home-page">
-              <h3>You need a supplier account to access this page.</h3>
-              <Link to="/suppliers/sign-in">Supplier Sign-In</Link>
+              <h3 style={{ width: "75%", marginBottom: "1.5em" }}>
+                You need a supplier account to access this page.
+              </h3>
+              <Link to="/supplier/sign-in">Supplier Sign-In</Link>
             </div>
           )}
         </div>
+        {this.props.userState.shipFrom && <NavbarSupplier />}
       </React.Fragment>
     );
   }
