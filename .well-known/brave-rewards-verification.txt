@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: babywish.herokuapp.com
+Token: 40fd6eabdecc02b76da160f6128257fcdd5dc1109d644be84036e1d56f8bb496

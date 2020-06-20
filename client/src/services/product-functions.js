@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const listProducts = async () => {
   try {
-    const response = await axios.get('/api/products');
+    const response = await axios.get("/api/products");
     return response.data.products;
   } catch (error) {
     throw error;
@@ -31,7 +31,7 @@ export const singleProduct = async id => {
 
 export const addProduct = async obj => {
   try {
-    const newProduct = await axios.post('/api/products/create', obj);
+    const newProduct = await axios.post("/api/products/create", obj);
     return newProduct;
   } catch (error) {
     throw error;
@@ -41,7 +41,7 @@ export const addProduct = async obj => {
 export const createFile = async file => {
   const data = new FormData();
 
-  data.append('pictureUrl', file);
+  data.append("pictureUrl", file);
   try {
     const response = await axios.post(`/api/products/upload`, data);
     // console.log('this below is response file');
