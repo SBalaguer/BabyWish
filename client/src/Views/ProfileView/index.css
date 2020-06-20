@@ -20,6 +20,7 @@
   color: #1f2674;
   margin-bottom: 0.1em;
 }
+
 .user-name {
   font-size: 0.8em;
   font-weight: 500;
@@ -58,6 +59,7 @@
 .counter-container:nth-of-type(1) {
   width: 30%;
 }
+
 .counter-container:nth-of-type(3) {
   width: 30%;
 }
@@ -84,7 +86,7 @@
 
 .counter-description {
   color: rgba(0, 0, 0, 0.2);
-  font-size: 1em;
+  font-size: 0.9rem;
 }
 
 .wishlist-locator {
@@ -117,9 +119,16 @@
 }
 
 .btn-wl {
-  background-color: #ff7f90 !important ;
-  color: #ffffff !important ;
-  border-radius: 40px !important ;
+  background-color: #ff7f90 !important;
+  color: #ffffff !important;
+  border-radius: 40px !important;
   margin-left: auto;
   margin-right: auto;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }

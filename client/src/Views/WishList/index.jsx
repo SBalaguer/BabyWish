@@ -1,24 +1,24 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   getWishlistByUserId,
   createWishlist,
   deleteWishlist
-} from "./../../services/wishlist-functions";
-import TopNavbar from "./../../Components/TopNavbar";
+} from './../../services/wishlist-functions';
+import TopNavbar from './../../Components/TopNavbar';
 // import { Link } from "react-router-dom";
-import Navbar from "./../../Components/Navbar";
-import { withRouter } from "react-router-dom";
+import Navbar from './../../Components/Navbar';
+import { withRouter } from 'react-router-dom';
 
-import WishlistComp from "./../../Components/WishlistComp";
+import WishlistComp from './../../Components/WishlistComp';
 
-import "./style.css";
+import './style.css';
 
 export class AllWishList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       wishLists: [],
-      wishListName: "",
+      wishListName: '',
       showInput: false,
       userId: this.props.userState._id
     };
@@ -76,7 +76,7 @@ export class AllWishList extends Component {
     try {
       const newWishlist = await createWishlist(id, name);
       const wishLists = [...this.state.wishLists, newWishlist];
-      const wishListName = "";
+      const wishListName = '';
       const showInput = false;
       this.setState({ wishLists, wishListName, showInput });
     } catch (error) {
@@ -96,60 +96,117 @@ export class AllWishList extends Component {
       <React.Fragment>
         <TopNavbar />
         <div className="app-container">
-          <div className="wish-list-container">
-            <div className="view-title">
-              <h1>
-                <span className="hi"> Wishlists</span>
-              </h1>
+          {this.state.wishLists.length > 0 && (
+            <div className="wish-list-container">
+              <div className="view-title">
+                <h1>
+                  <span className="hi"> Wishlists</span>
+                </h1>
 
-              <div
-                onClick={() => {
-                  this.toggleInput();
-                }}
-              >
-                <img className="add-button" src="../../add-blue.png" alt="" />
+                <div
+                  onClick={() => {
+                    this.toggleInput();
+                  }}
+                >
+                  <img className="add-button" src="../../add-blue.png" alt="" />
+                </div>
               </div>
+
+              {wishLists.map(wishList => {
+                if (wishList) {
+                  return (
+                    <WishlistComp
+                      key={wishList._id}
+                      {...wishList}
+                      delete={wishListId => this.deleteWishlist(wishListId)}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              })}
+              {this.state.showInput && (
+                <form
+                  onSubmit={this.createNewWishList}
+                  style={{ marginTop: '1em' }}
+                >
+                  <div className="form-row">
+                    <div
+                      className="form-group col-md-6"
+                      style={{ marginBottom: '0.3em' }}
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="wishlistName"
+                        onChange={this.updateName}
+                        value={this.state.wishListName}
+                        name="name"
+                        placeholder="Wishlist Name"
+                      />
+                    </div>
+                    <div className="form-group col-md-6">
+                      <button className="empty-btn"> Add</button>
+                    </div>
+                  </div>
+                </form>
+              )}
             </div>
-            {wishLists.map(wishList => {
-              if (wishList) {
-                return (
-                  <WishlistComp
-                    key={wishList._id}
-                    {...wishList}
-                    delete={wishListId => this.deleteWishlist(wishListId)}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
-            {this.state.showInput && (
-              <form
-                onSubmit={this.createNewWishList}
-                style={{ marginTop: "1em" }}
-              >
-                <div className="form-row">
+          )}
+          {this.state.wishLists.length === 0 && (
+            <React.Fragment>
+              <div className="wish-list-container">
+                <div className="view-title">
+                  <h1>
+                    <span className="hi"> Wishlists</span>
+                  </h1>
+
                   <div
-                    className="form-group col-md-6"
-                    style={{ marginBottom: "0.3em" }}
+                    onClick={() => {
+                      this.toggleInput();
+                    }}
                   >
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="wishlistName"
-                      onChange={this.updateName}
-                      value={this.state.wishListName}
-                      name="name"
-                      placeholder="Wishlist Name"
+                    <img
+                      className="add-button"
+                      src="../../add-blue.png"
+                      alt=""
                     />
                   </div>
-                  <div className="form-group col-md-6">
-                    <button className="empty-btn"> Add</button>
-                  </div>
                 </div>
-              </form>
-            )}
-          </div>
+                {!this.state.showInput && (
+                  <div className="no-wishlist-div">
+                    <h3>You don't have any wishlists yet.</h3>
+                  </div>
+                )}
+                {this.state.showInput && (
+                  <form
+                    onSubmit={this.createNewWishList}
+                    style={{ marginTop: '1em' }}
+                  >
+                    <div className="form-row">
+                      <div
+                        className="form-group col-md-6"
+                        style={{ marginBottom: '0.3em' }}
+                      >
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="wishlistName"
+                          onChange={this.updateName}
+                          value={this.state.wishListName}
+                          name="name"
+                          placeholder="Wishlist Name"
+                        />
+                      </div>
+                      <div className="form-group col-md-6">
+                        <button className="empty-btn"> Add</button>
+                      </div>
+                    </div>
+                  </form>
+                )}
+              </div>
+            </React.Fragment>
+          )}
         </div>
         <NavbarWithRouter
           user={user}

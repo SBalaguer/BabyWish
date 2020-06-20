@@ -30,7 +30,7 @@ wishListApiRouter.post('/create/:id', async (req, res, next) => {
     const wishListId = newWishList._id;
     const idString = newWishList._id.toString();
     const wishListLocator =
-      'BW-' + idString.substring(idString.length - 5, idString.length);
+      'BW-' + idString.substring(idString.length - 5, idString.length).toUpperCase();
     const wishListWithId = await WishList.findByIdAndUpdate(wishListId, {
       locator: wishListLocator
     });

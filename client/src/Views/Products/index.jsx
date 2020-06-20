@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import ProductComp from "./../../Components/ProductComp";
-import { listProducts } from "./../../services/product-functions";
-import Navbar from "./../../Components/Navbar";
-import { withRouter } from "react-router-dom";
-import { addProductToWishlist } from "./../../services/wishlist-functions";
-import TopNavbar from "./../../Components/TopNavbar";
+import React, { Component } from 'react';
+import ProductComp from './../../Components/ProductComp';
+import { listProducts } from './../../services/product-functions';
+import Navbar from './../../Components/Navbar';
+import { withRouter } from 'react-router-dom';
+import { addProductToWishlist } from './../../services/wishlist-functions';
+import TopNavbar from './../../Components/TopNavbar';
 
-import "./style.css";
+import './style.css';
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [],
-      wishListFrom: "",
-      searchQuery: "",
+      wishListFrom: '',
+      searchQuery: '',
       category: [
-        "diapers",
-        "trolleys",
-        "essentials",
-        "clothes",
-        "toys",
-        "uncategorized"
+        'diapers',
+        'trolleys',
+        'essentials',
+        'clothes',
+        'toys',
+        'uncategorized'
       ]
     };
     this.addUsertoUserState = this.addUsertoUserState.bind(this);
@@ -56,14 +56,14 @@ class Products extends Component {
 
   handleSelectChange(event) {
     let cat = event.target.value;
-    if (cat === "all") {
+    if (cat === 'all') {
       cat = [
-        "diapers",
-        "trolleys",
-        "essentials",
-        "clothes",
-        "toys",
-        "uncategorized"
+        'diapers',
+        'trolleys',
+        'essentials',
+        'clothes',
+        'toys',
+        'uncategorized'
       ];
     } else {
       cat = [cat];
@@ -106,6 +106,7 @@ class Products extends Component {
                     onChange={this.handleInputChange}
                     value={this.state.searchQuery}
                     type="search"
+                    placeholder="Search"
                     className="form-check select-category"
                   />
                 </form>

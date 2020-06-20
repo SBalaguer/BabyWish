@@ -3,3 +3,36 @@
   max-width: 600px;
   margin-top: 2em;
 }
+
+.file-input {
+  color: transparent;
+  margin: auto;
+}
+
+.file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.file-input::before {
+  background-color: transparent;
+  border: 0;
+  margin: auto;
+  color: black;
+  -webkit-user-select: none;
+  outline: none;
+  /* white-space: nowrap; */
+  content: 'Choose a new photo!';
+  text-align: center;
+}
+
+.file-input:hover::before {
+  border-color: black;
+}
+
+.file-input:active {
+  outline: 0;
+}
+
+.file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
